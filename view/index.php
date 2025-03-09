@@ -14,14 +14,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RECUPEROS | HOSPITAL SAMIC</title>
+  <title>INCOCAT S.R.L.</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../plantilla/plugins//fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="shortcut icon" href="../img/sami.jpg" type="image/jpg">
+  <link rel="shortcut icon" href="../img/incoca.png" type="image/jpg">
 
   <link rel="stylesheet" href="../plantilla/dist//css/adminlte.min.css">
   <link href="../utilitario/DataTables/datatables.min.css" type="text/css" rel="stylesheet" />
@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index.php" class="brand-link">
-        <img src="../img/banner.jpg" alt="<?php echo $_SESSION['S_RAZON']; ?>" width="100%" height="auto">
+        <img src="../img/incocat.png" alt="<?php echo $_SESSION['S_RAZON']; ?>" width="100%" height="auto">
       </a>
 
       <!-- Sidebar -->
@@ -124,27 +124,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="mt-1">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
-              <b>GESTIÓN PRÁCTICAS</b>
+              <b>GESTIÓN GENERAL</b>
             </li>
 
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <?php if ($_SESSION['S_ROL'] == "ADMINISTRADOR") { ?>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','area/view_area.php')" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p style="color:white">
-                    Áreas
-                  </p>
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-globe"></i>
+       
+                <p style="color:white">
+                Localizaciones
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','regiones/view_regiones.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Regiones
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','provincias/view_provincias.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Provincias
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','distritos/view_distritos.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                  <p style="color:white">
+                        Distritos
+                      </p>
+                    </a>
+                  </li>
+                </ul>
               </li>
              
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','obra_social/view_obra_social.php')" class="nav-link">
-                  <i class="nav-icon fas fas fa-hands-helping"></i>
+              <a href="#" onclick="cargar_contenido('contenido_principal','servicios/view_servicios.php')" class="nav-link">
+              <i class="nav-icon fas fas fa-hands-helping"></i>
 
                   <p style="color:white">
-                    Obras Sociales
+                    Servicios
                   </p>
                 </a>
               </li>
@@ -153,45 +181,118 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" onclick="cargar_contenido('contenido_principal','paciente/view_paciente.php')" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
                   <p style="color:white">
-                    Pacientes
+                    Clientes
                   </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','practicas/view_practicas.php')" class="nav-link">
-                  <i class="nav-icon fas fa-briefcase-medical"></i>
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-folder" ></i> 
+                <p style="color:white">
+                Gestión de Expedientes
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','empleado/view_empleado.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Registro de Expediente
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','area/view_area.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Lista de Expedientes
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','area/view_area.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Cotizaciones
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','paciente/view_paciente.php')" class="nav-link">
+                  <i class="nav-icon fas fa-hand-holding-usd"></i>
+                  <p style="color:white">
+                    Registro de Pagos
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-coins" ></i> 
 
-                  <p style="color:white">
-                    Prácticas
-                  </p>
+                <p style="color:white">
+                Ingresos y Gastos
+                      <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','indicadores/view_indicadores.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Indicadores
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','empleado/view_empleado.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Ingresos
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Gastos
+                      </p>
+                    </a>
+                  </li>
+                
+                </ul>
               </li>
-              <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','practicas_paciente/view_practicas_paciente.php')" class="nav-link">
-                  <i class="nav-icon fas fa-stethoscope"></i>
-                  <p style="color:white">
-                    Prácticas - Paciente
-                  </p>
-                </a>
-              </li>
+            
               <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
-                <b>FACTURAS</b>
+                <b>REPORTES DE EXPEDIENTES</b>
               </li>
               <li class="nav-item">
                 <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="nav-link">
-                  <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                  <i class="nav-icon fas fa-file-pdf"></i>
 
                   <p style="color:white">
-                    Gestión de Facturas
+                    Por fecha y provincia
                   </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas_archivadas.php')" class="nav-link">
-                <i class="nav-icon fas fa-file-archive" ></i> <!-- Archivada -->
+                <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
 
                   <p style="color:white">
-                    Facturas Archivadas
+                  Por fecha y distrito
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas_archivadas.php')" class="nav-link">
+                <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
+
+                  <p style="color:white">
+                    Por fecha y servicio
                   </p>
                 </a>
               </li>
@@ -433,7 +534,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="card card-primary" style="border-radius: 15px; overflow: hidden;">
             <div class="card-header py-2"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
               <h5 class="m-0" style="font-family:cooper; text-align:center; line-height: 1; padding: 0; color: white;">
-                <i class="fas fa-hospital" style="margin-right: 8px;"></i>DATOS DEL HOSPITAL
+              <i class="fas fa-building" style="margin-right: 8px;"></i> DATOS DE LA EMPRESA
               </h5>
               <div class="card-tools" style="position: absolute; right: 10px; top: 5px;">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -462,397 +563,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         </div>
 
-        <div class="col-md-12">
-          <div class="card card-primary">
-            <div class="card card-primary">
-              <div class="card-header py-2"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
-                <h5 class="m-0" style="font-family:cooper; text-align:center; line-height: 1; padding: 0;">
-                  <i class="fas fa-image" style="margin-right: 8px;"></i>CATALOGO DE FOTOS
-                </h5>
-              </div>
-              <div class="table-responsive" style="text-align:center">
-                <div class="card-body" style="display: block;">
-                  <div id="photoCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" style="transition: opacity 1s ease-in-out;">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="../Fotos/1.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 1">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/2.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 2">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/4.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 4">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/5.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 5">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/6.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 6">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/7.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 7">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/8.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 8">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/9.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 9">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/10.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 10">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/11.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 11">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/12.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 12">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/13.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 13">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/14.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 14">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/15.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 15">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/16.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 16">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/17.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 17">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/18.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 18">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/19.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 19">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/20.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 20">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/21.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 21">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/22.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 22">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/23.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 23">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/24.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 24">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/25.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 25">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/26.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 26">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/27.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 27">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/28.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 28">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/29.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 29">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/30.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 30">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/31.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 31">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/32.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 32">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/33.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 33">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/34.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 34">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/35.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 35">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/36.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 36">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/37.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 37">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/38.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 38">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/39.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 39">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/40.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 40">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/41.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 41">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/42.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 42">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/43.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 43">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/44.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 44">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/45.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 45">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/46.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 46">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/47.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 47">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/48.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 48">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/49.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 49">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/50.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 50">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/51.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 51">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/52.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 52">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/53.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 53">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/54.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 54">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/55.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 55">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/56.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 56">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/57.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 57">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/58.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 58">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/59.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 59">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/60.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 60">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/61.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 61">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/62.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 62">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/63.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 63">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/64.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 64">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/65.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 65">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/66.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 66">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/67.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 67">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/68.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 68">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/69.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 69">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/70.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 70">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/71.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 71">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/72.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 72">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/73.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 73">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/74.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 74">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/75.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 75">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/76.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 76">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/77.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 77">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/78.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 78">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/79.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 79">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/80.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 80">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/81.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 81">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/82.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 82">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/83.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 83">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/84.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 84">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/85.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 85">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/86.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 86">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/87.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 87">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/88.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 88">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/90.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 90">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/91.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 91">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/92.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 92">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/93.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 93">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/94.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 94">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/95.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 95">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/96.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 96">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/97.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 97">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/98.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 98">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/99.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 99">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/100.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 100">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/101.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 101">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/102.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 102">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/103.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 103">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/104.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 104">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/105.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 105">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/106.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 106">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/107.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 107">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/108.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 108">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/109.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 109">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/110.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 110">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/111.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 111">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/112.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 112">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/113.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 113">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/114.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 114">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/115.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 115">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/116.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 116">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/117.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 117">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/118.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 118">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/119.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 119">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/120.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 120">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/121.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 121">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/122.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 122">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/124.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 124">
-                      </div>
-                      <!-- Agrega más fotos aquí -->
-                    </div>
-                  </div>
-                  <!-- Botones personalizados para cambiar foto -->
-                  <button id="prevBtn" class="btn btn-primary" style="margin-top: 10px;">
-                    <i class="fas fa-chevron-left"></i> Anterior
-                  </button>
-                  <button id="nextBtn" class="btn btn-primary" style="margin-top: 10px;">
-                    Siguiente <i class="fas fa-chevron-right"></i>
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
 
@@ -967,398 +677,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div> <!-- /.content -->
 
 
-        <div class="col-md-12">
-          <div class="card card-primary">
-            <div class="card card-primary">
-              <div class="card-header py-2"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
-              <h5 class="m-0 text-center" style="font-family: 'Poppins', sans-serif; font-weight: 600; line-height: 1.2; padding: 5px;">
-  <i class="fas fa-image me-2"></i> Catálogo de Fotos
-</h5>
 
-              </div>
-              <div class="table-responsive" style="text-align:center">
-                <div class="card-body" style="display: block;">
-                  <div id="photoCarousel" class="carousel slide" data-ride="carousel" data-interval="5000" style="transition: opacity 1s ease-in-out;">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="../Fotos/1.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 1">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/2.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 2">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/4.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 4">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/5.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 5">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/6.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 6">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/7.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 7">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/8.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 8">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/9.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 9">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/10.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 10">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/11.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 11">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/12.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 12">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/13.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 13">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/14.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 14">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/15.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 15">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/16.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 16">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/17.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 17">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/18.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 18">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/19.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 19">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/20.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 20">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/21.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 21">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/22.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 22">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/23.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 23">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/24.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 24">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/25.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 25">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/26.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 26">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/27.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 27">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/28.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 28">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/29.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 29">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/30.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 30">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/31.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 31">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/32.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 32">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/33.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 33">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/34.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 34">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/35.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 35">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/36.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 36">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/37.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 37">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/38.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 38">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/39.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 39">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/40.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 40">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/41.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 41">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/42.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 42">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/43.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 43">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/44.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 44">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/45.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 45">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/46.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 46">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/47.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 47">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/48.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 48">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/49.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 49">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/50.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 50">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/51.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 51">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/52.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 52">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/53.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 53">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/54.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 54">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/55.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 55">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/56.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 56">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/57.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 57">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/58.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 58">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/59.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 59">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/60.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 60">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/61.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 61">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/62.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 62">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/63.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 63">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/64.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 64">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/65.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 65">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/66.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 66">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/67.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 67">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/68.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 68">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/69.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 69">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/70.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 70">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/71.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 71">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/72.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 72">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/73.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 73">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/74.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 74">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/75.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 75">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/76.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 76">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/77.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 77">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/78.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 78">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/79.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 79">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/80.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 80">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/81.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 81">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/82.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 82">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/83.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 83">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/84.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 84">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/85.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 85">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/86.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 86">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/87.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 87">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/88.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 88">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/90.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 90">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/91.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 91">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/92.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 92">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/93.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 93">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/94.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 94">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/95.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 95">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/96.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 96">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/97.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 97">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/98.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 98">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/99.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 99">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/100.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 100">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/101.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 101">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/102.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 102">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/103.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 103">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/104.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 104">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/105.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 105">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/106.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 106">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/107.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 107">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/108.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 108">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/109.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 109">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/110.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 110">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/111.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 111">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/112.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 112">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/113.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 113">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/114.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 114">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/115.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 115">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/116.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 116">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/117.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 117">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/118.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 118">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/119.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 119">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/120.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 120">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/121.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 121">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/122.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 122">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../Fotos/124.jpg" class="d-block w-100" style="height: 600px; object-fit: cover;" alt="Foto 124">
-                      </div>
-                      <!-- Agrega más fotos aquí -->
-                    </div>
-                  </div>
-                  <!-- Botones personalizados para cambiar foto -->
-                  <button id="prevBtn" class="btn btn-primary" style="margin-top: 10px;">
-                    <i class="fas fa-chevron-left"></i> Anterior
-                  </button>
-                  <button id="nextBtn" class="btn btn-primary" style="margin-top: 10px;">
-                    Siguiente <i class="fas fa-chevron-right"></i>
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- /.content -->
 
@@ -1384,7 +703,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <em>Versión 1.0.0</em>
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2025 <a href="https://samicnestorkirchner.org/" target="_blank"><em>Hospital SAMIC – Presidente Néstor Kirchner</em></a></strong>
+      <strong>Copyright &copy; 2025 - <a href="https://samicnestorkirchner.org/" target="_blank"><em>INCOCAT S.R.L.</em></a></strong>
     </footer>
   </div>
   <!-- ./wrapper -->
