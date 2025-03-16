@@ -4,9 +4,9 @@ class conexionBD {
 
     public function conexionPDO() {
         $host = "82.197.82.53";
-        $usuario = "u486624649_jersson";
+        $usuario = "u486624649_jersson2025";
         $contrasena = "Miranda1407.";
-        $bdName = "u486624649_incocatsrl";
+        $bdName = "u486624649_INCOCAT2025";
         try {
             // Asignar la conexión a la propiedad de clase $this->pdo
             $this->pdo = new PDO("mysql:host=$host;dbname=$bdName", $usuario, $contrasena);
