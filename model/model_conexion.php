@@ -3,10 +3,10 @@ class conexionBD {
     private $pdo;
 
     public function conexionPDO() {
-        $host = "localhost";
-        $usuario = "root";
-        $contrasena = "";
-        $bdName = "incocat";
+        $host = "82.197.82.53";
+        $usuario = "u486624649_jersson";
+        $contrasena = "Miranda1407.";
+        $bdName = "u486624649_incocatsrl";
         try {
             // Asignar la conexión a la propiedad de clase $this->pdo
             $this->pdo = new PDO("mysql:host=$host;dbname=$bdName", $usuario, $contrasena);
