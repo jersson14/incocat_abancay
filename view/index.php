@@ -176,7 +176,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+              <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="nav-link">
+              <i class="nav-icon fas fa-calendar-check"></i>
 
+                  <p style="color:white">
+                    Agendar reuniones
+                  </p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="#" onclick="cargar_contenido('contenido_principal','paciente/view_paciente.php')" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
