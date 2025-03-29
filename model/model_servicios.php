@@ -16,15 +16,14 @@
             return $arreglo;
             conexionBD::cerrar_conexion();
         }
-        public function Registrar_Servicio($serv,$costo,$requisito,$descripcion,$idusu){
+        public function Registrar_Servicio($serv,$costo,$descripcion,$idusu){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_REGISTRAR_SERVICIO(?,?,?,?,?)";
+            $sql = "CALL SP_REGISTRAR_SERVICIO(?,?,?,?)";
             $query  = $c->prepare($sql);
             $query ->bindParam(1,$serv);
             $query ->bindParam(2,$costo);
-            $query ->bindParam(3,$requisito);
-            $query ->bindParam(4,$descripcion);
-            $query ->bindParam(5,$idusu);
+            $query ->bindParam(3,$descripcion);
+            $query ->bindParam(4,$idusu);
 
             $resultado = $query->execute();
             if($row = $query->fetchColumn()){
@@ -32,17 +31,16 @@
             }
             conexionBD::cerrar_conexion();
         }
-        public function Modificar_Servicios($id,$serv,$costo,$requisito,$descripcion,$esta,$idusu){
+        public function Modificar_Servicios($id,$serv,$costo,$descripcion,$esta,$idusu){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_MODIFICAR_SERVICIO(?,?,?,?,?,?,?)";
+            $sql = "CALL SP_MODIFICAR_SERVICIO(?,?,?,?,?,?)";
             $query  = $c->prepare($sql);
             $query ->bindParam(1,$id);
             $query ->bindParam(2,$serv);
             $query ->bindParam(3,$costo);
-            $query ->bindParam(4,$requisito);
-            $query ->bindParam(5,$descripcion);
-            $query ->bindParam(6,$esta);
-            $query ->bindParam(7,$idusu);
+            $query ->bindParam(4,$descripcion);
+            $query ->bindParam(5,$esta);
+            $query ->bindParam(6,$idusu);
 
             $resultado = $query->execute();
             if($row = $query->fetchColumn()){
@@ -75,6 +73,58 @@
                 $arreglo[]=$resp;
             }
             return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+
+        function Registrar_detalle_practicas($id, $array_requisito){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_REGISTRAR_REQUISITOS(?, ?)"; 
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $id, PDO::PARAM_INT);
+            $query->bindParam(2, $array_requisito, PDO::PARAM_STR); // Debe ser STRING
+            $resul = $query->execute();
+            conexionBD::cerrar_conexion();
+            return $resul ? 1 : 0;
+        }
+
+        function Modificar_detalle_practicas($id, $array_requisito){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_MODIFICAR_REQUISITOS(?, ?)"; 
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $id, PDO::PARAM_INT);
+            $query->bindParam(2, $array_requisito, PDO::PARAM_STR); // Debe ser STRING
+            $resul = $query->execute();
+            conexionBD::cerrar_conexion();
+            return $resul ? 1 : 0;
+        }
+        public function Listar_detalle_requisitos($id){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_VER_DETALLE_REQUISITOS(?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$id);
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+        public function Eliminar_Detalle_requisito($id){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_ELIMINAR_DETALLE_REQUISITOS(?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id);
+    
+            $resul = $query->execute();
+            if($resul){
+                return 1;
+            }else{
+                return 0;
+            }
             conexionBD::cerrar_conexion();
         }
     }

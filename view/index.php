@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" onclick="cargar_contenido('contenido_principal','empleado/view_empleado.php')" class="nav-link">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_registro_expediente.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
                       Registro de Expediente
@@ -218,14 +218,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
                       Lista de Expedientes
-                      </p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" onclick="cargar_contenido('contenido_principal','area/view_area.php')" class="nav-link">
-                      <i class="nav-icon far fa-circle"></i>
-                      <p style="color:white">
-                      Cotizaciones
                       </p>
                     </a>
                   </li>
