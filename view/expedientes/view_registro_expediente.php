@@ -1,6 +1,7 @@
 <script src="../js/console_tramite.js?rev=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="../plantilla/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
+<input type="text" id="dni" autocomplete="off" name="dni" hidden>
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -216,21 +217,8 @@
         $("#rad_presentacion3").on('click', function() {
             document.getElementById('div_juridico').style.display = "block";
         });
-        Cargar_Select_Area_REMI();
-        Cargar_Select_DNI()
-        Cargar_Select_Tipo();
-        Cargar_Select_Area();
 
     });
-    $("#txt_dni").change(function() {
-        var id = $("#txt_dni").val();
-        TraerrequisitoDNI(id);
-    });
-    $("#select_tipo").change(function() {
-        var id = $("#select_tipo").val();
-        Traerrequisitotipodoc(id);
-    });
-
 
     Validar_Informacion();
 
@@ -339,4 +327,44 @@
             otrosDocumentosSection.style.display = 'none';
         }
     });
+    txt_dni.focus();
+ $(document).ready(function(){
+    $('#txt_dni').change(function(){
+  valor=$(this).val();
+    $('#dni').val(valor);
+  })
+})
+    var input = document.getElementById("txt_dni");
+  input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("prueba").click();
+  }
+});
+
+$("#prueba").click(function(){
+
+var dni=$("#dni").val();
+$.ajax({           
+  type:"POST",
+  url: "consulta-dni-ajax.php",
+  data: 'dni='+dni,
+  dataType: 'json',
+  success: function(data) {
+      if(data==1)
+      {
+          alert('El DNI tiene que tener 8 digitos');
+      }
+      else{
+          console.log(data);
+        
+          document.getElementById("txt_nomb").value = data.nombres
+          document.getElementById("txt_ape").value = data.apellidoPaterno+' '+data.apellidoMaterno
+
+
+       
+      }
+  }
+});
+})
 </script>
