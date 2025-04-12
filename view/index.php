@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INCOCAT S.R.L.</title>
+<!-- En tu <head> -->
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -135,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="nav-icon fas fa-globe"></i>
        
                 <p style="color:white">
-                Localizaciones
+                Ubigeo
                       <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
@@ -214,10 +215,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" onclick="cargar_contenido('contenido_principal','area/view_area.php')" class="nav-link">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
                       Lista de Expedientes
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Expedientes Archivados
                       </p>
                     </a>
                   </li>

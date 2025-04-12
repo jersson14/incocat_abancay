@@ -1,13 +1,30 @@
 <?php
     require_once 'model_conexion.php';
 
-    class Modelo_Servicios extends conexionBD{
+    class Modelo_Espedientes extends conexionBD{
         
 
-        public function Listar_Servicios(){
+        public function Listar_Expedientes(){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_LISTAR_SERVICIOS()";
+            $sql = "CALL SP_LISTAR_EXPEDIENTES()";
             $query  = $c->prepare($sql);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+        public function Listar_expedientes_filtro($fechaini,$fechafin,$servicio){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_FILTRO(?,?,?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$fechaini);
+            $query->bindParam(2,$fechafin);
+            $query->bindParam(3,$servicio);
+
             $query->execute();
             $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach($resultado as $resp){
