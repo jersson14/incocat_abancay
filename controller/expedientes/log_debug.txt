@@ -1,0 +1,79 @@
+Array
+(
+    [POST] => Array
+        (
+            [idexpediente] => E0000002
+            [dni] => 72646121
+            [idusu] => 1
+            [requisitos] => Array
+                (
+                    [0] => 14
+                    [1] => 16
+                )
+
+            [fechas] => Array
+                (
+                    [0] => 2025-04-13 16:52:36
+                    [1] => 2025-04-13 16:52:37
+                )
+
+        )
+
+    [FILES] => Array
+        (
+            [archivos] => Array
+                (
+                    [name] => Array
+                        (
+                            [0] => FichaSeguimiento MEL.pdf
+                            [1] => TOUR VOUCHER  “VUELO CLÁSICO LÍNEAS DE NAZCA” ABR 04,  2025.pdf
+                        )
+
+                    [full_path] => Array
+                        (
+                            [0] => FichaSeguimiento MEL.pdf
+                            [1] => TOUR VOUCHER  “VUELO CLÁSICO LÍNEAS DE NAZCA” ABR 04,  2025.pdf
+                        )
+
+                    [type] => Array
+                        (
+                            [0] => application/pdf
+                            [1] => application/pdf
+                        )
+
+                    [tmp_name] => Array
+                        (
+                            [0] => C:\xampp\tmp\phpA04A.tmp
+                            [1] => C:\xampp\tmp\phpA04B.tmp
+                        )
+
+                    [error] => Array
+                        (
+                            [0] => 0
+                            [1] => 0
+                        )
+
+                    [size] => Array
+                        (
+                            [0] => 82234
+                            [1] => 340676
+                        )
+
+                )
+
+        )
+
+    [DNI] => 72646121
+    [FECHAS] => Array
+        (
+            [0] => 2025-04-13 16:52:36
+            [1] => 2025-04-13 16:52:37
+        )
+
+    [REQUISITOS] => Array
+        (
+            [0] => 14
+            [1] => 16
+        )
+
+)

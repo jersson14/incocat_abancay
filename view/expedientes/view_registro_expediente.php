@@ -53,7 +53,7 @@
                         <div id="dni_section" class="col-6 form-group">
                             <label for="" style="font-size:small;">N° Documento<b style="color:red">(*)</b>:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="txt_dni">
+                                <input type="text" class="form-control" id="txt_dni" maxlength="8" onkeypress="return soloNumeros(event)">
                                 <div class="input-group-append">
                                     <button onclick="" class="btn btn-primary" id="prueba"><i class="fa fa-search"></i><b> Reniec</b></button>
                                 </div>
@@ -76,11 +76,11 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Celular<b style="color:red">(*)</b>:</label>
-                            <input type="text" class="form-control" id="txt_celular" onkeypress="return soloNumeros(event)">
+                            <input type="text" class="form-control" id="txt_celular" maxlength="9" onkeypress="return soloNumeros(event)">
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Telefono(Opcional)::</label>
-                            <input type="text" class="form-control" id="txt_telefono">
+                            <input type="text" class="form-control" id="txt_telefono" maxlength="9">
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Email(Opcional)::</label>
@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">N° Folios<b style="color:red">(*)</b>:</label>
-                            <input type="text" class="form-control" id="txt_folio" onkeypress="return soloNumeros(event)">
+                            <input type="text" class="form-control" id="txt_folio"  onkeypress="return soloNumeros(event)">
                         </div>
                         <div class="col-12 form-group" style="color:red">
                             <label for="">OJO: (los documentos como requisitos deben estar en un solo archivo en formato PDF, deberá optimizar los documentos antes de enviarlos. El tamaño máximo de los archivos no debe superar los 15MB).</label>
@@ -207,7 +207,7 @@
                                 </div>
                             </div>
                             <div class="col-12" style="text-align:center">
-                                <button class="btn btn-success btn-lg" onclick="Registrar_Tramite()" id="btn_registro"><i class="fas fa-save"></i><b> REGISTRAR EXPEDIENTE</b></button>
+                                <button class="btn btn-success btn-lg" onclick="Registrar_Expediente()" id="btn_registro"><i class="fas fa-save"></i><b> REGISTRAR EXPEDIENTE</b></button>
                             </div>
                         </div>
                     </div>
@@ -276,21 +276,7 @@
                 }
             }
         });
-        var input = document.getElementById('txt_dni');
-        input.addEventListener('input', function() {
-            if (this.value.length > 8)
-                this.value = this.value.slice(0, 8);
-        })
-        var input = document.getElementById('txt_celular');
-        input.addEventListener('input', function() {
-            if (this.value.length > 9)
-                this.value = this.value.slice(0, 9);
-        })
-        var input = document.getElementById('txt_folio');
-        input.addEventListener('input', function() {
-            if (this.value.length > 3)
-                this.value = this.value.slice(0, 3);
-        })
+      
         var checkboxes = document.querySelectorAll('input[type=checkbox]');
         var text = document.getElementById('txt_acciones');
 
@@ -346,36 +332,39 @@
             })
         })
         var input = document.getElementById("txt_dni");
-        input.addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                document.getElementById("prueba").click();
+
+input.addEventListener("keyup", function(event) {
+    // Usamos 'event.key' para obtener la tecla presionada
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("prueba").click();
+    }
+});
+
+$("#prueba").click(function() {
+    // Aquí usamos el ID correcto para obtener el valor del DNI
+    var dni = $("#txt_dni").val();  // Cambié de #dni a #txt_dni
+
+    // Realizamos la solicitud AJAX
+    $.ajax({
+        type: "POST",
+        url: "consulta-dni-ajax.php",
+        data: { dni: dni },  // Cambié la forma de enviar datos, es mejor enviar como objeto
+        dataType: 'json',
+        success: function(data) {
+            if (data == 1) {
+                alert('El DNI tiene que tener 8 digitos');
+            } else {
+                console.log(data);
+
+                // Asignamos los valores a los campos correspondientes
+                document.getElementById("txt_nomb").value = data.nombres;
+                document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno;
             }
-        });
+        }
+    });
+});
 
-        $("#prueba").click(function() {
-
-            var dni = $("#dni").val();
-            $.ajax({
-                type: "POST",
-                url: "consulta-dni-ajax.php",
-                data: 'dni=' + dni,
-                dataType: 'json',
-                success: function(data) {
-                    if (data == 1) {
-                        alert('El DNI tiene que tener 8 digitos');
-                    } else {
-                        console.log(data);
-
-                        document.getElementById("txt_nomb").value = data.nombres
-                        document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno
-
-
-
-                    }
-                }
-            });
-        })
     </script>
     <script>
         $('.js-example-basic-single').select2();
@@ -400,3 +389,38 @@
             // El resto de tu código...
         });
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    var dniInput = document.getElementById('txt_dni');
+    if (dniInput) {
+        dniInput.addEventListener('input', function () {
+            if (this.value.length > 8)
+                this.value = this.value.slice(0, 8);
+        });
+    }
+
+    var celularInput = document.getElementById('txt_celular');
+    if (celularInput) {
+        celularInput.addEventListener('input', function () {
+            if (this.value.length > 9)
+                this.value = this.value.slice(0, 9);
+        });
+    }
+
+    var telefonoInput = document.getElementById('txt_telefono');
+    if (telefonoInput) {
+        telefonoInput.addEventListener('input', function () {
+            if (this.value.length > 9)
+                this.value = this.value.slice(0, 9);
+        });
+    }
+
+    var folioInput = document.getElementById('txt_folio');
+    if (folioInput) {
+        folioInput.addEventListener('input', function () {
+            if (this.value.length > 3)
+                this.value = this.value.slice(0, 3);
+        });
+    }
+});
+</script>

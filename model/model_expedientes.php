@@ -33,38 +33,48 @@
             return $arreglo;
             conexionBD::cerrar_conexion();
         }
-        public function Registrar_Servicio($serv,$costo,$descripcion,$idusu){
+        public function Registrar_Expediente($tipo_doc,$documentoFinal, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip, $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $idusu, $total){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_REGISTRAR_SERVICIO(?,?,?,?)";
+            $sql = "CALL SP_REGISTRAR_EXPEDIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $query  = $c->prepare($sql);
-            $query ->bindParam(1,$serv);
-            $query ->bindParam(2,$costo);
-            $query ->bindParam(3,$descripcion);
-            $query ->bindParam(4,$idusu);
-
+            $query ->bindParam(1,$tipo_doc);
+            $query ->bindParam(2,$documentoFinal);
+            $query ->bindParam(3,$nombre);
+            $query ->bindParam(4,$apellido);
+            $query ->bindParam(5,$celular);
+            $query ->bindParam(6,$telefono);
+            $query ->bindParam(7,$email);
+            $query ->bindParam(8,$direc);
+            $query ->bindParam(9,$descrip);
+            $query ->bindParam(10,$vpresentacion);
+            $query ->bindParam(11,$ruc);
+            $query ->bindParam(12,$raz);
+            $query ->bindParam(13,$servi);
+            $query ->bindParam(14,$nroexpe);
+            $query ->bindParam(15,$folio);
+            $query ->bindParam(16,$idusu);
+            $query ->bindParam(17,$total);
             $resultado = $query->execute();
             if($row = $query->fetchColumn()){
                 return $row;
             }
             conexionBD::cerrar_conexion();
         }
-        public function Modificar_Servicios($id,$serv,$costo,$descripcion,$esta,$idusu){
+        public function Registrar_Detalle_Requisito($idexpediente, $id_requisito, $ruta_final, $fecha_convertida, $idusu) {
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_MODIFICAR_SERVICIO(?,?,?,?,?,?)";
-            $query  = $c->prepare($sql);
-            $query ->bindParam(1,$id);
-            $query ->bindParam(2,$serv);
-            $query ->bindParam(3,$costo);
-            $query ->bindParam(4,$descripcion);
-            $query ->bindParam(5,$esta);
-            $query ->bindParam(6,$idusu);
-
+            $sql = "CALL SP_REGISTRAR_DETALLE_REQUISITO(?,?,?,?,?)";
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $idexpediente);
+            $query->bindParam(2, $id_requisito);
+            $query->bindParam(3, $ruta_final);
+            $query->bindParam(4, $fecha_convertida);
+            $query->bindParam(5, $idusu);
+        
             $resultado = $query->execute();
-            if($row = $query->fetchColumn()){
-                return $row;
-            }
             conexionBD::cerrar_conexion();
+            return $resultado;
         }
+        
         public function Eliminar_Servicio($id){
             $c = conexionBD::conexionPDO();
             $sql = "CALL SP_ELIMINAR_SERVICIO(?)";
