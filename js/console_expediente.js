@@ -1,56 +1,100 @@
 function Cargar_Select_Servicios() {
-    // Verificar primero si Select2 está disponible
-    if (typeof $.fn.select2 !== 'function') {
-        console.error("Select2 no está cargado aún. Reintentando en 500ms...");
-        setTimeout(Cargar_Select_Servicios, 500);
-        return;
-    }
-    
-    $.ajax({
-        url: "../controller/servicios/controlador_cargar_servicios.php",
-        type: 'POST',
-        dataType: 'json', // Esto le dice a jQuery que espere JSON
-        timeout: 10000 // 10 segundos de timeout
-    }).done(function(data) {
-        try {
-            // No necesitas JSON.parse si usas dataType:'json'
-            let cadena = "<option value='' disabled selected>Seleccione Servicio</option>";
-            
-            if (data && data.length > 0) {
-                for (let i = 0; i < data.length; i++) {
-                    cadena += `<option value='${data[i][0]}' data-precio='${data[i][2]}'>${data[i][1]}</option>`;
-                }
-            } else {
-                console.warn("No se encontraron servicios disponibles");
-            }
-            
-            $('#select_servicio').html(cadena);
-            
-            // Verificar nuevamente si Select2 está disponible
-            if (typeof $.fn.select2 === 'function') {
-                $('#select_servicio').select2({
-                    placeholder: "Seleccione Servicio",
-                    allowClear: true,
-                    width: '100%'
-                });
-            } else {
-                console.error("Select2 no está disponible para inicializar el select");
-            }
-            
-            // Configurar eventos
-            configurarEventosServicio();
-            
-            console.log("Servicios cargados correctamente");
-        } catch (e) {
-            console.error("Error al procesar la respuesta:", e);
-            // Reintentar después de un breve retraso
-            setTimeout(Cargar_Select_Servicios, 2000);
-        }
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error("Error al cargar los servicios:", textStatus, errorThrown);
-        // Reintentar después de un breve retraso
-        setTimeout(Cargar_Select_Servicios, 2000);
-    });
+  // Verificar primero si Select2 está disponible
+  if (typeof $.fn.select2 !== 'function') {
+      console.error("Select2 no está cargado aún. Reintentando en 500ms...");
+      setTimeout(Cargar_Select_Servicios, 500);
+      return;
+  }
+  
+  // Cache el elemento select para mejor rendimiento
+  let $select = $('#select_servicio');
+  
+  $.ajax({
+      url: "../controller/servicios/controlador_cargar_servicios.php",
+      type: 'POST',
+      dataType: 'json',
+      timeout: 10000 // 10 segundos de timeout
+  }).done(function(data) {
+      try {
+          // Opción por defecto sin placeholder pero con valor vacío
+          let cadena = "<option value=''>Seleccione Servicio</option>";
+          
+          if (data && data.length > 0) {
+              for (let i = 0; i < data.length; i++) {
+                  cadena += `<option value='${data[i][0]}' data-precio='${data[i][2]}'>${data[i][1]}</option>`;
+              }
+          } else {
+              console.warn("No se encontraron servicios disponibles");
+          }
+          
+          // Verificar si ya está inicializado con Select2
+          if ($select.hasClass("select2-hidden-accessible")) {
+              // Obtener el valor actual antes de destruir Select2
+              let currentValue = $select.val();
+              console.log("Valor actual antes de actualizar:", currentValue);
+              
+              // Destruir Select2
+              $select.select2("destroy");
+              
+              // Actualizar HTML
+              $select.html(cadena);
+              
+              // Reinicializar Select2 con configuración específica
+              $select.select2({
+                  placeholder: "Seleccione Servicio",
+                  allowClear: true,
+                  width: '100%',
+                  dropdownParent: $select.parent() // Asegura que el dropdown aparezca correctamente posicionado
+              });
+              
+              // Si había un valor seleccionado antes, intentar restaurarlo
+              if (currentValue && currentValue !== '') {
+                  $select.val(currentValue).trigger('change.select2');
+                  console.log("Restaurando valor previo:", currentValue);
+              }
+          } else {
+              // Primera inicialización
+              $select.html(cadena);
+              
+              $select.select2({
+                  placeholder: "Seleccione Servicio",
+                  allowClear: true,
+                  width: '100%',
+                  dropdownParent: $select.parent()
+              });
+          }
+          
+          // Asegurar que el cambio de valor funcione correctamente
+          $select.off('change.services').on('change.services', function() {
+              let selectedValue = $(this).val();
+              let selectedText = $(this).find("option:selected").text();
+              console.log("Servicio seleccionado:", selectedValue, selectedText);
+              
+              // Si el valor seleccionado es válido, asegurar que se muestre correctamente
+              if (selectedValue && selectedValue !== '') {
+                  // Forzar actualización visible de Select2
+                  setTimeout(function() {
+                      $select.trigger('change.select2');
+                  }, 100);
+              }
+          });
+          
+          // Configurar eventos
+          if (typeof configurarEventosServicio === 'function') {
+              configurarEventosServicio();
+          } else {
+              console.warn("La función configurarEventosServicio no está definida");
+          }
+          
+          console.log("Servicios cargados correctamente");
+      } catch (e) {
+          console.error("Error al procesar la respuesta:", e);
+          setTimeout(Cargar_Select_Servicios, 2000);
+      }
+  }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar los servicios:", textStatus, errorThrown);
+      setTimeout(Cargar_Select_Servicios, 2000);
+  });
 }
 
 // Separar los eventos en otra función para mejor organización
@@ -548,11 +592,12 @@ function listar_expedientes_filtro() {
     let nroexpe = document.getElementById('txt_nro_expediente').value.trim();
     let total = document.getElementById('precio_total').value;
     let folio = document.getElementById('txt_folio').value;
-  
+    let distri = document.getElementById('select_distrito').value;
+
     let idusu = document.getElementById('txtprincipalid').value;
   
     // Validar campos obligatorios
-    if (!tipo_doc || !nombre || !apellido || !celular || !nroexpe || !folio || !servi) {
+    if (!tipo_doc || !nombre || !apellido || !celular || !nroexpe || !folio || !servi || !distri) {
       return Swal.fire("Mensaje de Advertencia", "Los campos obligatorios no han sido completados", "warning");
     }
   
@@ -601,7 +646,8 @@ function listar_expedientes_filtro() {
         nroexpe: nroexpe,
         folio: folio,
         idusu: idusu,
-        total: total  
+        total: total,
+        distri:distri  
       }
     }).done(function (resp) {
       console.log("RESPUESTA DEL SERVIDOR:", resp); // <--- AGREGAR ESTO
@@ -620,7 +666,9 @@ function listar_expedientes_filtro() {
 }
 
   function LimpiarRegistro(){
-  
+    Cargar_Select_Regiones();
+    Cargar_Select_Provincia(null);
+    Cargar_Select_Distrito(null);
     $("#txt_dni").val("");
     $("#txt_dni2").val("");
     $("#txt_nombre").val("");
@@ -650,22 +698,18 @@ function listar_expedientes_filtro() {
     formData.append("dni", dni);
     formData.append("idusu", idusu);
 
-    $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function (index) {
-        const chk = $(this).find('.chk-agregar');
-        const isChecked = chk.is(':checked');
-        if (isChecked) {
-            const idRequisito = $(this).find('td').eq(0).text().trim();
-            const fileInput = $(this).find('.file-input')[0];
-            const fecha = $(this).find('.fecha-input').val();
+    $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
+        const idRequisito = $(this).find('td').eq(0).text().trim();
+        const fileInput = $(this).find('.file-input')[0];
+        const fecha = $(this).find('.fecha-input').val();
 
-            formData.append("requisitos[]", idRequisito);
-            formData.append("fechas[]", fecha ? fecha : "");
+        formData.append("requisitos[]", idRequisito);
+        formData.append("fechas[]", fecha ? fecha : "");
 
-            if (fileInput.files.length > 0) {
-                formData.append("archivos[]", fileInput.files[0]);
-            } else {
-                formData.append("archivos[]", new File([], "")); // archivo vacío
-            }
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append("archivos[]", fileInput.files[0]);
+        } else {
+            formData.append("archivos[]", new File([], "")); // archivo vacío
         }
     });
 
@@ -676,15 +720,256 @@ function listar_expedientes_filtro() {
         contentType: false,
         processData: false
     }).done(function (resp) {
-        let response = JSON.parse(resp); // Parsear el JSON recibido
+        let response = JSON.parse(resp);
 
         if (response.success) {
             Swal.fire("Éxito", "Requisitos registrados correctamente", "success");
             $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
         } else {
-            Swal.fire("Error", response.message, "error"); // Mostrar el mensaje de error del backend
+            Swal.fire("Error", response.message, "error");
         }
     }).fail(function () {
         Swal.fire("Error", "Hubo un problema con la conexión, intente nuevamente", "error");
     });
+}
+
+
+
+// Función para cargar los distritos
+function Cargar_Select_Regiones() {
+  $.ajax({
+      url: "../controller/regiones/controlador_cargar_select_regiones.php",
+      type: "POST",
+      dataType: "json",
+      beforeSend: function () {
+          console.log("Cargando regiones...");
+      }
+  })
+  .done(function (data) {
+      let opciones = "<option value=''>Seleccionar Región</option>";
+
+      if (data.length > 0) {
+          data.forEach(region => {
+              // Verificamos si el valor es 1 para ponerlo como seleccionado
+              const selected = region[0] === "1" ? " selected" : "";
+              opciones += `<option value="${region[0]}"${selected}>${region[1]}</option>`;
+          });
+      }
+
+      // Seleccionar los elementos por ID
+      let $regiones = $("#select_region, #select_region_editar");
+      
+      // Actualizar HTML
+      $regiones.html(opciones);
+      
+      // Si usa Select2, actualizar correctamente
+      $regiones.each(function() {
+          let $this = $(this);
+          if ($this.hasClass("select2-hidden-accessible")) {
+              $this.select2("destroy");
+              $this.html(opciones);
+              $this.select2({
+                  placeholder: "Seleccionar Región",
+                  allowClear: true,
+                  width: "100%"
+              });
+              
+              // Forzar la actualización del valor seleccionado para Select2
+              $this.val("1").trigger("change");
+          } else {
+              // Para selects normales, establece el valor directamente
+              $this.val("1");
+          }
+          
+          // Asegurarse de que tiene la clase form-control
+          if (!$this.hasClass("form-control")) {
+              $this.addClass("form-control");
+          }
+      });
+
+      // Cargar provincias cuando se seleccione una región
+      $regiones.off("change").on("change", function () {
+          let id_region = $(this).val();
+          let target = $(this).attr("id");
+          Cargar_Select_Provincia(id_region, target);
+      });
+      
+      // Cargar automáticamente las provincias para la región 1 al inicializar
+      Cargar_Select_Provincia("1", "select_region");
+      if ($("#select_region_editar").length) {
+          Cargar_Select_Provincia("1", "select_region_editar");
+      }
+  })
+  .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar regiones:", textStatus, errorThrown);
+      $("#select_region, #select_region_editar").html("<option value=''>Error al cargar regiones</option>");
+  });
+}
+
+// Función para cargar las provincias según la región seleccionada
+// Función para cargar las provincias según la región seleccionada
+function Cargar_Select_Provincia(id_region, target) {
+  // Determinar qué select corresponde al target
+  let $select;
+  
+  if (target === "select_region") {
+      $select = $("#txt_provincia");
+  } else if (target === "select_region_editar") {
+      $select = $("#txt_provincia_editar");
+  } else {
+      $select = $("#select_provincia_busqueda");
+  }
+  
+  // Limpiar el select si no hay región seleccionada
+  if (!id_region) {
+      $select.html("<option value=''>Seleccionar Provincia</option>");
+      
+      // Si usa Select2, actualizar correctamente
+      if ($select.hasClass("select2-hidden-accessible")) {
+          $select.val("").trigger("change");
+      }
+      
+      // También resetear el select de distritos
+      $("#select_distrito").html("<option value=''>Seleccionar Distrito</option>");
+      if ($("#select_distrito").hasClass("select2-hidden-accessible")) {
+          $("#select_distrito").val("").trigger("change");
+      }
+      
+      return;
+  }
+
+  // Cargar provincias
+  $.ajax({
+      url: "../controller/provincias/controlador_cargar_select_provincias.php",
+      type: "POST",
+      data: { id_region: id_region },
+      dataType: "json",
+      beforeSend: function () {
+          console.log("Cargando provincias para la región ID:", id_region);
+      }
+  })
+  .done(function (data) {
+      // Preparar opciones
+      let opciones = "<option value=''>Seleccionar Provincia</option>";
+      
+      if (data && data.length > 0) {
+          data.forEach(provincia => {
+              opciones += `<option value="${provincia[0]}">${provincia[1]}</option>`;
+          });
+      } else {
+          console.log("No se encontraron provincias para esta región");
+      }
+      
+      // Actualizar HTML del select
+      $select.html(opciones);
+      
+      // Si usa Select2, actualizar correctamente
+      if ($select.hasClass("select2-hidden-accessible")) {
+          $select.select2("destroy");
+          $select.html(opciones);
+          $select.select2({
+              placeholder: "Seleccionar Provincia",
+              allowClear: true,
+              width: "100%"
+          });
+      }
+      
+      // Asegurarse de que tiene la clase form-control
+      if (!$select.hasClass("form-control")) {
+          $select.addClass("form-control");
+      }
+      
+      // Configurar evento para cargar distritos
+      $select.off("change").on("change", function() {
+          let id_provincia = $(this).val();
+          console.log("Provincia seleccionada:", id_provincia);
+          
+          // Solo cargar distritos si hay un ID de provincia
+          if (id_provincia) {
+              Cargar_Select_Distrito(id_provincia);
+          } else {
+              // Limpiar el select de distritos si no hay provincia seleccionada
+              $("#select_distrito").html("<option value=''>Seleccionar Distrito</option>");
+              if ($("#select_distrito").hasClass("select2-hidden-accessible")) {
+                  $("#select_distrito").val("").trigger("change");
+              }
+          }
+      });
+  })
+  .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar provincias:", textStatus, errorThrown);
+      $select.html("<option value=''>Error al cargar provincias</option>");
+      
+      // Si usa Select2, actualizar correctamente
+      if ($select.hasClass("select2-hidden-accessible")) {
+          $select.val("").trigger("change");
+      }
+  });
+}
+
+
+
+// Función para cargar los distritos según la provincia seleccionada
+function Cargar_Select_Distrito(id_provincia) {
+  let $select = $("#select_distrito");
+  
+  if (!id_provincia) {
+      if ($select.hasClass("select2-hidden-accessible")) {
+          $select.html("<option value=''>Seleccionar Distrito</option>");
+          $select.val("").trigger("change");
+      } else {
+          $select.html("<option value=''>Seleccionar Distrito</option>");
+      }
+      return;
+  }
+
+  $.ajax({
+      url: "../controller/distritos/controlador_cargar_select_distritos.php",
+      type: "POST",
+      data: { id_provincia: id_provincia },
+      dataType: "json",
+      beforeSend: function () {
+          console.log("Cargando distritos para la provincia ID:", id_provincia);
+      }
+  })
+  .done(function (response) {
+      let opciones = "<option value=''>Seleccionar Distrito</option>";
+      const data = response.data || [];
+
+      if (data.length > 0) {
+          data.forEach(distrito => {
+              opciones += `<option value="${distrito.id_distritos}">${distrito.nombre}</option>`;
+          });
+      } else {
+          console.log("No se encontraron distritos para esta provincia");
+      }
+
+      // Verificar si el select tiene Select2 inicializado
+      let isInitialized = $select.hasClass("select2-hidden-accessible");
+      
+      // Si está inicializado, destruirlo primero
+      if (isInitialized) {
+          $select.select2("destroy");
+      }
+      
+      // Actualizar HTML
+      $select.html(opciones);
+      
+      // Reinicializar Select2
+      $select.select2({
+          placeholder: "Seleccionar Distrito",
+          allowClear: true,
+          width: "100%"
+      });
+  })
+  .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar distritos:", textStatus, errorThrown);
+      
+      if ($select.hasClass("select2-hidden-accessible")) {
+          $select.html("<option value=''>Error al cargar distritos</option>");
+          $select.val("").trigger("change");
+      } else {
+          $select.html("<option value=''>Error al cargar distritos</option>");
+      }
+  });
 }

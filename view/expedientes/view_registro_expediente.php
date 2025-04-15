@@ -90,6 +90,19 @@
                             <label for="" style="font-size:small;">Dirección(Opcional):</label>
                             <input type="text" class="form-control" id="txt_dire">
                         </div>
+                        <div class="col-4 form-group">
+                            <label for="" style="font-size:small;">Región<b style="color:red">(*)</b>:</label>
+                            <select class="form-control" id="select_region" style="width:100%"></select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="" style="font-size:small;">Provincia<b style="color:red">(*)</b>:</label>
+                            <select id="txt_provincia" class="form-control" style="width:100%"></select>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="" style="font-size:small;">Distrito<b style="color:red">(*)</b>:</label>
+                            <select class="js-example-basic-single" id="select_distrito" style="width:100%"></select>
+                        </div>
+
                         <div class="col-12 form-group">
                             <label for="" style="font-size:small;">Descripción(Opcional):</label>
                             <input type="text" class="form-control" id="txt_descrip">
@@ -159,7 +172,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Servicio<b style="color:red">(*)</b>:</label>
-                            <select class="form-control" id="select_servicio" style="width:100%"></select>
+                            <select class="js-example-basic-single" id="select_servicio" style="width:100%"></select>
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">N° Expediente<b style="color:red">(*)</b>:</label>
@@ -167,7 +180,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">N° Folios<b style="color:red">(*)</b>:</label>
-                            <input type="text" class="form-control" id="txt_folio"  onkeypress="return soloNumeros(event)">
+                            <input type="text" class="form-control" id="txt_folio" onkeypress="return soloNumeros(event)">
                         </div>
                         <div class="col-12 form-group" style="color:red">
                             <label for="">OJO: (los documentos como requisitos deben estar en un solo archivo en formato PDF, deberá optimizar los documentos antes de enviarlos. El tamaño máximo de los archivos no debe superar los 15MB).</label>
@@ -217,9 +230,6 @@
     </div>
     <script>
         $(document).ready(function() {
-
-
-
             $("#rad_presentacion1").on('click', function() {
                 document.getElementById('div_juridico').style.display = "none";
             });
@@ -276,7 +286,7 @@
                 }
             }
         });
-      
+
         var checkboxes = document.querySelectorAll('input[type=checkbox]');
         var text = document.getElementById('txt_acciones');
 
@@ -333,94 +343,149 @@
         })
         var input = document.getElementById("txt_dni");
 
-input.addEventListener("keyup", function(event) {
-    // Usamos 'event.key' para obtener la tecla presionada
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("prueba").click();
-    }
-});
-
-$("#prueba").click(function() {
-    // Aquí usamos el ID correcto para obtener el valor del DNI
-    var dni = $("#txt_dni").val();  // Cambié de #dni a #txt_dni
-
-    // Realizamos la solicitud AJAX
-    $.ajax({
-        type: "POST",
-        url: "consulta-dni-ajax.php",
-        data: { dni: dni },  // Cambié la forma de enviar datos, es mejor enviar como objeto
-        dataType: 'json',
-        success: function(data) {
-            if (data == 1) {
-                alert('El DNI tiene que tener 8 digitos');
-            } else {
-                console.log(data);
-
-                // Asignamos los valores a los campos correspondientes
-                document.getElementById("txt_nomb").value = data.nombres;
-                document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno;
+        input.addEventListener("keyup", function(event) {
+            // Usamos 'event.key' para obtener la tecla presionada
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("prueba").click();
             }
-        }
-    });
-});
+        });
 
+        $("#prueba").click(function() {
+            // Aquí usamos el ID correcto para obtener el valor del DNI
+            var dni = $("#txt_dni").val(); // Cambié de #dni a #txt_dni
+
+            // Realizamos la solicitud AJAX
+            $.ajax({
+                type: "POST",
+                url: "consulta-dni-ajax.php",
+                data: {
+                    dni: dni
+                }, // Cambié la forma de enviar datos, es mejor enviar como objeto
+                dataType: 'json',
+                success: function(data) {
+                    if (data == 1) {
+                        alert('El DNI tiene que tener 8 digitos');
+                    } else {
+                        console.log(data);
+
+                        // Asignamos los valores a los campos correspondientes
+                        document.getElementById("txt_nomb").value = data.nombres;
+                        document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno;
+                    }
+                }
+            });
+        });
     </script>
     <script>
-        $('.js-example-basic-single').select2();
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+            // ==========================
+            // Verificación y Configuración de Select2
+            // ==========================
+            if (typeof $.fn.select2 !== 'function') {
+                console.error("Select2 no está disponible en el documento");
+                return;
+            }
 
-            // Intenta cargar los servicios
+            // Configuración global de Select2
+            $.fn.select2.defaults.set("escapeMarkup", function(markup) {
+                return markup; // Permitir HTML en opciones
+            });
+
+            // Inicialización genérica de Select2 para todos los select con clase definida
+            $('.js-example-basic-single').select2({
+                placeholder: "Seleccionar distrito",
+                allowClear: true,
+                width: "100%"
+            });
+
+            // ==========================
+            // Depuración de eventos change en selects
+            // ==========================
+            $(document).on('change', 'select', function(e) {
+                let $select = $(this);
+                let id = $select.attr('id') || 'sin_id';
+                let val = $select.val();
+                let text = $select.find('option:selected').text();
+                console.log(`Select cambiado - ID: ${id}, Valor: ${val}, Texto: ${text}`);
+            });
+
+            // ==========================
+            // Interacción específica con #select_servicio
+            // ==========================
+            $('#select_servicio').on('select2:select', function(e) {
+                console.log("Servicio específicamente seleccionado:", e.params.data);
+
+                let $select = $(this);
+                let selectedId = $select.val();
+
+                // Forzar re-renderizado
+                setTimeout(function() {
+                    $select.select2('destroy');
+                    $select.select2({
+                        placeholder: "Seleccione Servicio",
+                        allowClear: true,
+                        width: "100%"
+                    });
+                    $select.val(selectedId).trigger('change');
+                }, 50);
+            });
+
+            // ==========================
+            // Carga de Servicios (función debe existir)
+            // ==========================
             if (typeof Cargar_Select_Servicios === "function") {
                 Cargar_Select_Servicios();
             } else {
                 console.error("La función Cargar_Select_Servicios no está definida");
-                // Esperar un momento y volver a intentar
                 setTimeout(function() {
                     if (typeof Cargar_Select_Servicios === "function") {
                         Cargar_Select_Servicios();
                     } else {
                         console.error("La función sigue sin estar disponible después de esperar");
                     }
-                }, 1000); // Esperar 1 segundo
+                }, 1000);
             }
 
-            // El resto de tu código...
+            // ==========================
+            // Restricción de longitud en campos de entrada
+            // ==========================
+            const camposConLimite = [{
+                    id: 'txt_dni',
+                    max: 8
+                },
+                {
+                    id: 'txt_celular',
+                    max: 9
+                },
+                {
+                    id: 'txt_telefono',
+                    max: 9
+                },
+                {
+                    id: 'txt_folio',
+                    max: 3
+                }
+            ];
+
+            camposConLimite.forEach(campo => {
+                let input = document.getElementById(campo.id);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        if (this.value.length > campo.max) {
+                            this.value = this.value.slice(0, campo.max);
+                        }
+                    });
+                }
+            });
+
+            // ==========================
+            // Carga inicial de regiones
+            // ==========================
+            if (typeof Cargar_Select_Regiones === "function") {
+                Cargar_Select_Regiones();
+            } else {
+                console.warn("Cargar_Select_Regiones no está definida");
+            }
         });
     </script>
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var dniInput = document.getElementById('txt_dni');
-    if (dniInput) {
-        dniInput.addEventListener('input', function () {
-            if (this.value.length > 8)
-                this.value = this.value.slice(0, 8);
-        });
-    }
-
-    var celularInput = document.getElementById('txt_celular');
-    if (celularInput) {
-        celularInput.addEventListener('input', function () {
-            if (this.value.length > 9)
-                this.value = this.value.slice(0, 9);
-        });
-    }
-
-    var telefonoInput = document.getElementById('txt_telefono');
-    if (telefonoInput) {
-        telefonoInput.addEventListener('input', function () {
-            if (this.value.length > 9)
-                this.value = this.value.slice(0, 9);
-        });
-    }
-
-    var folioInput = document.getElementById('txt_folio');
-    if (folioInput) {
-        folioInput.addEventListener('input', function () {
-            if (this.value.length > 3)
-                this.value = this.value.slice(0, 3);
-        });
-    }
-});
-</script>

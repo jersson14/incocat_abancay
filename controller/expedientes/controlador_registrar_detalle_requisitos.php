@@ -31,47 +31,47 @@ $todo_ok = true; // Bandera para verificar el proceso
 // Procesar cada requisito
 for ($i = 0; $i < count($requisitos); $i++) {
     $id_requisito = $requisitos[$i];
-    $fecha_original = $fechas[$i] ?? null;
+    $fecha_original = $fechas[$i] ?? '';
 
-    if (!$fecha_original) {
-        echo json_encode(['success' => false, 'message' => "Fecha no recibida en el índice $i"]);
-        exit;
+    // Si no hay fecha, usar valor por defecto
+    if (empty($fecha_original)) {
+        $fecha_convertida = '0000-00-00 00:00:00';
+    } else {
+        // Si hay fecha, intentar convertirla
+        $fecha_convertida_dt = DateTime::createFromFormat('Y-m-d H:i:s', $fecha_original);
+        if (!$fecha_convertida_dt) {
+            $fecha_convertida_dt = DateTime::createFromFormat('Y-m-d', $fecha_original);
+        }
+
+        if ($fecha_convertida_dt) {
+            $fecha_convertida = $fecha_convertida_dt->format('Y-m-d H:i:s');
+        } else {
+            $fecha_convertida = '0000-00-00 00:00:00'; // Fallback
+        }
     }
 
-    // Verificar si la fecha está en el formato correcto
-    $fecha_convertida = DateTime::createFromFormat('Y-m-d H:i:s', $fecha_original);
-    if (!$fecha_convertida) {
-        echo json_encode(['success' => false, 'message' => "Fecha inválida recibida: $fecha_original"]);
-        exit;
-    }
-    $fecha_convertida = $fecha_convertida->format('Y-m-d H:i:s');
-
-    // Obtener la información del archivo
+    // Archivo
     $archivo_nombre = $archivos['name'][$i] ?? '';
     $archivo_tmp = $archivos['tmp_name'][$i] ?? '';
 
-    // Verificar si el archivo ha sido enviado
     if (!isset($archivo_tmp) || empty($archivo_tmp)) {
-        echo json_encode(['success' => false, 'message' => "Archivo vacío o no enviado en el índice $i"]);
-        exit;
-    }
-
-    // Definir la ruta completa para guardar el archivo
-    $ruta_final = $ruta_base . basename($archivo_nombre);
-
-    // Mover el archivo al servidor
-    if (move_uploaded_file($archivo_tmp, $ruta_final)) {
-        // Llamar al método para registrar el detalle del requisito
-        $consulta = $ME->Registrar_Detalle_Requisito($idexpediente, $id_requisito, $ruta_final, $fecha_convertida, $idusu);
-        if (!$consulta) {
-            echo json_encode(['success' => false, 'message' => "Error al registrar en BD en índice $i"]);
+        $ruta_final = ''; // Valor vacío si no hay archivo
+    } else {
+        $ruta_final = $ruta_base . basename($archivo_nombre);
+        if (!move_uploaded_file($archivo_tmp, $ruta_final)) {
+            echo json_encode(['success' => false, 'message' => "Error al mover archivo en índice $i"]);
             exit;
         }
-    } else {
-        echo json_encode(['success' => false, 'message' => "Error al mover archivo en índice $i"]);
+    }
+
+    // Registrar en BD
+    $consulta = $ME->Registrar_Detalle_Requisito($idexpediente, $id_requisito, $ruta_final, $fecha_convertida, $idusu);
+    if (!$consulta) {
+        echo json_encode(['success' => false, 'message' => "Error al registrar en BD en índice $i"]);
         exit;
     }
 }
+
 
 echo json_encode(['success' => true, 'message' => "Todo registrado correctamente"]);
 ?>

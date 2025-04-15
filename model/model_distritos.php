@@ -96,6 +96,21 @@
             conexionBD::cerrar_conexion();
         
         }
+        public function Cargar_distritos($id_provincia){
+            $c = conexionBD::conexionPDO();
+            $arreglo = array();
+            $sql = "CALL SP_CARGAR_SELECT_DISTRITOS(?)";
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id_provincia);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        
+        }
        
     }
 

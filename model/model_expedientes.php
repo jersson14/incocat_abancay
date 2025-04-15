@@ -33,9 +33,9 @@
             return $arreglo;
             conexionBD::cerrar_conexion();
         }
-        public function Registrar_Expediente($tipo_doc,$documentoFinal, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip, $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $idusu, $total){
+        public function Registrar_Expediente($tipo_doc,$documentoFinal, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip, $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $idusu, $total,$distri){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_REGISTRAR_EXPEDIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "CALL SP_REGISTRAR_EXPEDIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $query  = $c->prepare($sql);
             $query ->bindParam(1,$tipo_doc);
             $query ->bindParam(2,$documentoFinal);
@@ -54,6 +54,7 @@
             $query ->bindParam(15,$folio);
             $query ->bindParam(16,$idusu);
             $query ->bindParam(17,$total);
+            $query ->bindParam(18,$distri);
             $resultado = $query->execute();
             if($row = $query->fetchColumn()){
                 return $row;
@@ -66,7 +67,14 @@
             $query = $c->prepare($sql);
             $query->bindParam(1, $idexpediente);
             $query->bindParam(2, $id_requisito);
-            $query->bindParam(3, $ruta_final);
+        
+            // Detectar si es cadena vacía y reemplazar por NULL
+            if ($ruta_final === "") {
+                $query->bindValue(3, null, PDO::PARAM_NULL);
+            } else {
+                $query->bindValue(3, $ruta_final, PDO::PARAM_STR);
+            }
+        
             $query->bindParam(4, $fecha_convertida);
             $query->bindParam(5, $idusu);
         
@@ -74,6 +82,7 @@
             conexionBD::cerrar_conexion();
             return $resultado;
         }
+        
         
         public function Eliminar_Servicio($id){
             $c = conexionBD::conexionPDO();

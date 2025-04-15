@@ -21,8 +21,9 @@
     $folio = strtoupper(htmlspecialchars($_POST['folio'], ENT_QUOTES, 'UTF-8')); // Ejemplo de nuevo dato
     $idusu = strtoupper(htmlspecialchars($_POST['idusu'], ENT_QUOTES, 'UTF-8')); // Ejemplo de nuevo dato
     $total = strtoupper(htmlspecialchars($_POST['total'], ENT_QUOTES, 'UTF-8')); // Ejemplo de nuevo dato
+    $distri = strtoupper(htmlspecialchars($_POST['distri'], ENT_QUOTES, 'UTF-8')); // Ejemplo de nuevo dato
 
     // Llamamos al método del modelo con todos los datos
-    $consulta = $ME->Registrar_Expediente($tipo_doc,$documentoFinal, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip, $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $idusu, $total);
+    $consulta = $ME->Registrar_Expediente($tipo_doc,$documentoFinal, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip, $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $idusu, $total,$distri);
     echo $consulta;
 ?>
