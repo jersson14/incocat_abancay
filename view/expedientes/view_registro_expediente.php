@@ -228,6 +228,7 @@
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $("#rad_presentacion1").on('click', function() {

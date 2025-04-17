@@ -193,6 +193,83 @@
             // Esta línea nunca se ejecuta porque está después del return
             // conexionBD::cerrar_conexion();
         }
+        public function Eliminar_expediente($id){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_ELIMINAR_EXPEDIENTE(?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id);
+    
+            $resul = $query->execute();
+            if($resul){
+                return 1;
+            }else{
+                return 0;
+            }
+            conexionBD::cerrar_conexion();
+        }
+        public function Listar_Expedientes_archivados(){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_ARCHIVADOS()";
+            $query  = $c->prepare($sql);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+
+        public function Listar_expedientes_filtro_archivados($fechaini,$fechafin,$servicio){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_FILTRO_ARCHIVADOS(?,?,?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$fechaini);
+            $query->bindParam(2,$fechafin);
+            $query->bindParam(3,$servicio);
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+        public function Modificar_Estado($id,$esta,$motivo,$idusu){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_MODIFICAR_ESTADO(?,?,?,?)";
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id);
+            $query ->bindParam(2,$esta);
+            $query ->bindParam(3,$motivo);
+            $query ->bindParam(4,$idusu);
+
+            $resul = $query->execute();
+            if($resul){
+                return 1;
+            }else{
+                return 0;
+            }
+            conexionBD::cerrar_conexion();
+        }
+        public function Listar_Historial_Espedientes($id){
+            $c = conexionBD::conexionPDO();
+            $arreglo = array();
+            $sql = "CALL SP_LISTA_HISTORIAL_EXPEDIENTES(?)";
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        
+        }
     }
 
 

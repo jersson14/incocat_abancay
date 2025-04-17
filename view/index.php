@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="nav-link">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expediente_archivados.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
                       Expedientes Archivados
