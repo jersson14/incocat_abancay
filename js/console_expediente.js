@@ -779,14 +779,16 @@ function listar_expedientes_filtro() {
         const idRequisito = $(this).find('td').eq(0).text().trim();
         const fileInput = $(this).find('.file-input')[0];
         const fecha = $(this).find('.fecha-input').val();
+        const estado = $(this).find('.estado-text span').text().trim(); // ← AQUÍ se toma el estado
 
         formData.append("requisitos[]", idRequisito);
         formData.append("fechas[]", fecha ? fecha : "");
+        formData.append("estados[]", estado); // ← AQUÍ lo agregas al formulario
 
         if (fileInput && fileInput.files.length > 0) {
             formData.append("archivos[]", fileInput.files[0]);
         } else {
-            formData.append("archivos[]", new File([], "")); // archivo vacío
+            formData.append("archivos[]", new File([], ""));
         }
     });
 
@@ -809,6 +811,7 @@ function listar_expedientes_filtro() {
         Swal.fire("Error", "Hubo un problema con la conexión, intente nuevamente", "error");
     });
 }
+
 
 
 
@@ -1584,6 +1587,146 @@ function listar_historial(id) {
 
           { "data": "fecha_formateada" }
       ],
+      "language": {
+          "emptyTable": "No se encontraron datos", // ✅ Mensaje cuando la tabla está vacía
+          "zeroRecords": "No se encontraron resultados", // ✅ Mensaje para búsquedas sin coincidencias
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+          "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+          "infoFiltered": "(filtrado de _MAX_ registros en total)",
+          "lengthMenu": "Mostrar _MENU_ registros",
+          "loadingRecords": "Cargando...",
+          "processing": "Procesando...",
+          "search": "Buscar:",
+          "paginate": {
+              "first": "Primero",
+              "last": "Último",
+              "next": "Siguiente",
+              "previous": "Anterior"
+          }
+      },
+      "select": true
+  });
+}
+
+
+//VER HISTORIAL DE ESTADO
+$('#tabla_expedientes').on('click','.mostrar',function(){
+  var data = tbl_expedientes.row($(this).parents('tr')).data();
+
+  if(tbl_expedientes.row(this).child.isShown()){
+      var data = tbl_expedientes.row(this).data();
+  }
+$("#modal_ver_requisitos").modal('show');
+
+  document.getElementById('lb_titulo_historial_requi').innerHTML="<b>CLIENTE:</b> "+data.CLIENTE+"";
+  document.getElementById('lb_titulo_historial2_requi').innerHTML="<b>SERVICIO:</b> "+data.nombre+"";
+
+  listar_requi(data.id_expediente);
+
+})
+// VISTA DE REQUISITOS DE EXPEDIENTE
+var tbl_requisitos;
+function listar_requi(id) {
+  tbl_requisitos = $("#tabla_ver_requi").DataTable({
+      "ordering": false,
+      "bLengthChange": true,
+      "searching": false,  // Deshabilita la barra de búsqueda
+      "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+      "pageLength": 5,
+      "destroy": true,
+      "pagingType": 'full_numbers',
+      "scrollCollapse": true,
+      "responsive": true,
+      "async": false,
+      "processing": true,
+      "ajax": {
+          "url": "../controller/expedientes/controlador_listar_requisitos_expedientes.php",
+          "type": 'POST',
+          "data": { id: id },
+          "dataSrc": function(json) {
+              console.log("Respuesta JSON:", json);
+              return json.data;
+          }
+      },
+      "dom": 'Bfrtip', 
+      "buttons": [
+        {
+          extend: 'excelHtml5',
+          text: '<i class="fas fa-file-excel"></i> Excel',
+          titleAttr: 'Exportar a Excel',
+          filename: "LISTA_DE_REQUISITOS",
+          title: "LISTA DE REQUISITOS",
+          className: 'btn btn-success' 
+        },
+        {
+          extend: 'pdfHtml5',
+          text: '<i class="fas fa-file-pdf"></i> PDF',
+          titleAttr: 'Exportar a PDF',
+          filename: "LISTA_DE_REQUISITOS",
+          title: "LISTA DE REQUISITOS",
+          className: 'btn btn-danger'
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print"></i> Imprimir',
+          titleAttr: 'Imprimir',
+          title: "LISTA DE REQUISITOS",
+          className: 'btn btn-primary' 
+        }
+      ],
+     "columns": [
+  { 
+    "data": null, 
+    "render": function(data, type, row, meta) { 
+      return meta.row + 1; 
+    } 
+  }, 
+  {
+    "data": "REQUISITO",
+    "render": function (data, type, row) {
+      return `<strong>${data}</strong>`;
+    }
+  },
+  {
+    "data": "archivo",
+    "render": function(data, type, row) {
+      if (!data) {
+        return "<button class='btn btn-danger btn-sm' disabled title='Sin archivo'><i class='fa fa-file-pdf'></i></button>";
+      } else {
+        return `<a class='btn btn-success btn-sm' href='incocat_abancay/${data}' target='_blank' title='Ver archivo adjunto'><i class='fas fa-eye'></i> Ver archivo</a>`;
+      }
+    }   
+  },
+  {
+    "data": "estado",
+    "render": function(data, type, row) {
+      if (data == 'SI') {
+        return '<span class="badge bg-success">COMPLETO</span>';
+      } else if (data == 'NO' || data == '') {
+        return '<span class="badge bg-danger">INCOMPLETO</span>';
+      }
+    }
+  },
+  {
+    "data": "fecha_formateada",
+    "render": function(data, type, row) {
+      if (!data || data === '00-00-0000 - 00:00:00') {
+        return 'SIN FECHA';
+      }
+      return data;
+    }
+  },
+  {
+    "data": "fecha_formateada2",
+    "render": function(data, type, row) {
+      if (!data || data === '00-00-0000 - 00:00:00') {
+        return 'SIN FECHA';
+      }
+      return data;
+    }
+  }
+],
+
       "language": {
           "emptyTable": "No se encontraron datos", // ✅ Mensaje cuando la tabla está vacía
           "zeroRecords": "No se encontraron resultados", // ✅ Mensaje para búsquedas sin coincidencias
