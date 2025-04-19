@@ -233,7 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','paciente/view_paciente.php')" class="nav-link">
+                <a href="#" onclick="cargar_contenido('contenido_principal','pagos/view_pagos.php')" class="nav-link">
                   <i class="nav-icon fas fa-hand-holding-usd"></i>
                   <p style="color:white">
                     Registro de Pagos
