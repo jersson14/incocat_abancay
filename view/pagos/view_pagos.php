@@ -153,53 +153,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modal_ver_historial" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div style="display: flex; flex-direction: column;color:black">
-            <h5 class="modal-title" id="lb_titulo_historial"></h5>
-            <h5 class="modal-title" id="lb_titulo_historial2" style="margin-top: 10px;"></h5> <!-- Espaciado entre títulos -->
-          </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-12" style="text-align:center">
-              <div class="table-responsive" style="text-align:center">
-                <div class="card-body">
-                  <!-- Título general -->
-                  <table id="tabla_ver_historial" class="display compact" style="width:100%; text-align:center;">
-                    <thead style="background-color:#0252A0;color:#FFFFFF;">
-                      <tr>
-                        <th colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;">HISTORIAL DE MODIFICACIÓN</th>
-                      </tr>
-                      <tr style="text-align:center;">
-                        <th style="text-align:center;">Nro.</th>
-                        <th style="text-align:center;">Usuario que modifico</th>
-                        <th style="text-align:center;">Estado cambiado</th>
-                        <th style="text-align:center;">Motivo</th>
 
-                        <th style="text-align:center;">Fecha de modificación</th>
-                      </tr>
-                    </thead>
-
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            <i class="fa fa-arrow-right-from-bracket"></i> Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="modal fade" id="modal_ver_anulado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -230,6 +184,88 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times ml-1"></i> Cerrar</button>
           <button type="button" class="btn btn-success" onclick="Realizar_pago()"><i class="fas fa-check"></i> Pagar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal_ver_pagos" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div style="display: flex; flex-direction: column;color:black">
+            <h5 class="modal-title" id="lb_titulo_historialpagos"></h5>
+            <h5 class="modal-title" id="lb_titulo_historial2pagos" style="margin-top: 10px;"></h5> <!-- Espaciado entre títulos -->
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12" style="text-align:center">
+              <div class="table-responsive" style="text-align:center">
+                <div class="card-body">
+                  <!-- Título general -->
+                  <table id="tabla_ver_pagos" class="display compact" style="width:100%; text-align:center;">
+                    <thead style="background-color:#0252A0;color:#FFFFFF;">
+                      <tr>
+                        <th colspan="8" style="text-align:center; font-size: 18px; font-weight: bold;">HISTORIAL DE MODIFICACIÓN</th>
+                      </tr>
+                      <tr style="text-align:center;">
+                        <th style="text-align:center;">Nro.</th>
+                        <th style="text-align:center;">Usuario que registro</th>
+                        <th style="text-align:center;">Subtotal</th>
+                        <th style="text-align:center;">IGV</th>
+                        <th style="text-align:center;">Total cancelado</th>
+                        <th style="text-align:center;">Fecha de pago</th>
+                        <th style="text-align:center;">Estado</th>
+                        <th style="text-align:center;">Acción</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <i class="fa fa-arrow-right-from-bracket"></i> Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal_ver_anulado_historial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#1FA0E0;">
+          <div style="display: flex; flex-direction: column;color:white">
+            <h5 class="modal-title"><b>MOTIVO DE ANULACIÓN</b></h5>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12 form-group" style="color:red">
+              <h6><b>Campos Obligatorios (*)</b></h6>
+            </div>
+
+            <div class="col-12 form-group">
+              <label for="">Fecha de anulación:</label>
+              <input type="datetime" class="form-control" id="txt_fecha_anulado3" disabled>
+            </div>
+            <div class="col-12 form-group">
+              <label for="">Motivo:</label>
+              <textarea class="form-control" id="txt_motivo3" disabled rows="4" style="resize:none" placeholder="Ingrese el motivo"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times ml-1"></i> Cerrar</button>
         </div>
       </div>
     </div>

@@ -230,6 +230,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </p>
                     </a>
                   </li>
+                  <li class="nav-item" hidden>
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_editar_expediente.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                      Expedientes Archivados
+                      </p>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">

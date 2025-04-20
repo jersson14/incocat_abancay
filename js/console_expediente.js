@@ -353,10 +353,19 @@ function listar_expedientes() {
       {
         "defaultContent": "<button class='ver btn btn-success btn-sm' title='Ver datos cliente'><i class='fa fa-user'></i> Ver datos cliente</button>"
       },
-      { "data": "nombre" },
+      {
+        "data": null,
+        "render": function(data, type, row) {
+          return `
+            <div>${row.nombre}</div>
+            <div style="font-weight: bold; font-size: 20px;">PRECIO: S/. ${row.monto_total}</div>
+
+          `;
+        }
+      },
       { "data": "folios" },
       {
-        "data": "estado",
+        "data": "ESTADO_EXPE",
         "render": function(data, type, row) {
           let color = '';
       
@@ -402,7 +411,7 @@ function listar_expedientes() {
         }
       },      
       {
-        "data": "estado",
+        "data": "ESTADO_EXPE",
         render: function(data, type, row) {
             if (data == 'REINGRESADO') {
                 return  `
@@ -548,10 +557,19 @@ function listar_expedientes_filtro() {
         {
           "defaultContent": "<button class='ver btn btn-success btn-sm' title='Ver datos cliente'><i class='fa fa-user'></i> Ver datos cliente</button>"
         },
-        { "data": "nombre" },
+        {
+          "data": null,
+          "render": function(data, type, row) {
+            return `
+              <div>${row.nombre}</div>
+              <div style="font-weight: bold; font-size: 20px;">PRECIO: S/. ${row.monto_total}</div>
+  
+            `;
+          }
+        },
         { "data": "folios" },
         {
-          "data": "estado",
+          "data": "ESTADO_EXPE",
           "render": function(data, type, row) {
             let color = '';
         
@@ -598,7 +616,7 @@ function listar_expedientes_filtro() {
         },      
 
         {
-          "data": "estado",
+          "data": "ESTADO_EXPE",
           render: function(data, type, row) {
               if (data == 'REINGRESADO') {
                   return  `
@@ -910,9 +928,9 @@ function Cargar_Select_Provincia(id_region, target) {
       }
       
       // También resetear el select de distritos
-      $("#select_distrito").html("<option value=''>Seleccionar Distrito</option>");
-      if ($("#select_distrito").hasClass("select2-hidden-accessible")) {
-          $("#select_distrito").val("").trigger("change");
+      $("#select_distrito, #select_distrito_editar").html("<option value=''>Seleccionar Distrito</option>");
+      if ($("#select_distrito, #select_distrito_editar").hasClass("select2-hidden-accessible")) {
+          $("#select_distrito, #select_distrito_editar").val("").trigger("change");
       }
       
       return;
@@ -969,9 +987,9 @@ function Cargar_Select_Provincia(id_region, target) {
               Cargar_Select_Distrito(id_provincia);
           } else {
               // Limpiar el select de distritos si no hay provincia seleccionada
-              $("#select_distrito").html("<option value=''>Seleccionar Distrito</option>");
-              if ($("#select_distrito").hasClass("select2-hidden-accessible")) {
-                  $("#select_distrito").val("").trigger("change");
+              $("#select_distrito, #select_distrito_editar").html("<option value=''>Seleccionar Distrito</option>");
+              if ($("#select_distrito, #select_distrito_editar").hasClass("select2-hidden-accessible")) {
+                  $("#select_distrito, #select_distrito_editar").val("").trigger("change");
               }
           }
       });
@@ -991,7 +1009,7 @@ function Cargar_Select_Provincia(id_region, target) {
 
 // Función para cargar los distritos según la provincia seleccionada
 function Cargar_Select_Distrito(id_provincia) {
-  let $select = $("#select_distrito");
+  let $select = $("#select_distrito, #select_distrito_editar");
   
   if (!id_provincia) {
       if ($select.hasClass("select2-hidden-accessible")) {
@@ -1418,7 +1436,7 @@ function listar_expedientes_filtro_archivados() {
     document.getElementById('lb_tituloesta').innerHTML="<b>CLIENTE:</b> "+data.CLIENTE+"";
     document.getElementById('lb_titulo2esta').innerHTML="<b>SERVICIO:</b> "+data.nombre+"";
     document.getElementById('id_estado').value=data.id_expediente;
-    document.getElementById('select_estado_edit').value=data.estado;
+    document.getElementById('select_estado_edit').value=data.ESTADO_EXPE;
   
   })
 
@@ -1745,5 +1763,41 @@ function listar_requi(id) {
           }
       },
       "select": true
+  });
+}
+
+//EDITAR EXPEDIENTE
+$("#tabla_expedientes").on("click", ".editar", function () {
+  var data = tbl_expedientes.row($(this).parents("tr")).data();
+  if (tbl_expedientes.row(this).child.isShown()) {
+    data = tbl_expedientes.row(this).data();
+  }
+
+  console.log("DATOS GUARDADOS:", data); // 👈 Verifica estos datos
+
+  // Guardamos los datos del expediente en localStorage
+  localStorage.setItem("expedienteEditar", JSON.stringify(data));
+  
+  // Cargamos la vista de edición
+  cargar_contenido('contenido_principal', '../view/expedientes/view_editar_expediente.php');
+});
+function cargar_contenido(contenedor, contenido) {
+  // Limpiar el localStorage SOLO si no es la vista de editar
+  if (!contenido.includes("view_editar_expediente.php")) {
+    localStorage.removeItem("expedienteEditar");
+    console.log("🧹 LocalStorage limpiado");
+  }
+
+  $("#" + contenedor).load(contenido, function (response, status, xhr) {
+    if (status == "error") {
+      console.error("❌ Error al cargar el contenido:", xhr.status, xhr.statusText);
+    } else {
+      console.log("✅ Contenido cargado:", contenido);
+      
+      // Este bloque es para cargar los datos del expediente en caso de que estemos editando
+      if (contenido.includes("view_editar_expediente.php")) {
+        cargarDatosDesdeLocalStorage();
+      }
+    }
   });
 }

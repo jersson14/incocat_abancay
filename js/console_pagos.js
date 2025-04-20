@@ -675,3 +675,213 @@ function Anular_pago(id, motivo) {
   document.getElementById('txt_fecha_anulado2').value = data.fecha_formateada_pagos2;
   
   })
+
+  //VER HISTORIAL DE PAGOS
+  $('#tabla_pagos').on('click','.historial_pagos',function(){
+    var data = tbl_pagos.row($(this).parents('tr')).data();
+  
+    if(tbl_pagos.row(this).child.isShown()){
+        var data = tbl_pagos.row(this).data();
+    }
+  $("#modal_ver_pagos").modal('show');
+  
+  document.getElementById('lb_titulo_historialpagos').innerHTML = "<b>CLIENTE:</b> " + data.CLIENTE;
+  document.getElementById('lb_titulo_historial2pagos').innerHTML = "<b>SERVICIO:</b> " + data.nombre;
+  listar_pagos_historial(data.id_pago);
+  
+  })
+  // VISTA DE HISTORIAL
+  var tbl_historial_pagos;
+  function listar_pagos_historial(id) {
+    tbl_historial_pagos = $("#tabla_ver_pagos").DataTable({
+        "ordering": false,
+        "bLengthChange": true,
+        "searching": false,  // Deshabilita la barra de búsqueda
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+        "pageLength": 5,
+        "destroy": true,
+        "pagingType": 'full_numbers',
+        "scrollCollapse": true,
+        "responsive": true,
+        "async": false,
+        "processing": true,
+        "ajax": {
+            "url": "../controller/pagos/controlador_listar_historial_pagos.php",
+            "type": 'POST',
+            "data": { id: id },
+            "dataSrc": function(json) {
+                console.log("Respuesta JSON:", json);
+                return json.data;
+            }
+        },
+        "dom": 'Bfrtip', 
+        "buttons": [
+          {
+            extend: 'excelHtml5',
+            text: '<i class="fas fa-file-excel"></i> Excel',
+            titleAttr: 'Exportar a Excel',
+            filename: "LISTA_DE_HISTORIAL_DE_PAGOS",
+            title: "LISTA DE HISTORIAL DE PAGOS",
+            className: 'btn btn-success' 
+          },
+          {
+            extend: 'pdfHtml5',
+            text: '<i class="fas fa-file-pdf"></i> PDF',
+            titleAttr: 'Exportar a PDF',
+            filename: "LISTA_DE_HISTORIAL_DE_PAGOS",
+            title: "LISTA DE HISTORIAL DE PAGOS",
+            className: 'btn btn-danger'
+          },
+          {
+            extend: 'print',
+            text: '<i class="fa fa-print"></i> Imprimir',
+            titleAttr: 'Imprimir',
+            title: "LISTA DE HISTORIAL DE PAGOS",
+            className: 'btn btn-primary' 
+          }
+        ],
+        "columns": [
+            { "data": null, "render": function(data, type, row, meta) { return meta.row + 1; } }, 
+            { "data": "USUARIO" },
+            {
+              "data": "monto_pagado",
+              "render": function (data, type, row) {
+                return `<strong>S/. ${data}</strong>`;
+              }
+            },
+            {
+              "data": "igv",
+              "render": function (data, type, row) {
+                return `<strong>S/. ${data}</strong>`;
+              }
+            },
+            {
+              "data": "monto_total",
+              "render": function (data, type, row) {
+                return `<strong>S/. ${data}</strong>`;
+              }
+            },
+            { "data": "fecha_formateada" },
+            {"data":"estado",
+              render: function(data,type,row){
+                      if(data=='VALIDO'){
+                      return '<span class="badge bg-success">VALIDO</span>';
+                      }else{
+                      return '<span class="badge bg-danger">ANULADO</span>';
+                      }
+              }   
+          },
+            {
+              "data": "estado",
+              render: function(data, type, row) {
+                  if (data == 'VALIDO') {
+                      return  `
+                     <button class='anular_histo btn btn-danger btn-sm' title='Anular el pago'><i class='fa fa-ban'></i> Anular</button>
+                      <button class='ver_anulado_histo btn btn-warning btn-sm' hidden title='Ver motivo'><i class='fa fa-eye'></i> Ver Anulado</button>
+                        `;
+                } else {
+                  return  `
+                  <button class='anular_histo btn btn-danger btn-sm' hidden title='Anular el pago'><i class='fa fa-ban'></i> Anular</button>
+                      <button class='ver_anulado_histo btn btn-warning btn-sm' title='Ver motivo'><i class='fa fa-eye'></i> Ver Anulado</button>
+                     `;
+                  }
+              }
+          },        
+        ],
+        "language": {
+            "emptyTable": "No se encontraron datos", // ✅ Mensaje cuando la tabla está vacía
+            "zeroRecords": "No se encontraron resultados", // ✅ Mensaje para búsquedas sin coincidencias
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+            "infoFiltered": "(filtrado de _MAX_ registros en total)",
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        "select": true
+    });
+  }
+  
+  function Anular_pago_historial(id, motivo, monto_anulado) {
+    let idusu = document.getElementById('txtprincipalid').value;
+  
+  
+  
+    $.ajax({
+        url: "../controller/pagos/controlador_anular_pago_historial.php",
+        type: 'POST',
+        data: {
+            id: id,
+            idusu: idusu,
+            motivo_anulacion: motivo,  // Enviamos el motivo de anulación
+            monto_anulado: monto_anulado       // Enviamos el monto anulado
+        }
+    }).done(function(resp) {
+        if (resp > 0) {
+            Swal.fire("Mensaje de Confirmación", "Se anuló el pago con éxito", "success").then(() => {
+                tbl_historial_pagos.ajax.reload();
+                tbl_pagos.ajax.reload();
+            });
+        } else {
+            return Swal.fire("Mensaje de Advertencia", "No se puede anular el pago, verifique por favor", "warning");
+        }
+    });
+  }
+  
+  // ENVIANDO AL BOTÓN DELETE
+  $('#tabla_ver_pagos').on('click', '.anular_histo', function() {
+    var data = tbl_historial_pagos.row($(this).parents('tr')).data();
+  
+    if (tbl_historial_pagos.row(this).child.isShown()) {
+        var data = tbl_historial_pagos.row(this).data();
+    }
+  
+    Swal.fire({
+        title: '¿Desea anular el pago de <b style="color:blue">AR$ ' + data.monto_total + '</b>?',
+        html: "<p>Por favor, ingrese el motivo de la anulación antes de confirmar.</p>" +
+              "<p style='color:red; font-weight: bold;'>⚠️ Al anular este pago:</p>" +
+              "<ul style='text-align: left; color: red; font-weight: bold;'>" +
+              "<li>El monto será sumado al <b>Saldo pendiente</b>.</li>" +
+              "<li>El monto será restado del <b>Saldo cobrado</b> y pasara a un estado de PENDIENTE.</li>" +
+              "</ul>",
+        icon: 'warning',
+        input: 'text',
+        inputPlaceholder: 'Escriba el motivo de la anulación...',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, Anular',
+        preConfirm: (motivo) => {
+            if (!motivo) {
+                Swal.showValidationMessage("El motivo de anulación es obligatorio");
+            }
+            return motivo;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let motivoAnulacion = result.value;
+            Anular_pago_historial(data.id_ingresos, motivoAnulacion, data.monto_total);
+        }
+    });
+  });
+  
+  
+  $('#tabla_ver_pagos').on('click','.ver_anulado_histo',function(){
+    var data = tbl_historial_pagos.row($(this).parents('tr')).data();
+  
+    if(tbl_historial_pagos.row(this).child.isShown()){
+        var data = tbl_historial_pagos.row(this).data();
+    }
+  $("#modal_ver_anulado_historial").modal('show');
+  
+  document.getElementById('txt_fecha_anulado3').value = data.ANULACION;
+  document.getElementById('txt_motivo3').value = data.motivo_anu;
+  
+  })
