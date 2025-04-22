@@ -474,3 +474,196 @@ $("#tabla_gastos").on("click", ".delete", function() {
     document.getElementById("txt_observación_motivo").value = data.motivo_anulacion;
   
   });
+
+  var tbl_diferencia;
+function listar_diferencia(){
+    tbl_diferencia = $("#tabla_diferencia").DataTable({
+      "ordering":false,   
+      "bLengthChange":true,
+      "searching": { "regex": false },
+      "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+      "pageLength": 5,
+      "destroy":true,
+      pagingType: 'full_numbers',
+      scrollCollapse: true,
+      responsive: true,
+      "async": false ,
+      "processing": true,
+      "ajax":{
+          "url":"../controller/ingresos/controlador_listar_diferencia.php",
+          type:'POST'
+      },
+      dom: 'Bfrtip', 
+     
+      buttons:[ 
+        
+    {
+      extend:    'excelHtml5',
+      text:      '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      
+      filename: function() {
+        return  "LISTA DE DIFERENCIA"
+      },
+        title: function() {
+          return  "LISTA DE DIFERENCIA" }
+  
+    },
+    {
+      extend:    'pdfHtml5',
+      text:      '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      filename: function() {
+        return  "LISTA DE DIFERENCIA"
+      },
+    title: function() {
+      return  "LISTA DE DIFERENCIA"
+    }
+  },
+    {
+      extend:    'print',
+      text:      '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      
+    title: function() {
+      return  "LISTA DE DIFERENCIA"
+  
+    }
+    }],
+      "columns":[
+        {"data":"FechaInicial"},
+        {"data":"FechaFinal"},
+        {"data":"TotalIngresos",
+          render: function(data,type,row){
+              if(data==data){
+              return '<span class="badge bg-success">'+data+'</span>';
+              }
+      }   
+      },        
+      {"data":"TotalGastos",
+        render: function(data,type,row){
+            if(data==data){
+            return '<span class="badge bg-danger">'+data+'</span>';
+            }
+    }   
+    },    
+    {"data":"Diferencia",
+        render: function(data,type,row){
+            if(data<0){
+            return '<span class="badge bg-danger">'+data+'</span>';
+            }else{
+                return '<span class="badge bg-success">'+data+'</span>';
+
+            }
+    }   
+    },    
+    ],
+
+    "language":idioma_espanol,
+    select: true
+});
+tbl_diferencia.on('draw.td',function(){
+  var PageInfo = $("#tabla_diferencia").DataTable().page.info();
+  tbl_diferencia.column(0, {page: 'current'}).nodes().each(function(cell, i){
+  });
+});
+}
+function listar_diferencia_filtro(){
+    let fechaini = document.getElementById('txtfechainicio3').value;
+    let fechafin = document.getElementById('txtfechafin3').value;
+  
+    tbl_diferencia = $("#tabla_diferencia").DataTable({
+      "ordering":false,   
+      "bLengthChange":true,
+      "searching": { "regex": false },
+      "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+      "pageLength": 5,
+      "destroy":true,
+      pagingType: 'full_numbers',
+      scrollCollapse: true,
+      responsive: true,
+      "async": false ,
+      "processing": true,
+      "ajax":{
+          "url":"../controller/ingresos/controlador_listar_diferencia_filtro.php",
+          type:'POST',
+          data:{
+            fechaini:fechaini,
+            fechafin:fechafin
+          }
+      },
+      dom: 'Bfrtip', 
+     
+      buttons:[ 
+        
+    {
+      extend:    'excelHtml5',
+      text:      '<i class="fas fa-file-excel"></i> ',
+      titleAttr: 'Exportar a Excel',
+      
+      filename: function() {
+        return  "LISTA DE DIFERENCIA"
+      },
+        title: function() {
+          return  "LISTA DE DIFERENCIA" }
+  
+    },
+    {
+      extend:    'pdfHtml5',
+      text:      '<i class="fas fa-file-pdf"></i> ',
+      titleAttr: 'Exportar a PDF',
+      filename: function() {
+        return  "LISTA DE DIFERENCIA"
+      },
+    title: function() {
+      return  "LISTA DE DIFERENCIA"
+    }
+  },
+    {
+      extend:    'print',
+      text:      '<i class="fa fa-print"></i> ',
+      titleAttr: 'Imprimir',
+      
+    title: function() {
+      return  "LISTA DE DIFERENCIA"
+  
+    }
+    }],
+    "columns":[
+        {"data":"FechaInicial"},
+        {"data":"FechaFinal"},
+        {"data":"TotalIngresos",
+          render: function(data,type,row){
+              if(data==data){
+              return '<span class="badge bg-success">'+data+'</span>';
+              }
+      }   
+      },        
+      {"data":"TotalGastos",
+        render: function(data,type,row){
+            if(data==data){
+            return '<span class="badge bg-danger">'+data+'</span>';
+            }
+    }   
+    },    
+    {"data":"Diferencia",
+        render: function(data,type,row){
+            if(data<0){
+            return '<span class="badge bg-danger">'+data+'</span>';
+            }else{
+                return '<span class="badge bg-success">'+data+'</span>';
+
+            }
+    }   
+    },    
+    ],
+
+    "language":idioma_espanol,
+    select: true
+});
+tbl_diferencia.on('draw.td',function(){
+  var PageInfo = $("#tabla_diferencia").DataTable().page.info();
+  tbl_diferencia.column(0, {page: 'current'}).nodes().each(function(cell, i){
+  });
+});
+}

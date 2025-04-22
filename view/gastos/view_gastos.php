@@ -83,6 +83,61 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+
+    <div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- /.col-md-6 -->
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="nav-icon fas fa-th"></i>&nbsp;&nbsp;<b>Ver diferencia de ingresos y egresos por fechas</b></h3>
+          </div>
+          <div class="table-responsive" style="text-align:left">
+            <div class="card-body">
+                <div class="row">               
+                    <div class="col-3 form-group">
+                        <label for="">Fecha Inicio<b style="color:red">(*)</b>:</label>
+                        <input class="form-control" type="date" id="txtfechainicio3">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="">Fecha Final<b style="color:red">(*)</b>:</label>
+                        <input class="form-control" type="date" id="txtfechafin3">
+                    </div>
+                    <div class="col-12 col-md-3" role="document">
+                        <label for="">&nbsp;</label><br>
+                        <button onclick="listar_diferencia_filtro()" class="btn btn-danger mr-2" style="width:100%" onclick><i class="fas fa-search mr-1"></i>Buscar por fechas</button>
+                    </div>
+                    <div class="col-12 col-md-3" role="document">
+                        <label for="">&nbsp;</label><br>
+                        <button onclick="listar_diferencia()" class="btn btn-success mr-2" style="width:100%" onclick><i class="fas fa-search mr-1"></i>Listar diferencia hoy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="table-responsive" style="text-align:center">
+          <div class="card-body">
+          <table id="tabla_diferencia" class="table table-striped table-bordered" style="width:100%">
+              <thead style="background-color:#0A5D86;color:#FFFFFF;">
+                  <tr>
+                      <th style="text-align:center">Fecha desde</th>
+                      <th style="text-align:center">Fecha hasta</th>
+                      <th style="text-align:center">Total de Ingresos</th>
+                      <th style="text-align:center">Total de Gastos</th>
+                      <th style="text-align:center">Diferencia</th>
+                  </tr>
+              </thead>
+          </table>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.col-md-6 -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+  
+</div>
     <!-- Modal -->
     <div class="modal fade" id="modal_registro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -250,6 +305,7 @@
             });
             listar_gastos();
             Cargar_Select_Indicadores();
+            listar_diferencia();
         });
         $('#modal_registro').on('shown.bs.modal', function() {
             $('#txt_region').trigger('focus')

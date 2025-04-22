@@ -566,7 +566,7 @@ document.getElementById('txt_total').value = data.saldo_pendiente;
     let igv = parseFloat(document.getElementById('txt_igv').value) || 0;
     let subtotal = parseFloat(document.getElementById('txt_subtotal_a_cancelar').value) || 0;
     let saldo = parseFloat(document.getElementById('txt_saldo').value) || 0; 
-    let descrip = parseFloat(document.getElementById('txt_obser').value) || 0;       
+    let descrip = document.getElementById('txt_obser').value;       
     let idusu = document.getElementById('txtprincipalid').value;
   
     if (isNaN(pagar) || pagar <= 0) {
@@ -658,7 +658,7 @@ function Anular_pago(id, motivo) {
     }).then((result) => {
         if (result.isConfirmed) {
             let motivoAnulacion = result.value;
-            Anular_pago(data.id_pago, motivoAnulacion);
+            Anular_pago(data.id_ingresos, motivoAnulacion);
         }
     });
   });
