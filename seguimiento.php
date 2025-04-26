@@ -121,64 +121,36 @@
     </style>
 </head>
 <body>
-    <?php
-    // Aquí puedes agregar la lógica PHP necesaria
-    $oficinas = array("Seleccione Oficina", "Oficina 1", "Oficina 2", "Oficina 3");
-    $anos = range(date('Y'), 2000);
-    ?>
-
     <div class="form-container">
         <div class="logo">
-        <img src="img/incocat.png" alt="Síguelo Plus Logo" class="img-fluid" style="max-width: 400px;">
+            <img src="img/incocat.png" alt="Síguelo Plus Logo" class="img-fluid" style="max-width: 400px;">
         </div>
         
         <p class="form-description">
-            Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz un pago a cuenta de dicho título
+            Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz seguimiento de tus pagos
         </p>
 
         <form method="POST" action="">
             <div class="form-group">
-                <label>Tipo de Seguimiento</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="tipo" value="titulo" checked> Título
-                    </label>
-                    <label>
-                        <input type="radio" name="tipo" value="publicidad"> Publicidad
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Oficina Registral</label>
-                <select name="oficina">
-                    <?php foreach($oficinas as $oficina): ?>
-                        <option value="<?php echo $oficina; ?>"><?php echo $oficina; ?></option>
-                    <?php endforeach; ?>
+                <label>Tipo de Documento</label>
+                <select name="tipo_documento" required>
+                    <option value="">Seleccione tipo</option>
+                    <option value="DNI">DNI</option>
+                    <option value="RUC">RUC</option>
+                    <option value="CE">Carné de Extranjería</option>
+                    <option value="PAS">Pasaporte</option>
+                    <!-- Puedes agregar más tipos si quieres -->
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Año de Título</label>
-                <select name="ano">
-                    <option value="">Seleccione año</option>
-                    <?php foreach($anos as $ano): ?>
-                        <option value="<?php echo $ano; ?>"><?php echo $ano; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <label>Número de Documento</label>
+                <input type="text" name="numero_documento" placeholder="Ingrese su número de documento" required>
             </div>
 
             <div class="form-group">
-                <label>Número de Título</label>
-                <input type="text" name="numero" placeholder="Ingrese su número">
-            </div>
-
-            <div class="captcha-container">
-                <div class="captcha-image">
-                    <!-- Aquí iría tu sistema de CAPTCHA -->
-                    CAPTCHA
-                </div>
-                <button type="button" class="refresh-button">↻</button>
+                <label>Número de Expediente</label>
+                <input type="text" name="numero_expediente" placeholder="Ingrese su número de expediente" required>
             </div>
 
             <button type="submit" class="search-button">Buscar</button>
@@ -190,4 +162,5 @@
         </form>
     </div>
 </body>
+
 </html>

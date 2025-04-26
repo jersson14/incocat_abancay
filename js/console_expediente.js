@@ -421,31 +421,41 @@ function listar_expedientes() {
                <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                <button class='editar btn btn-primary btn-sm' hidden title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
                <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>
+                <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+
                   `;
           } else if (data == 'OBSERVADO') {
                 return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>     
+                               <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+              `;
           } else if (data == 'EN PROCESO') {
                 return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-               <button class='eliminar btn btn-danger btn-sm' title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+               <button class='eliminar btn btn-danger btn-sm' title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>      
+                               <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+             `;
           } else if (data == 'EN TRAMITE') {
                 return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                <button class='editar btn btn-primary btn-sm' hidden title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button> 
+                               <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+                  `;
           } else {
                 return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                <button class='cambiar btn btn-dark btn-sm' hidden title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                <button class='editar btn btn-primary btn-sm' hidden title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+               <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button> 
+                               <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+                  `;
           }
         }
     },        
@@ -626,31 +636,41 @@ function listar_expedientes_filtro() {
                  <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                  <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
                  <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>
+                                 <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+
                     `;
             } else if (data == 'OBSERVADO') {
                   return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                  <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                  <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                  <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>  
+                                 <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+                 `;
             } else if (data == 'EN PROCESO') {
                   return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                  <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                  <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                  <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-                 <button class='eliminar btn btn-danger btn-sm' title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+                 <button class='eliminar btn btn-danger btn-sm' title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>     
+                                 <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+              `;
             } else if (data == 'EN TRAMITE') {
                   return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                  <button class='cambiar btn btn-dark btn-sm' title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                  <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                  <button class='editar btn btn-primary btn-sm' title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>      
+                                 <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+             `;
             } else {
                   return ` <button class='mirar btn btn-success btn-sm' title='Ver datos'><i class='fa fa-eye'></i> Mostrar</button> 
                  <button class='cambiar btn btn-dark btn-sm' hidden title='Cambiar estado'> <i class='fa fa-exchange-alt'></i> Cambiar estado</button> 
                  <button class='mostrar btn btn-warning btn-sm' title='Ver requisitos'><i class='fa fa-eye'></i> Ver requisitos</button> 
                  <button class='editar btn btn-primary btn-sm' hidden title='Editar datos de área'><i class='fa fa-edit'></i> Editar</button> 
-                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>                   `;
+                 <button class='eliminar btn btn-danger btn-sm' hidden title='Eliminar datos de área'><i class='fa fa-trash'></i> Eliminar</button>     
+                                 <button class='print btn btn-secondary btn-sm' title='Imprimir ticket de seguimiento'><i class='fa fa-print'></i> Ticket</button>
+              `;
             }
           }
       },        
@@ -688,149 +708,253 @@ function listar_expedientes_filtro() {
     let total = document.getElementById('precio_total').value;
     let folio = document.getElementById('txt_folio').value;
     let distri = document.getElementById('select_distrito').value;
-
     let idusu = document.getElementById('txtprincipalid').value;
-  
+
     // Validar campos obligatorios
     if (!tipo_doc || !nombre || !apellido || !celular || !nroexpe || !folio || !servi || !distri) {
-      return Swal.fire("Mensaje de Advertencia", "Los campos obligatorios no han sido completados", "warning");
+        return Swal.fire("Mensaje de Advertencia", "Los campos obligatorios no han sido completados", "warning");
     }
-  
+
     // Validar documento según tipo
     let documentoFinal = '';
     if (tipo_doc === 'DNI') {
-      if (!dni) {
-        return Swal.fire("Mensaje de Advertencia", "El campo DNI es obligatorio", "warning");
-      }
-      documentoFinal = dni;
+        if (!dni) {
+            return Swal.fire("Mensaje de Advertencia", "El campo DNI es obligatorio", "warning");
+        }
+        documentoFinal = dni;
     } else {
-      if (!dni2) {
-        return Swal.fire("Mensaje de Advertencia", "El campo de documento es obligatorio", "warning");
-      }
-      documentoFinal = dni2;
+        if (!dni2) {
+            return Swal.fire("Mensaje de Advertencia", "El campo de documento es obligatorio", "warning");
+        }
+        documentoFinal = dni2;
     }
-  
+
     // Obtener tipo de presentación
     let vpresentacion = '';
     let presentacion = document.getElementsByName("r1");
     for (let i = 0; i < presentacion.length; i++) {
-      if (presentacion[i].checked) {
-        vpresentacion = presentacion[i].value;
-        break;
-      }
+        if (presentacion[i].checked) {
+            vpresentacion = presentacion[i].value;
+            break;
+        }
     }
-  
-    $.ajax({
-      url: "../controller/expedientes/controlador_registro_expediente.php",
-      type: 'POST',
-      data: {
-        tipo_doc: tipo_doc,
-        documentoFinal: documentoFinal,
-        dni: dni,
-        nombre: nombre,
-        apellido: apellido,
-        celular: celular,
-        telefono: telefono,
-        email: email,
-        direc: direc,
-        descrip: descrip,
-        vpresentacion: vpresentacion,
-        ruc: ruc,
-        raz: raz,
-        servi: servi,
-        nroexpe: nroexpe,
-        folio: folio,
-        idusu: idusu,
-        total: total,
-        distri:distri  
-      }
-    }).done(function (resp) {
-      console.log("RESPUESTA DEL SERVIDOR:", resp); // <--- AGREGAR ESTO
 
-      if (resp) {
-        // Si la respuesta del servidor es el ID del expediente, pasa a la siguiente función
-        Registrar_Detalle_requisitos2(resp, documentoFinal, idusu); // Aquí pasamos el ID retornado por el servidor
-        $("#contenido_principal").load("../view/expedientes/view_expedientes.php");
-        
-        Swal.fire("Mensaje de Confirmación", `Nuevo Expediente registrado satisfactoriamente del cliente con el nombre: <b>${nombre} ${apellido}</b>`, "success");
-        LimpiarRegistro();
-      } else {
-        return Swal.fire("Mensaje de Error", "No se completó el registro", "error");
-      }
+    // VALIDACIÓN NUEVA: Revisar si hay archivos en los requisitos
+    let archivosCargados = false;
+    $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
+        const checkbox = $(this).find('input[type="checkbox"]').first();
+        const isChecked = checkbox.is(":checked");
+
+        const fileInput = $(this).find('.file-input')[0];
+
+        if (isChecked && fileInput && fileInput.files.length > 0) {
+            archivosCargados = true;
+            return false; // Salir del each cuando encuentra al menos uno
+        }
+    });
+
+    if (!archivosCargados) {
+        return Swal.fire("Mensaje de Advertencia", "Debe adjuntar al menos un archivo en los requisitos seleccionados antes de registrar el expediente.", "warning");
+    }
+
+    // Si todo está bien, registrar el expediente
+    $.ajax({
+        url: "../controller/expedientes/controlador_registro_expediente.php",
+        type: 'POST',
+        data: {
+            tipo_doc: tipo_doc,
+            documentoFinal: documentoFinal,
+            dni: dni,
+            nombre: nombre,
+            apellido: apellido,
+            celular: celular,
+            telefono: telefono,
+            email: email,
+            direc: direc,
+            descrip: descrip,
+            vpresentacion: vpresentacion,
+            ruc: ruc,
+            raz: raz,
+            servi: servi,
+            nroexpe: nroexpe,
+            folio: folio,
+            idusu: idusu,
+            total: total,
+            distri: distri
+        }
+    }).done(function (resp) {
+        console.log("RESPUESTA DEL SERVIDOR:", resp);
+
+        if (resp) {
+            Registrar_Detalle_requisitos2(resp, documentoFinal, idusu);
+            $("#contenido_principal").load("../view/expedientes/view_expedientes.php");
+
+            Swal.fire("Mensaje de Confirmación", `Nuevo Expediente registrado satisfactoriamente del cliente con el nombre: <b>${nombre} ${apellido}</b>`, "success");
+            LimpiarRegistro();
+        } else {
+            return Swal.fire("Mensaje de Error", "No se completó el registro", "error");
+        }
     });
 }
 
-  function LimpiarRegistro(){
-    Cargar_Select_Regiones();
-    Cargar_Select_Provincia(null);
-    Cargar_Select_Distrito(null);
-    $("#txt_dni").val("");
-    $("#txt_dni2").val("");
-    $("#txt_nombre").val("");
-    $("#txt_ape").val("");
-    $("#txt_celular").val("");
-    $("#txt_telefono").val("");
-    $("#txt_email").val("");
-    $("#txt_dire").val("");
-    $("#txt_descrip").val("");
-    $("#txt_ruc").val("");
-    $("#txt_razon").val("");
-    $("#txt_nro_expediente").val("");
-    $("#txt_folio").val("");
-    $("#select_servicio").trigger("change");
-    $("#select_tipo_doc").trigger("change");
-  
+
+
+function Registrar_Detalle_requisitos2(idexpediente, dni, idusu) {
+  let count = $("#tabla_requisito tbody#tbody_tabla_requisito tr").length;
+  if (count === 0) {
+      return Swal.fire({
+          title: "Advertencia",
+          text: "El detalle de los requisitos debe tener al menos un registro.",
+          icon: "warning",
+          allowOutsideClick: false,
+          allowEscapeKey: false
+      });
   }
 
-  function Registrar_Detalle_requisitos2(idexpediente, dni, idusu) {
-    let count = $("#tabla_requisito tbody#tbody_tabla_requisito tr").length;
-    if (count === 0) {
-        return Swal.fire("Mensaje de Advertencia", "El detalle de los requisitos debe tener al menos un registro", "warning");
-    }
+  let requisitosSeleccionados = 0;
+  let formData = new FormData();
+  formData.append("idexpediente", idexpediente);
+  formData.append("dni", dni);
+  formData.append("idusu", idusu);
 
-    let formData = new FormData();
-    formData.append("idexpediente", idexpediente);
-    formData.append("dni", dni);
-    formData.append("idusu", idusu);
+  let archivosCompletos = true;
 
-    $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
-        const idRequisito = $(this).find('td').eq(0).text().trim();
-        const fileInput = $(this).find('.file-input')[0];
-        const fecha = $(this).find('.fecha-input').val();
-        const estado = $(this).find('.estado-text span').text().trim(); // ← AQUÍ se toma el estado
+  $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
+      const checkbox = $(this).find('input[type="checkbox"]').first();
+      const isChecked = checkbox.is(":checked");
 
-        formData.append("requisitos[]", idRequisito);
-        formData.append("fechas[]", fecha ? fecha : "");
-        formData.append("estados[]", estado); // ← AQUÍ lo agregas al formulario
+      const idRequisito = $(this).find('td').eq(0).text().trim();
+      const fileInput = $(this).find('.file-input')[0];
+      const fecha = $(this).find('.fecha-input').val();
+      const estado = $(this).find('.estado-text span').text().trim();
 
-        if (fileInput && fileInput.files.length > 0) {
-            formData.append("archivos[]", fileInput.files[0]);
-        } else {
-            formData.append("archivos[]", new File([], ""));
-        }
-    });
+      if (isChecked) {
+          requisitosSeleccionados++;
+          formData.append("requisitos[]", idRequisito);
+          formData.append("fechas[]", fecha ? fecha : "");
+          formData.append("estados[]", estado);
 
-    $.ajax({
-        url: "../controller/expedientes/controlador_registrar_detalle_requisitos.php",
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false
-    }).done(function (resp) {
-        let response = JSON.parse(resp);
+          if (fileInput && fileInput.files.length > 0) {
+              formData.append("archivos[]", fileInput.files[0]);
+          } else {
+              archivosCompletos = false;
+              formData.append("archivos[]", new Blob([]), 'vacio.txt');
+          }
+      }
+  });
 
-        if (response.success) {
-            Swal.fire("Éxito", "Requisitos registrados correctamente", "success");
-            $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
-        } else {
-            Swal.fire("Error", response.message, "error");
-        }
-    }).fail(function () {
-        Swal.fire("Error", "Hubo un problema con la conexión, intente nuevamente", "error");
-    });
+  if (requisitosSeleccionados === 0) {
+      return Swal.fire({
+          title: "Advertencia",
+          text: "Debe seleccionar al menos un requisito marcándolo con el check.",
+          icon: "warning",
+          allowOutsideClick: false,
+          allowEscapeKey: false
+      });
+  }
+
+  if (!archivosCompletos) {
+      Swal.fire({
+          title: "Advertencia",
+          text: "Algunos requisitos seleccionados no tienen archivo, se subirá como vacío.",
+          icon: "info",
+          allowOutsideClick: false,
+          allowEscapeKey: false
+      });
+  }
+
+  Swal.fire({
+      title: 'Registrando...',
+      text: 'Por favor espere mientras se guarda la información.',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+          Swal.showLoading();
+      }
+  });
+
+  $.ajax({
+      url: "../controller/expedientes/controlador_registrar_detalle_requisitos.php",
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false
+  }).done(function (resp) {
+      Swal.close(); // Cierra el loading
+
+      let response = JSON.parse(resp);
+
+      if (response.success) {
+          Swal.fire({
+              title: '¡Registro exitoso!',
+              text: "¿Desea imprimir la boleta?",
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '¡Sí, imprimir!',
+              cancelButtonText: 'No, gracias',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  var url = "../view/MPDF/REPORTE/ticket_seguimiento.php?id=" + encodeURIComponent(idexpediente) + "#zoom=100%";
+                  var newWindow = window.open(url, "TICKET DE SEGUIMIENTO", "scrollbars=NO");
+
+                  if (newWindow) {
+                      newWindow.moveTo(0, 0);
+                      newWindow.resizeTo(screen.width, screen.height);
+                  }
+              }
+
+              // Limpia la tabla de requisitos siempre
+              $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
+          });
+
+      } else {
+          Swal.fire({
+              title: "Error",
+              text: response.message,
+              icon: "error",
+              allowOutsideClick: false,
+              allowEscapeKey: false
+          });
+      }
+  }).fail(function () {
+      Swal.close();
+      Swal.fire({
+          title: "Error",
+          text: "Hubo un problema con la conexión, intente nuevamente.",
+          icon: "error",
+          allowOutsideClick: false,
+          allowEscapeKey: false
+      });
+  });
 }
 
 
+
+function LimpiarRegistro(){
+  Cargar_Select_Regiones();
+  Cargar_Select_Provincia(null);
+  Cargar_Select_Distrito(null);
+  $("#txt_dni").val("");
+  $("#txt_dni2").val("");
+  $("#txt_nombre").val("");
+  $("#txt_ape").val("");
+  $("#txt_celular").val("");
+  $("#txt_telefono").val("");
+  $("#txt_email").val("");
+  $("#txt_dire").val("");
+  $("#txt_descrip").val("");
+  $("#txt_ruc").val("");
+  $("#txt_razon").val("");
+  $("#txt_nro_expediente").val("");
+  $("#txt_folio").val("");
+  $("#select_servicio").trigger("change");
+  $("#select_tipo_doc").trigger("change");
+
+}
 
 
 // Función para cargar los distritos
@@ -1801,3 +1925,23 @@ function cargar_contenido(contenedor, contenido) {
     }
   });
 }
+
+//IMREMIAR TICKET
+$('#tabla_expedientes').on('click','.print',function(){
+  var data = tbl_expedientes.row($(this).parents('tr')).data();
+
+  if(tbl_expedientes.row(this).child.isShown()){
+      var data = tbl_expedientes.row(this).data();
+  }
+  var url = "../view/MPDF/REPORTE/ticket_seguimiento.php?id=" + encodeURIComponent(data.id_expediente) + "#zoom=100%";
+
+  // Abrir una nueva ventana con la URL construida
+  var newWindow = window.open(url, "Ticket de seguimiento", "scrollbars=NO");
+  
+  // Asegurarse de que la ventana se abre en tamaño máximo
+  if (newWindow) {
+      newWindow.moveTo(0, 0);
+      newWindow.resizeTo(screen.width, screen.height);
+  }
+
+})

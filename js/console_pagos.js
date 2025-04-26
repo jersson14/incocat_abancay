@@ -591,10 +591,38 @@ document.getElementById('txt_total').value = data.saldo_pendiente;
         }
     }).done(function(resp) {
         if (resp > 0) {
-            Swal.fire("Mensaje de Confirmación", "Se realizó correctamente el pago con el monto de: S/. " + pagar, "success").then((value) => {
-                tbl_pagos.ajax.reload();
-                $("#modal_pagar").modal('hide');
-            });
+
+          Swal.fire({
+            title: 'Se registro el pago correctamente<b>',
+            text: "Datos de Confirmación",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Imprimir Boleta!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              var url = "../view/MPDF/REPORTE/boleta_pago.php?id="+ encodeURIComponent(resp) + "#zoom=100%";;
+    
+              // Abrir una nueva ventana con la URL construida
+              var newWindow = window.open(url, "PAGO", "scrollbars=NO");
+              
+              // Asegurarse de que la ventana se abre en tamaño máximo
+              if (newWindow) {
+                  newWindow.moveTo(0, 0);
+                  newWindow.resizeTo(screen.width, screen.height);
+              }           
+               $("#modal_pagar").modal('hide');
+    
+               tbl_pagos.ajax.reload();
+
+            }else{
+              $("#modal_pagar").modal('hide');
+              tbl_pagos.ajax.reload();
+
+            }
+          });
+       
         } else {
             return Swal.fire("Mensaje de Error", "No se completó el pago", "error");
         }
@@ -776,6 +804,7 @@ function Anular_pago(id, motivo) {
               render: function(data, type, row) {
                   if (data == 'VALIDO') {
                       return  `
+                      <button class='imprimir btn btn-primary btn-sm' title='Imprimir boleta'><i class='fa fa-print'></i> Imprimir</button>
                      <button class='anular_histo btn btn-danger btn-sm' title='Anular el pago'><i class='fa fa-ban'></i> Anular</button>
                       <button class='ver_anulado_histo btn btn-warning btn-sm' hidden title='Ver motivo'><i class='fa fa-eye'></i> Ver Anulado</button>
                         `;
@@ -885,3 +914,43 @@ function Anular_pago(id, motivo) {
   document.getElementById('txt_motivo3').value = data.motivo_anu;
   
   })
+
+  //IMPRIMIR BOLETA
+  $('#tabla_ver_pagos').on('click','.imprimir',function(){
+    var data = tbl_historial_pagos.row($(this).parents('tr')).data();
+  
+    if(tbl_historial_pagos.row(this).child.isShown()){
+        var data = tbl_historial_pagos.row(this).data();
+    }
+    var url = "../view/MPDF/REPORTE/boleta_pago.php?id=" + encodeURIComponent(data.id_ingresos) + "#zoom=100%";
+  
+    // Abrir una nueva ventana con la URL construida
+    var newWindow = window.open(url, "BOLETA DE PAGO", "scrollbars=NO");
+    
+    // Asegurarse de que la ventana se abre en tamaño máximo
+    if (newWindow) {
+        newWindow.moveTo(0, 0);
+        newWindow.resizeTo(screen.width, screen.height);
+    }
+  
+  })
+  
+  $('#tabla_pagos').on('click','.boleta',function(){
+    var data = tbl_pagos.row($(this).parents('tr')).data();
+  
+    if(tbl_pagos.row(this).child.isShown()){
+        var data = tbl_pagos.row(this).data();
+    }
+    var url = "../view/MPDF/REPORTE/kardex_pago.php?id=" + encodeURIComponent(data.id_pago) + "#zoom=100%";
+  
+    // Abrir una nueva ventana con la URL construida
+    var newWindow = window.open(url, "KARDEX DE PAGO", "scrollbars=NO");
+    
+    // Asegurarse de que la ventana se abre en tamaño máximo
+    if (newWindow) {
+        newWindow.moveTo(0, 0);
+        newWindow.resizeTo(screen.width, screen.height);
+    }
+  
+  })
+  

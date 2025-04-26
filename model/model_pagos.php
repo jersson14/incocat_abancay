@@ -33,26 +33,28 @@
             return $arreglo;
             conexionBD::cerrar_conexion();
         }
-        public function Realizar_pago($id,$pagar,$igv,$subtotal,$saldo,$descrip,$idusu){
+        public function Realizar_pago($id, $pagar, $igv, $subtotal, $saldo, $descrip, $idusu) {
             $c = conexionBD::conexionPDO();
             $sql = "CALL SP_REALIZAR_PAGO(?,?,?,?,?,?,?)";
-            $query  = $c->prepare($sql);
-            $query ->bindParam(1,$id);
-            $query ->bindParam(2,$pagar);
-            $query ->bindParam(3,$igv);
-            $query ->bindParam(4,$subtotal);
-            $query ->bindParam(5,$saldo);
-            $query ->bindParam(6,$descrip);
-            $query ->bindParam(7,$idusu);
-
-            $resul = $query->execute();
-            if($resul){
-                return 1;
-            }else{
-                return 0;
-            }
+            $query = $c->prepare($sql);
+            
+            $query->bindParam(1, $id);
+            $query->bindParam(2, $pagar);
+            $query->bindParam(3, $igv);
+            $query->bindParam(4, $subtotal);
+            $query->bindParam(5, $saldo);
+            $query->bindParam(6, $descrip);
+            $query->bindParam(7, $idusu);
+        
+            $query->execute();
+            
+            $resultado = $query->fetch(PDO::FETCH_ASSOC); // Solo un registro esperado (el id_ingreso)
+            
             conexionBD::cerrar_conexion();
-        }        
+        
+            return $resultado['id_ingreso']; // Retornamos solo el ID que te interesa
+        }
+        
         public function Eliminar_Detalle_requisito($id){
             $c = conexionBD::conexionPDO();
             $sql = "CALL SP_ELIMINAR_DETALLE_REQUISITOS(?)";
