@@ -3,7 +3,7 @@
     require '../../model/model_usuario.php';
 
     $MUSU= new Modelo_Usuario();//Instaciamos
-    $consulta = $MUSU->listar_total_facturas_pendientes();
+    $consulta = $MUSU->listar_total_expedientes_proceso();
     echo json_encode($consulta);
 
 ?>

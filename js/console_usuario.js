@@ -580,83 +580,18 @@ function Cargar_Select_Area_Solo(){
 //SEGUIMIENTO TRAMITE //
 
 
-function Cargar_Select_Expedientes(){
-  let id = document.getElementById('txtprincipalid').value;
-
-  $.ajax({
-    "url":"../controller/tramite_area/controlador_expedientes.php",
-    type:'POST',
-    data:{
-      id:id
-  }
-  }).done(function(resp){
-    let data=JSON.parse(resp);
-    if(data.length>0){
-      let cadena ="<option value=''>Seleccionar Expediente</option>";
-      for (let i = 0; i < data.length; i++) {
-        cadena+="<option value='"+data[i][0]+"'> Expediente N°: "+data[i][9]+" - DNI: "+data[i][1]+" - Remitente: "+data[i][2]+"</option>";    
-      }
-        document.getElementById('txt_expediente').innerHTML=cadena;
-    }else{
-      cadena+="<option value=''>No hay tipos disponibles</option>";
-      document.getElementById('txt_expediente').innerHTML=cadena;
-    }
-  })
-}
-function Cargar_Select_Expedientes_Admin(){
-
-  $.ajax({
-    "url":"../controller/tramite_area/controlador_expedientes_admin.php",
-    type:'POST',
-   
-  }).done(function(resp){
-    let data=JSON.parse(resp);
-    if(data.length>0){
-      let cadena ="<option value=''>Seleccionar Expediente</option>";
-      for (let i = 0; i < data.length; i++) {
-        cadena+="<option value='"+data[i][0]+"'> Expediente N°: "+data[i][9]+" - DNI: "+data[i][1]+" - Remitente: "+data[i][2]+"</option>";    
-      }
-        document.getElementById('txt_expediente').innerHTML=cadena;
-    }else{
-      cadena+="<option value=''>No hay tipos disponibles</option>";
-      document.getElementById('txt_expediente').innerHTML=cadena;
-    }
-  })
-}
-function Traerrdatosexpediente(idrequisito){
-  $.ajax({
-          
-    "url":"../controller/tramite_area/controlador_traerdatos_expediente.php",
-    type:'POST',
-        data:{
-          id:idrequisito
-        }
-      }).done(function(resp){
-      var data = JSON.parse(resp);
-      var cadena="";
-      if(data.length>0){
-        $("#txt_numero").val(data[0][0]);
-        $("#txt_dni").val(data[0][1]);
-
-
-      }
-      else{
-          return Swal.fire("Mensaje de Error","No se pudo traer el requisito","error");
-      }
-  })
-}
 
 
 // TOTALES
-function Total_facturas(){
+function Total_reuniones_hoy(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_facturas.php",
+      "url":"../controller/usuario/controlador_total_reuniones_hoy.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_facturas").html(data[0][0]);
+        $("#total_reuniones_hoy").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
@@ -664,91 +599,75 @@ function Total_facturas(){
   })
 }
 
-function Total_facturas_pendientes(){
+function Total_reuniones(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_facturas_pendientes.php",
+      "url":"../controller/usuario/controlador_total_reuniones.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_fact_pendiente").html(data[0][0]);
+        $("#total_reuniones").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
     
   })
 }
-function Total_facturas_cobradas(){
+function Total_expedientes(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_facturas_cobradas.php",
+      "url":"../controller/usuario/controlador_total_expedientes.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_fact_cobradas").html(data[0][0]);
+        $("#total_expedientes").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
     
   })
 }
-function Total_facturas_rechazadas(){
+function Total_expedientes_proceso(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_facturas_rechazadas.php",
+      "url":"../controller/usuario/controlador_total_expedientes_proceso.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_fact_rechazada").html(data[0][0]);
+        $("#total_expedientes_proceso").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
     
   })
 }
-function Total_practicas_paciente(){
+function Total_expedientes_tramite(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_practicas_paciente.php",
+      "url":"../controller/usuario/controlador_total_expedientes_tramite.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_practicas_paciente").html(data[0][0]);
+        $("#total_expedientes_tramite").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
     
   })
 }
-function Total_practicas(){
+function Total_expedientes_observados(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_practicas.php",
+      "url":"../controller/usuario/controlador_total_expedientes_observados.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_practicas").html(data[0][0]);
-    } else {
-      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
-    }
-    
-  })
-}
-
-function Total_pacientes(){
-  $.ajax({
-      "url":"../controller/usuario/controlador_total_pacientes.php",
-      type:'POST'
-      }).done(function(resp){
-      var data = JSON.parse(resp);
-      var cadena="";
-      if (data.length > 0) {
-        $("#total_pacientes").html(data[0][0]);
+        $("#total_expedientes_observados").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
@@ -756,19 +675,103 @@ function Total_pacientes(){
   })
 }
 
-
-function Total_obras_sociales(){
+function Total_expedientes_finalizados(){
   $.ajax({
-      "url":"../controller/usuario/controlador_total_obras_sociales.php",
+      "url":"../controller/usuario/controlador_total_expedientes_finalizados.php",
       type:'POST'
       }).done(function(resp){
       var data = JSON.parse(resp);
       var cadena="";
       if (data.length > 0) {
-        $("#total_obras_sociales").html(data[0][0]);
+        $("#total_expedientes_finalizados").html(data[0][0]);
     } else {
       return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
     }
     
   })
+}
+
+
+function Total_clientes(){
+  $.ajax({
+      "url":"../controller/usuario/controlador_total_clientes.php",
+      type:'POST'
+      }).done(function(resp){
+      var data = JSON.parse(resp);
+      var cadena="";
+      if (data.length > 0) {
+        $("#total_clientes").html(data[0][0]);
+    } else {
+      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
+    }
+    
+  })
+}
+
+function Total_ingresos_hoy(){
+  $.ajax({
+      "url":"../controller/usuario/controlador_total_ingresos_hoy.php",
+      type:'POST'
+      }).done(function(resp){
+      var data = JSON.parse(resp);
+      var cadena="";
+      if (data.length > 0) {
+        $("#total_ingresos_hoy").html('S/. '+data[0][0]);
+    } else {
+      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
+    }
+    
+  })
+  
+}
+
+function Total_gastos_hoy(){
+  $.ajax({
+      "url":"../controller/usuario/controlador_total_gastos_hoy.php",
+      type:'POST'
+      }).done(function(resp){
+      var data = JSON.parse(resp);
+      var cadena="";
+      if (data.length > 0) {
+        $("#total_gastos_hoy").html('S/. '+data[0][0]);
+    } else {
+      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
+    }
+    
+  })
+  
+}
+
+function Total_ingresos_mensual(){
+  $.ajax({
+      "url":"../controller/usuario/controlador_total_ingresos_mensual.php",
+      type:'POST'
+      }).done(function(resp){
+      var data = JSON.parse(resp);
+      var cadena="";
+      if (data.length > 0) {
+        $("#total_ingresos_mes_actual").html('S/. '+data[0][0]);
+    } else {
+      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
+    }
+    
+  })
+  
+}
+
+function Total_gastos_mensual(){
+  $.ajax({
+      "url":"../controller/usuario/controlador_total_gastos_mensual.php",
+      type:'POST'
+      }).done(function(resp){
+      var data = JSON.parse(resp);
+      var cadena="";
+      if (data.length > 0) {
+        $("#total_gastos_mes_actual").html('S/. '+data[0][0]);
+    } else {
+      return Swal.fire("Mensaje de Error","No se pudo traer los resultados","error");
+    }
+    
+  })
+  
 }

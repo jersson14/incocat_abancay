@@ -423,16 +423,92 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row">
                   <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-secondary">
                       <div class="inner">
-                        <b>Total de Facturas</b>
-                        <h3 id="total_facturas"><sup style="font-size: 20px"></sup></h3>
+                        <b>Reuniones Hoy</b>
+                        <h3 id="total_reuniones_hoy"><sup style="font-size: 20px"></sup></h3>
 
                       </div>
                       <div class="icon">
-                      <i class="fas fa-file-invoice-dollar"></i> <!-- Factura con signo de dólar -->
+                      <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
                       </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="small-box-footer"><b>Ver Facturas</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-dark">
+                      <div class="inner">
+                        <b>Total de Expedientes</b>
+                        <h3 id="total_expedientes"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                      <div class="inner">
+
+                        <b>Expedientes en Proceso</b>
+                        <h3 id="total_expedientes_proceso"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                      <div class="inner">
+                        <b>Expedientes en Trámite</b>
+                        <h3 id="total_expedientes_tramite"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <b> Expedientes Observados</b>
+                        <h3 id="total_expedientes_observados"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                      <div class="inner">
+                        <b>Expedientes Finalizados</b>
+                        <h3 id="total_expedientes_finalizados"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->
@@ -440,110 +516,96 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- small box -->
                     <div class="small-box bg-warning">
                       <div class="inner">
-                        <b>Facturas Pendientes</b>
-                        <h3 id="total_fact_pendiente"><sup style="font-size: 20px"></sup></h3>
 
-                      </div>
-                      <div class="icon">
-                      <i class="fas fa-file-invoice-dollar"></i> <!-- Factura con signo de dólar -->
-                      </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="small-box-footer"><b>Ver Facturas</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                      <div class="inner">
-
-                        <b>Facturas Cobradas</b>
-                        <h3 id="total_fact_cobradas"><sup style="font-size: 20px"></sup></h3>
-
-                      </div>
-                      <div class="icon">
-                      <i class="fas fa-file-invoice-dollar"></i> <!-- Factura con signo de dólar -->
-                      </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="small-box-footer"><b>Ver Facturas</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                      <div class="inner">
-                        <b>Facturas Rechazadas</b>
-                        <h3 id="total_fact_rechazada"><sup style="font-size: 20px"></sup></h3>
-
-                      </div>
-                      <div class="icon">
-                      <i class="fas fa-file-invoice-dollar"></i> <!-- Factura con signo de dólar -->
-                      </div>
-                      
-                      <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="small-box-footer"><b>Ver Facturas</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-dark">
-                      <div class="inner">
-                        <b> Total de Prácticas Realizadas a Pacientes</b>
-                        <h3 id="total_practicas_paciente"><sup style="font-size: 20px"></sup></h3>
-
-                      </div>
-                      <div class="icon">
-                      <i class="nav-icon fas fa-stethoscope"></i>
-                      </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','practicas_paciente/view_practicas_paciente.php')" class="small-box-footer"><b>Ver Prácticas - Paciente</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                      <div class="inner">
-                        <b>Total de Prácticas</b>
-                        <h3 id="total_practicas"><sup style="font-size: 20px"></sup></h3>
-
-                      </div>
-                      <div class="icon">
-                      <i class="fas fa-briefcase-medical"></i> <!-- Maletín médico (prácticas médicas) -->
-                      </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','practicas/view_practicas.php')" class="small-box-footer"><b>Ver Prácticas</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                  <!-- ./col -->
-                  <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-info">
-                      <div class="inner">
-
-                        <b>Total de Pacientes</b>
-                        <h3 id="total_pacientes"><sup style="font-size: 20px"></sup></h3>
+                        <b>Total de Clientes</b>
+                        <h3 id="total_clientes"><sup style="font-size: 20px"></sup></h3>
 
                       </div>
                       <div class="icon">
                       <i class="nav-icon fas fa-users"></i>
                       </div>
-                      <a href="#" onclick="cargar_contenido('contenido_principal','paciente/view_paciente.php')" class="small-box-footer"><b>Ver Pacientes</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','clientes/view_clientes.php')" class="small-box-footer"><b>Ver Clientes</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->
                   <div class="col-lg-3 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-warning">
+                    <div class="small-box bg-success">
                       <div class="inner">
-                        <b>Total de Obras Sociales</b>
-                        <h3 id="total_obras_sociales"><sup style="font-size: 20px"></sup></h3>
+                        <b>Total de Reuniones</b>
+                        <h3 id="total_reuniones"><sup style="font-size: 20px"></sup></h3>
 
                       </div>
                       <div class="icon">
-                      <i class="fas fa-hands-helping"></i> <!-- Manos ayudando (solidaridad) -->
+                      <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
                       </div>
                       
-                      <a href="#" onclick="cargar_contenido('contenido_principal','obra_social/view_obra_social.php')" class="small-box-footer"><b>Ver Obras Sociales</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->        <hr>
 
+                    <div class="small-box bg-success">
+                      <div class="inner">
+
+                        <b> Total de Ingresos Hoy</b>
+                        <h3 id="total_ingresos_hoy"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="nav-icon fas fa-coins"></i>
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->        <hr>
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <b>Total de Gastos Hoy</b>
+                        <h3 id="total_gastos_hoy"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fas fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->        <hr>
+                    <div class="small-box bg-success">
+                      <div class="inner">
+
+                        <b>Total de Ingresos Mes Actual</b>
+                        <h3 id="total_ingresos_mes_actual"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="nav-icon fas fa-coins"></i>
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->        <hr>
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                      <b>Total de Gastos Mes Actual</b>
+                      <h3 id="total_gastos_mes_actual"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                      <i class="fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      
+                      <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -828,15 +890,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
   $(document).ready(function() {
    listar_empresa();
-   Total_facturas();
-   Total_facturas_pendientes();
-   Total_facturas_cobradas();
-   Total_facturas_rechazadas();
-   Total_practicas_paciente();
-   Total_practicas();
-   Total_pacientes();
-   Total_obras_sociales();
-
+   Total_reuniones_hoy();
+   Total_reuniones();
+   Total_expedientes();
+   Total_expedientes_proceso();
+   Total_expedientes_tramite();
+   Total_expedientes_observados();
+   Total_expedientes_finalizados();
+   Total_clientes();
+   Total_ingresos_hoy();
+   Total_gastos_hoy();
+   Total_ingresos_mensual();
+   Total_gastos_mensual();
   });
 
 

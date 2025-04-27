@@ -1,8 +1,9 @@
+
 <?php
     require '../../model/model_usuario.php';
 
     $MUSU= new Modelo_Usuario();//Instaciamos
-    $consulta = $MUSU->listar_total_facturas();
+    $consulta = $MUSU->listar_total_expedientes_observados();
     echo json_encode($consulta);
 
 ?>
