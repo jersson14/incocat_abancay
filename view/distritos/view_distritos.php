@@ -184,8 +184,7 @@
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2({
-                placeholder: "Seleccionar Región",
-                allowClear: true
+
             });
             listar_distritos();
             Cargar_Select_Regiones();

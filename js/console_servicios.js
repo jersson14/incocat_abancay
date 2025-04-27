@@ -124,7 +124,6 @@ $('#tabla_servicios').on('click','.editar',function(){
 
 var tbl_traer_datos;
 function listar_detalle_requisitos(id) {
-
   tbl_traer_datos = $("#tabla_requisito_editar").DataTable({
     "ordering": false,
     "bLengthChange": false,
@@ -136,22 +135,33 @@ function listar_detalle_requisitos(id) {
     "scrollCollapse": false,
     "responsive": true,
     "processing": true,
-   "ajax": {
-    "url": "../controller/servicios/controlador_listar_detalle_requisitos.php",
-    "type": 'POST',
-    "data": { id: id },
-   
+    "ajax": {
+      "url": "../controller/servicios/controlador_listar_detalle_requisitos.php",
+      "type": 'POST',
+      "data": { id: id },
+      "dataSrc": function(json) {
+        if (!json.data || json.data.length === 0) {
+          $('#tabla_requisito_editar tbody').empty();
+          return []; 
+        }
+        return json.data;
+      }
     },
     "columns": [
-      { "data": "id_requisitos", "visible": false }, // Hace que la columna sea invisible
-
-      {"data": "requisito"},
-      {"defaultContent": "<button class='delete btn btn-danger btn-sm' title='Eliminar datos de especialidad'><i class='fa fa-trash'></i> Eliminar</button>"}
+      { "data": "id_requisitos", "visible": false },
+      { "data": "requisito" },
+      { "defaultContent": "<button class='delete btn btn-danger btn-sm' title='Eliminar datos de especialidad'><i class='fa fa-trash'></i> Eliminar</button>" }
     ],
-    "language": idioma_espanol,
+    "language": {
+      ...idioma_espanol,
+      "emptyTable": "",
+      "zeroRecords": "" // <--- agregamos también esto
+    },
     "select": true
   });
 }
+
+
 
 function Eliminar_detalle_requisito(id){
   $.ajax({

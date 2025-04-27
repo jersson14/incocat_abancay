@@ -290,7 +290,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <b>REPORTES DE EXPEDIENTES</b>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas.php')" class="nav-link">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_expedientes_fecha_provincia.php')" class="nav-link">
                   <i class="nav-icon fas fa-file-pdf"></i>
 
                   <p style="color:white">
@@ -299,7 +299,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas_archivadas.php')" class="nav-link">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_expediente_fecha_distritos.php')" class="nav-link">
                 <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
 
                   <p style="color:white">
@@ -308,11 +308,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','facturas/view_facturas_archivadas.php')" class="nav-link">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_fechas_estado.php')" class="nav-link">
                 <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
 
                   <p style="color:white">
-                    Por fecha y servicio
+                    Por fecha y estado
                   </p>
                 </a>
               </li>
@@ -832,7 +832,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       teclado = String.fromCharCode(key).toLowerCase();
 
-      letras = "qwertyuiopasdfghjklñzxcvbnmáéíóú ";
+      letras = "qwertyuiopasdfghjklñzxcvbnmáéíóúAEIOUÁÉÍÓÚ.-:/?¡!@#$%&/()=+*^¨{}[]´`´ ";
 
       especiales = "8-37-38-46-164";
 

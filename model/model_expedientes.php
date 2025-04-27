@@ -286,6 +286,58 @@
             conexionBD::cerrar_conexion();
         
         }
+        //REPORTERIA DE EXPEDIENTES POR FECHA Y PROVINCIA
+        public function Listar_expedientes_filtro_fechas_provincia($fechaini,$fechafin,$provincia){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_FILTRO_FECHA_PROVINCIA(?,?,?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$fechaini);
+            $query->bindParam(2,$fechafin);
+            $query->bindParam(3,$provincia);
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+        public function Listar_expedientes_filtro_fechas_estado($fechaini,$fechafin,$estado){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_FILTRO_FECHA_ESTADO(?,?,?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$fechaini);
+            $query->bindParam(2,$fechafin);
+            $query->bindParam(3,$estado);
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
+        public function Listar_expedientes_filtro_fechas_distrito($fechaini,$fechafin,$distrito){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_LISTAR_EXPEDIENTES_FILTRO_FECHA_DISTRITO(?,?,?)";
+            $arreglo = array();
+            $query  = $c->prepare($sql);
+            $query->bindParam(1,$fechaini);
+            $query->bindParam(2,$fechafin);
+            $query->bindParam(3,$distrito);
+
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            foreach($resultado as $resp){
+                $arreglo["data"][]=$resp;
+            }
+            return $arreglo;
+            conexionBD::cerrar_conexion();
+        }
     }
 
 
