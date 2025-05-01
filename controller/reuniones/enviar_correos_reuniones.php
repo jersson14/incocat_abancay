@@ -65,6 +65,7 @@ if ($reuniones) {
 
             $mail->send();
             echo "Correo enviado a $correo <br>";
+            file_put_contents(__DIR__ . '/log_cron.txt', "✅ Correo enviado a $correo para la reunión del $fecha\n", FILE_APPEND);
         } catch (Exception $e) {
             echo "Error al enviar correo a $correo: {$mail->ErrorInfo} <br>";
         }
