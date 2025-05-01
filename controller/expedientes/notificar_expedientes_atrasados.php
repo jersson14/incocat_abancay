@@ -33,6 +33,7 @@ AND expediente.tiempo_transcurrido >= 30
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $expedientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+file_put_contents(__DIR__ . '/log_cron.txt', "🕒 Ejecutado: " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 
 if ($expedientes) {
     foreach ($expedientes as $expediente) {
@@ -80,6 +81,8 @@ if ($expedientes) {
 
             $mail->send();
             echo "✅ Notificación enviada a $correo por expediente $nro_expediente<br>";
+            file_put_contents(__DIR__ . '/log_cron.txt', "🕒 Ejecutado: " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+
         } catch (Exception $e) {
             echo "❌ Error al enviar a $correo: {$mail->ErrorInfo}<br>";
         }
