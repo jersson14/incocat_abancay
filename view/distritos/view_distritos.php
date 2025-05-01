@@ -188,6 +188,7 @@
             });
             listar_distritos();
             Cargar_Select_Regiones();
+            Cargar_Select_Regiones2();
         });
         $('#modal_registro').on('shown.bs.modal', function() {
             $('#txt_region').trigger('focus')

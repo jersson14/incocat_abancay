@@ -221,177 +221,169 @@ function listar_distritos_filtro() {
   });
 }
 //CARGAR REGIONES
-function Cargar_Select_Regiones() {
-  $.ajax({
-    url: "../controller/regiones/controlador_cargar_select_regiones.php",
-    type: 'POST',
-  }).done(function(resp) {
-    let data = JSON.parse(resp);
-    let cadena = "<option value=''>Seleccionar Región</option>";
-    if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-        cadena += "<option value='" + data[i][0] + "'>REGIÓN: " + data[i][1] + "</option>";
-      }
-    } else {
-      cadena += "<option value=''>No hay obras disponibles</option>";
-    }
-    $('#select_region').html(cadena);
-    $('#select_regiones_busqueda').html(cadena);
-    $('#select_region_editar').html(cadena);
-
-    // Inicializar Select2 después de cargar opciones
-    $('#select_region').select2({
-      placeholder: "Seleccionar Región",
-      allowClear: true,
-      width: '100%' // Asegura que use todo el ancho
-    });
-  });
-}
-// Agregar estos event listeners
-$('#modal_registro').on('shown.bs.modal', function() {
-  $('#select_region').select2({
-    placeholder: "Seleccionar Región",
-    allowClear: true,
-      dropdownParent: $('#modal_registro')
-  });
-});
-
-$('#modal_editar').on('shown.bs.modal', function() {
-  $('#select_region_editar').select2({
-      placeholder: "Seleccionar Región",
-      allowClear: true,
-      dropdownParent: $('#modal_editar')
-  });
-});
-
-$("#tabla_distritos").on("click", ".editar", function() {
-    var data = tbl_distritos.row($(this).parents("tr")).data();
-
-    if (tbl_distritos.row(this).child.isShown()) {
-        var data = tbl_distritos.row(this).data();
-    }
-
-    $("#modal_editar").modal("show");
-    
-    // Asignar valores a los campos del modal
-    document.getElementById("txt_distrito_id").value = data.id_distritos;
-    document.getElementById("txt_distrito_editar").value = data.DISTRITO;
-    document.getElementById("txt_status_editar").value = data.estado;
-    $("#txt_provincia, #txt_provincia_editar, #select_provincia_busqueda").trigger('change.select2');
-
-    // Seleccionar región y cargar provincias correspondientes
-    $("#select_region_editar").val(data.id_region).trigger('change');
-
-    // Esperar a que carguen las provincias antes de seleccionar la correcta
-    setTimeout(() => {
-        $("#txt_provincia_editar").val(data.id_provincia).trigger('change');
-    }, 500); // Ajusta el tiempo si es necesario
-});
-
 // Función para cargar las regiones en los selects
 function Cargar_Select_Regiones() {
-    $.ajax({
-        url: "../controller/regiones/controlador_cargar_select_regiones.php",
-        type: "POST",
-        dataType: "json",
-        beforeSend: function() {
-            console.log("Cargando regiones...");
-        }
-    })
-    .done(function(data) {
-        let opciones = "<option value=''>Seleccionar Región</option>";
+  $.ajax({
+      url: "../controller/regiones/controlador_cargar_select_regiones.php",
+      type: "POST",
+      dataType: "json",
+      beforeSend: function() {
+          console.log("Cargando regiones...");
+      }
+  })
+  .done(function(data) {
+      let opciones = "<option value=''>Seleccionar Región</option>";
 
-        if (data.length > 0) {
-            data.forEach(region => {
-                opciones += `<option value="${region[0]}">${region[1]}</option>`;
-            });
-        }
+      if (data.length > 0) {
+          data.forEach(region => {
+              opciones += `<option value="${region[0]}">${region[1]}</option>`;
+          });
+      }
 
-        $("#select_region, #select_regiones_busqueda, #select_region_editar").html(opciones);
+      $("#select_region, #select_regiones_busqueda, #select_region_editar").html(opciones);
 
-        // Inicializar Select2
-        $("#select_region, #select_regiones_busqueda, #select_region_editar").select2({
-            placeholder: "Seleccionar Región",
-            allowClear: true,
-            width: "100%"
-        });
+      // Inicializar Select2
+      $("#select_region, #select_regiones_busqueda").select2({
+          placeholder: "Seleccionar Región",
+          allowClear: true,
+          width: "100%"
+      });
+      
+      // Inicializar Select2 para el modal de edición con dropdown parent
+      $("#select_region_editar").select2({
+          placeholder: "Seleccionar Región",
+          allowClear: true,
+          width: "100%",
+          dropdownParent: $("#modal_editar")
+      });
 
-        // Cargar provincias cuando se seleccione una región
-        $("#select_region, #select_regiones_busqueda, #select_region_editar").on("change", function() {
-            let id_region = $(this).val();
-            let target = $(this).attr("id");
-            Cargar_Select_Provincia(id_region, target);
-        });
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error("Error al cargar regiones:", textStatus, errorThrown);
-    });
+      // Cargar provincias cuando se seleccione una región
+      $("#select_region, #select_regiones_busqueda, #select_region_editar").on("change", function() {
+          let id_region = $(this).val();
+          let target = $(this).attr("id");
+          Cargar_Select_Provincia(id_region, target);
+      });
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar regiones:", textStatus, errorThrown);
+  });
 }
 
 // Función para cargar las provincias según la región seleccionada
 function Cargar_Select_Provincia(id_region, target) {
-    if (!id_region) {
-        $("#txt_provincia, #txt_provincia_editar, #select_provincia_busqueda").html("<option value=''>Seleccionar Provincia</option>");
-        return;
-    }
+  if (!id_region) {
+      if (target === "select_region") {
+          $("#txt_provincia").html("<option value=''>Seleccionar Provincia</option>");
+          $("#txt_provincia").trigger('change');
+      } else if (target === "select_regiones_busqueda") {
+          $("#select_provincia_busqueda").html("<option value=''>Seleccionar Provincia</option>");
+          $("#select_provincia_busqueda").trigger('change');
+      } else if (target === "select_region_editar") {
+          $("#txt_provincia_editar").html("<option value=''>Seleccionar Provincia</option>");
+          $("#txt_provincia_editar").trigger('change');
+      }
+      return;
+  }
 
-    $.ajax({
-        url: "../controller/provincias/controlador_cargar_select_provincias.php",
-        type: "POST",
-        data: { id_region: id_region },
-        dataType: "json",
-        beforeSend: function() {
-            console.log("Cargando provincias para la región ID:", id_region);
-        }
-    })
-    .done(function(data) {
-        let opciones = "<option value=''>Seleccionar Provincia</option>";
+  $.ajax({
+      url: "../controller/provincias/controlador_cargar_select_provincias.php",
+      type: "POST",
+      data: { id_region: id_region },
+      dataType: "json",
+      beforeSend: function() {
+          console.log("Cargando provincias para la región ID:", id_region);
+      }
+  })
+  .done(function(data) {
+      let opciones = "<option value=''>Seleccionar Provincia</option>";
 
-        if (data.length > 0) {
-            data.forEach(provincia => {
-                opciones += `<option value="${provincia[0]}">${provincia[1]}</option>`;
-            });
-        } else {
-            opciones = "<option value=''>No hay provincias disponibles</option>";
-        }
+      if (data.length > 0) {
+          data.forEach(provincia => {
+              opciones += `<option value="${provincia[0]}">${provincia[1]}</option>`;
+          });
+      } else {
+          opciones = "<option value=''>No hay provincias disponibles</option>";
+      }
 
-        if (target === "select_region") {
-            $("#txt_provincia").html(opciones);
-        } else if (target === "select_regiones_busqueda") {
-            $("#select_provincia_busqueda").html(opciones);
-        } else if (target === "select_region_editar") {
-            $("#txt_provincia_editar").html(opciones);
-        }
-
-        // Inicializar Select2
-        $("#txt_provincia, #txt_provincia_editar, #select_provincia_busqueda").select2({
-            placeholder: "Seleccionar Provincia",
-            allowClear: true,
-            width: "100%"
-        });
-    })
-    .fail(function(jqXHR, textStatus, errorThrown) {
-        console.error("Error al cargar provincias:", textStatus, errorThrown);
-    });
+      if (target === "select_region") {
+          $("#txt_provincia").html(opciones);
+          $("#txt_provincia").trigger('change');
+      } else if (target === "select_regiones_busqueda") {
+          $("#select_provincia_busqueda").html(opciones);
+          $("#select_provincia_busqueda").trigger('change');
+      } else if (target === "select_region_editar") {
+          $("#txt_provincia_editar").html(opciones);
+          $("#txt_provincia_editar").trigger('change');
+      }
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+      console.error("Error al cargar provincias:", textStatus, errorThrown);
+  });
 }
 
 // Inicializar select2 dentro de los modales
 $("#modal_registro").on("shown.bs.modal", function() {
-    $("#txt_provincia").select2({
-        placeholder: "Seleccionar Provincia",
-        allowClear: true,
-        dropdownParent: $("#modal_registro")
-    });
+  $("#select_region").select2({
+      placeholder: "Seleccionar Región",
+      allowClear: true,
+      dropdownParent: $("#modal_registro")
+  });
+  
+  $("#txt_provincia").select2({
+      placeholder: "Seleccionar Provincia",
+      allowClear: true,
+      dropdownParent: $("#modal_registro")
+  });
 });
 
 $("#modal_editar").on("shown.bs.modal", function() {
-    $("#txt_provincia_editar").select2({
-        placeholder: "Seleccionar Provincia",
-        allowClear: true,
-        dropdownParent: $("#modal_editar")
-    });
+  $("#select_region_editar").select2({
+      placeholder: "Seleccionar Región",
+      allowClear: true,
+      dropdownParent: $("#modal_editar")
+  });
+  
+  $("#txt_provincia_editar").select2({
+      placeholder: "Seleccionar Provincia",
+      allowClear: true,
+      dropdownParent: $("#modal_editar")
+  });
 });
 
+// Función mejorada para cargar datos al editar
+$("#tabla_distritos").on("click", ".editar", function() {
+  var data = tbl_distritos.row($(this).parents("tr")).data();
+
+  if (tbl_distritos.row(this).child.isShown()) {
+      var data = tbl_distritos.row(this).data();
+  }
+
+  $("#modal_editar").modal("show");
+  
+  // Asignar valores a los campos del modal
+  document.getElementById("txt_distrito_id").value = data.id_distritos;
+  document.getElementById("txt_distrito_editar").value = data.DISTRITO;
+  document.getElementById("txt_status_editar").value = data.estado;
+  
+  // Primero seleccionar la región y configurar un callback para cuando se carguen las provincias
+  $("#select_region_editar").val(data.id_region).trigger('change');
+  
+  // Usar un enfoque basado en eventos en lugar de setTimeout
+  let provinciaCargada = false;
+  
+  // Función que se ejecutará cuando cambien las provincias
+  function seleccionarProvincia() {
+      if (!provinciaCargada) {
+          $("#txt_provincia_editar").val(data.id_provincia).trigger('change');
+          provinciaCargada = true;
+          // Desactivar el listener después de usarlo una vez
+          $("#txt_provincia_editar").off('change', seleccionarProvincia);
+      }
+  }
+  
+  // Asociar el evento al cambio de opciones en el select de provincias
+  $("#txt_provincia_editar").on('change', seleccionarProvincia);
+});
 
 
 function AbrirRegistro() {
