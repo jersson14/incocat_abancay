@@ -1,6 +1,6 @@
 
 
-<script src="../js/console_expediente.js?rev=<?php echo time(); ?>"></script>
+<script src="../js/console_expediente_editar.js?rev=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="../plantilla/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -94,15 +94,15 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Región<b style="color:red">(*)</b>:</label>
-                            <select class="form-control" id="select_region_editar" style="width:100%"></select>
+                            <select class="form-control" id="select_region" style="width:100%"></select>
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Provincia<b style="color:red">(*)</b>:</label>
-                            <select id="txt_provincia_editar" class="form-control" style="width:100%"></select>
+                            <select id="txt_provincia" class="form-control" style="width:100%"></select>
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Distrito<b style="color:red">(*)</b>:</label>
-                            <select class="js-example-basic-single" id="select_distrito_editar" style="width:100%"></select>
+                            <select class="js-example-basic-single" id="select_distrito" style="width:100%"></select>
                         </div>
 
                         <div class="col-12 form-group">
@@ -233,59 +233,125 @@
 
 
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    cargarDatosDesdeLocalStorage();
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  cargarDatosDesdeLocalStorage();
+});
 
-  function cargarDatosDesdeLocalStorage() {
-    const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
-    if (datos) {
-      document.getElementById("txt_dni").value = datos.nro_documento;
-      document.getElementById("txt_nomb").value = datos.nombres;
-      document.getElementById("txt_ape").value = datos.apellidos;
-      document.getElementById("txt_celular").value = datos.celular;
-      document.getElementById("txt_telefono").value = datos.telefono;
-      document.getElementById("txt_email").value = datos.email;
-      document.getElementById("txt_dire").value = datos.direccion;
-      document.getElementById("txt_descrip").value = datos.observacion;
-      console.log(1);
 
-      // Corrección aquí, cambia "data" por "datos"
-      if (datos.representacion == "A NOMBRE PROPIO") {
-        $("rad_presentacion1").prop('checked', true);
-        document.getElementById('div_juridico').style.display = "none"; // Oculta el div si no es persona jurídica
-      } else if (datos.representacion == "A OTRA PERSONA NATURAL") {
-        $("rad_presentacion2").prop('checked', true);
-        document.getElementById('div_juridico').style.display = "none";
-      } else if (datos.representacion == "PERSONA JURÍDICA") {
-        $("rad_presentacion3").prop('checked', true);
-        document.getElementById('div_juridico').style.display = "block"; // Muestra el div si es persona jurídica
-      } else {
-        document.getElementById('div_juridico').style.display = "none"; // Oculta el div en otros casos
+let regionesCargadas = false;
+let provinciasCargadas = false;
+
+function cargarRegionesSeleccion(idRegion, idProvincia, idDistrito) {
+  if (regionesCargadas) return;  // Evita la recarga innecesaria
+  regionesCargadas = true;  // Marcamos como cargada
+
+  $.ajax({
+    url: "../controller/regiones/controlador_cargar_select_regiones.php",
+    method: 'GET',
+    dataType: 'json',
+    success: function (regiones) {
+      const $region = $('#select_region');
+      $region.empty().append('<option value="">Seleccione región</option>');
+
+      regiones.forEach(region => {
+        const selected = (region.id == idRegion) ? 'selected' : '';
+        $region.append(`<option value="${region.id}" ${selected}>${region.nombre}</option>`);
+      });
+
+      // Llamamos solo si no ha sido cargado previamente
+      if (idRegion && !provinciasCargadas) {
+        cargarProvinciasSeleccion(idRegion, idProvincia, idDistrito);
       }
-
-      console.log(2);
-
-      document.getElementById("txt_ruc").value = datos.ruc;
-      document.getElementById("txt_razon").value = datos.razon_social;
-      console.log(3);
-      $("#select_region_editar").val(datos.id_region).trigger("change");
-$("#txt_provincia_editar").val(datos.id_provincia).trigger("change");
-$("#select_distrito_editar").val(datos.id_distrito).trigger("change");
-
-      console.log(4);
-      $("select_servicio").val(datos.id_servicio).trigger("change");
-      console.log(datos.id_servicio);
-
-      document.getElementById("txt_nro_expediente").value = datos.nro_expediente;
-      document.getElementById("txt_folio").value = datos.folios;
-
-      console.log("🟢 Datos cargados:", datos);
-    } else {
-      console.log("⚠ No se encontraron datos en localStorage");
     }
+  });
+}
+
+function cargarProvinciasSeleccion(idRegion, idProvincia, idDistrito) {
+  if (provinciasCargadas) return;  // Evita la recarga innecesaria
+  provinciasCargadas = true;  // Marcamos como cargada
+
+  $.ajax({
+    url: "../controller/provincias/controlador_cargar_select_provincias.php",
+    method: 'POST',
+    data: { id_region: idRegion },
+    dataType: 'json',
+    success: function (provincias) {
+      const $provincia = $('#txt_provincia');
+      $provincia.empty().append('<option value="">Seleccione provincia</option>');
+
+      provincias.forEach(prov => {
+        const selected = (prov.id_provincia == idProvincia) ? 'selected' : '';
+        $provincia.append(`<option value="${prov.id_provincia}" ${selected}>${prov.PROVINCIA}</option>`);
+      });
+
+      // Llamamos solo si no ha sido cargado previamente
+      if (idProvincia) {
+        cargarDistritosSeleccion(idProvincia, idDistrito);
+      }
+    }
+  });
+}
+
+function cargarDistritosSeleccion(idProvincia, idDistrito) {
+  $.ajax({
+    url: "../controller/distritos/controlador_cargar_select_distritos.php",
+    method: 'POST',
+    data: { id_provincia: idProvincia },
+    dataType: 'json',
+    success: function (distritos) {
+      const $distrito = $('#select_distrito');
+      $distrito.empty().append('<option value="">Seleccione distrito</option>');
+
+      distritos.data.forEach(dist => {
+        const selected = (dist.id_distritos == idDistrito) ? 'selected' : '';
+        $distrito.append(`<option value="${dist.id_distritos}" ${selected}>${dist.nombre}</option>`);
+      });
+    }
+  });
+}
+
+
+
+
+function cargarDatosDesdeLocalStorage() {
+  const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
+  if (!datos) {
+    console.log("⚠ No se encontraron datos en localStorage");
+    return;
   }
+
+  // Asignación de campos...
+  document.getElementById("txt_dni").value = datos.nro_documento;
+  document.getElementById("txt_nomb").value = datos.nombres;
+  document.getElementById("txt_ape").value = datos.apellidos;
+  document.getElementById("txt_celular").value = datos.celular;
+  document.getElementById("txt_telefono").value = datos.telefono;
+  document.getElementById("txt_email").value = datos.email;
+  document.getElementById("txt_dire").value = datos.direccion;
+  document.getElementById("txt_descrip").value = datos.observacion;
+  document.getElementById("txt_ruc").value = datos.ruc;
+  document.getElementById("txt_razon").value = datos.razon_social;
+  document.getElementById("txt_nro_expediente").value = datos.nro_expediente;
+  document.getElementById("txt_folio").value = datos.folios;
+
+  if (datos.representacion == "A NOMBRE PROPIO") {
+    $("#rad_presentacion1").prop('checked', true);
+    document.getElementById('div_juridico').style.display = "none";
+  } else if (datos.representacion == "A OTRA PERSONA NATURAL") {
+    $("#rad_presentacion2").prop('checked', true);
+    document.getElementById('div_juridico').style.display = "none";
+  } else if (datos.representacion == "PERSONA JURÍDICA") {
+    $("#rad_presentacion3").prop('checked', true);
+    document.getElementById('div_juridico').style.display = "block";
+  } else {
+    document.getElementById('div_juridico').style.display = "none";
+  }
+
+  // 👇 Pasamos los tres valores correctamente
+  cargarRegionesSeleccion(datos.id_region, datos.id_provincia, datos.id_distrito);
+}
 </script>
+
 
 
 <script>
