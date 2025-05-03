@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguimiento de Trámite INCOCAT</title>
+    <link rel="stylesheet" href="plantilla/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plantilla/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="plantilla/dist/css/adminlte.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -13,7 +23,8 @@
         }
 
         body {
-            background-image: url('img/img3.jpg'); /* Reemplaza con tu imagen de fondo */
+            background-image: url('img/img3.jpg');
+            /* Reemplaza con tu imagen de fondo */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -30,7 +41,7 @@
             border-radius: 8px;
             width: 100%;
             max-width: 500px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -64,7 +75,8 @@
             gap: 1rem;
         }
 
-        select, input[type="text"] {
+        select,
+        input[type="text"] {
             width: 100%;
             padding: 0.5rem;
             border: 1px solid #ddd;
@@ -120,12 +132,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="form-container">
         <div class="logo">
             <img src="img/incocat.png" alt="Síguelo Plus Logo" class="img-fluid" style="max-width: 400px;">
         </div>
-        
+
         <p class="form-description">
             Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz seguimiento de tus pagos
         </p>
@@ -133,7 +146,7 @@
         <form method="POST" action="">
             <div class="form-group">
                 <label>Tipo de Documento</label>
-                <select name="tipo_documento" required>
+                <select name="tipo_documento" id="select_tipo_documento" required>
                     <option value="">Seleccione tipo</option>
                     <option value="DNI">DNI</option>
                     <option value="RUC">RUC</option>
@@ -145,22 +158,27 @@
 
             <div class="form-group">
                 <label>Número de Documento</label>
-                <input type="text" name="numero_documento" placeholder="Ingrese su número de documento" required>
+                <input type="text" name="numero_documento" id="txt_documento" placeholder="Ingrese su número de documento" required>
             </div>
 
             <div class="form-group">
                 <label>Número de Expediente</label>
-                <input type="text" name="numero_expediente" placeholder="Ingrese su número de expediente" required>
+                <input type="text" name="numero_expediente" id="txt_expediente" placeholder="Ingrese su número de expediente" required>
+            </div>
+            <div class="col-12" style="text-align:center">
+                <button type="button" class="btn btn-success btn-lg" onclick="Buscar_expediente()" id="btn_registro"><i class="fas fa-search"></i><b> BUSCAR EXPEDIENTE</b></button>
             </div>
 
-            <button type="submit" class="search-button">Buscar</button>
-
-            <p class="terms">
-                Para utilizar este servicio debe aceptar los términos y condiciones siguientes: 
-                <a href="#">Ingresar</a>
-            </p>
         </form>
     </div>
 </body>
 
 </html>
+<script src="js/console_seguimiento.js?rev=<?php echo time(); ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="plantilla/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plantilla/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="plantilla/dist/js/adminlte.min.js"></script>

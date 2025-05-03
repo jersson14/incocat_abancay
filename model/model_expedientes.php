@@ -338,6 +338,20 @@
             return $arreglo;
             conexionBD::cerrar_conexion();
         }
+        public function Buscar_Expediente($tipo_documento, $numero_documento, $numero_expediente){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_BUSCAR_EXPEDIENTE(?,?,?)";
+            $arreglo = array();
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $tipo_documento);
+            $query->bindParam(2, $numero_documento);
+            $query->bindParam(3, $numero_expediente);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+            conexionBD::cerrar_conexion();
+            return $resultado;
+        }
+        
     }
 
 
