@@ -10,7 +10,7 @@ function Buscar_expediente() {
     }
   
     $.ajax({
-      url: "../../incocat_abancay/controller/expedientes/controlador_buscar_expediente.php",
+      url: "../controller/expedientes/controlador_buscar_expediente.php",
       type: 'POST',
       data: {
         tipo_documento: tipo,
