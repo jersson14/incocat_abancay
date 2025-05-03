@@ -1,2 +1,5 @@
 incocat.sql
 model/model_conexion.php
+# Ignorar archivos específicos mencionados en el error
+controller/expedientes/log_cron.txt
+incocat-premium.html
