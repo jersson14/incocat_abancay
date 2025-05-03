@@ -166,7 +166,7 @@
                 <input type="text" name="numero_expediente" id="txt_expediente" placeholder="Ingrese su número de expediente" required>
             </div>
             <div class="col-12" style="text-align:center">
-                <button type="button" class="btn btn-success btn-lg" onclick="Buscar_expediente()" id="btn_registro"><i class="fas fa-search"></i><b> BUSCAR EXPEDIENTE</b></button>
+                <button type="button" class="btn btn-success btn-lg" onclick="Buscar_expediente()" id="btn_registro"><i class="fas fa-search"></i><b> Buscar expediente</b></button>
             </div>
 
         </form>
