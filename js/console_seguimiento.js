@@ -60,7 +60,7 @@ function cargarPagosPorExpediente() {
   console.log("🟡 Enviando ID de pago desde sessionStorage:", id_pago);
 
   $.ajax({
-    url: "../incocat_abancay/controller/pagos/controlador_listar_pagos_expediente.php",
+    url: "../controller/pagos/controlador_listar_pagos_expediente.php",
     type: "POST",
     data: { id_pago: id_pago },
     dataType: "json",
