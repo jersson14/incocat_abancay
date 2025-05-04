@@ -240,6 +240,23 @@
             }
             conexionBD::cerrar_conexion();
         }
+        public function Listar_pagos_expediente($id_pago) {
+            $c = conexionBD::conexionPDO();
+            $arreglo = ["data" => []]; // ✅ Asegura que la clave "data" siempre existe
+            $sql = "CALL SP_LISTA_PAGOS_EXPEDIENTE(?)";
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $id_pago);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+            if (!empty($resultado)) { // ✅ Solo llena "data" si hay resultados
+                $arreglo["data"] = $resultado;
+            }
+        
+            conexionBD::cerrar_conexion();
+            return $arreglo;
+        }
+
     }
 
 

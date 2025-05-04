@@ -352,6 +352,22 @@
             return $resultado;
         }
         
+        public function Listar_historial_expediente($id_expediente) {
+            $c = conexionBD::conexionPDO();
+            $arreglo = ["data" => []]; // ✅ Asegura que la clave "data" siempre existe
+            $sql = "CALL SP_LISTA_HISTORIAL_EXPEDIENTE(?)";
+            $query = $c->prepare($sql);
+            $query->bindParam(1, $id_expediente);
+            $query->execute();
+            $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+            if (!empty($resultado)) { // ✅ Solo llena "data" si hay resultados
+                $arreglo["data"] = $resultado;
+            }
+        
+            conexionBD::cerrar_conexion();
+            return $arreglo;
+        }
     }
 
 

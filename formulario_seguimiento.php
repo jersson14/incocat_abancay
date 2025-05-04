@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Síguelo Plus - Plataforma Virtual Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -952,7 +954,7 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="txt_nro_expediente"><i class="fas fa-hashtag"></i> Número de expediente</label>
-                        <input type="text" class="form-control" id="txt_nro_expediente" class="campo-resaltado" readonly>
+                        <input type="text" class="form-control" id="txt_nro_expediente" readonly>
                     </div>
                     <div class="form-group">
                         <label for="txt_tipo_documento"><i class="fas fa-id-card"></i> Tipo de documento</label>
@@ -960,7 +962,7 @@
                     </div>
                     <div class="form-group">
                         <label for="txt_nro_documento"><i class="fas fa-file-alt"></i> Nro. documento</label>
-                        <input type="text" id="txt_nro_documento" class="form-control" class="campo-resaltado" readonly>
+                        <input type="text" id="txt_nro_documento" class="form-control" readonly>
                     </div>
                 </div>
 
@@ -1021,8 +1023,10 @@
                     <input type="text" id="txt_servicio" class="form-control" readonly>
                 </div>
 
-                <div class="form-group" style="margin-bottom: 0;text-align: center;">
-                    <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Generar Reporte Resumen</button>
+                <div class="form-group" style="margin-bottom: 0; text-align: center;">
+                    <button class="btn btn-primary" onclick="generarReporteResumen()">
+                        <i class="fas fa-file-pdf"></i> Generar Reporte Resumen
+                    </button>
                 </div>
             </div>
 
@@ -1074,7 +1078,7 @@
                         <thead>
                             <tr>
                                 <th><i class="fas fa-file-alt"></i> Documento</th>
-                                <th><i class="fas fa-calendar-alt"></i> Fecha</th>
+                                <th><i class="fas fa-calendar-alt"></i> Fecha de presentación</th>
                                 <th><i class="fas fa-info-circle"></i> Estado</th>
                             </tr>
 
@@ -1095,6 +1099,7 @@
                             </tr>
 
                         </thead>
+                        <tbody></tbody>
 
                     </table>
                 </div>
@@ -1255,9 +1260,22 @@
 }
 
     </style>
-    <script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables CSS -->
+<script>
         // Animación de carga
         document.addEventListener('DOMContentLoaded', function() {
+            cargarPagosPorExpediente(); // se ejecuta al cargar la página
+            cargarHistorialPorExpediente(); // se ejecuta al cargar la página
             setTimeout(function() {
                 document.querySelector('.loading-bar').style.display = 'none';
             }, 2000);
@@ -1290,13 +1308,10 @@
             });
         });
     </script>
-</body>
-
-</html>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="js/console_seguimiento.js?rev=<?php echo time(); ?>"></script><!-- Asegúrate de colocar esta línea antes de cualquier script que utilice jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Mostrar la leyenda al cargar

@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INCOCAT S.R.L - Expertos en Saneamiento de Terrenos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset y estilos base */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+  /* Primary Colors - Based on the blue in the logo */
+  --primary: #0045a5;         /* Deep blue from logo */
+  --primary-dark: #003584;    /* Darker shade of the logo blue */
+  --primary-light: #4f7fce;   /* Lighter blue */
+  --primary-bg: #e6f0ff;      /* Very light blue background */
+  
+  /* Secondary Colors - For the metallic/gear elements */
+  --secondary: #5a6978;       /* Steel gray for industrial feel */
+  
+  /* Accent Colors - Complementary */
+  --accent: #b5bdc7;          /* Light metallic silver */
+  
+  /* Text Colors */
+  --text-dark: #1a2c4e;       /* Dark blue-gray for text */
+  --text-medium: #3d5073;     /* Medium blue-gray for text */
+  --text-light: #8c9cb8;      /* Light blue-gray for subtitles */
+  
+  /* Background Colors */
+  --bg-light: #f5f8fc;        /* Very light blue-tinted white */
+  --bg-white: #ffffff;        /* Pure white */
+  --bg-dark: #0a1c3d;         /* Very dark blue */
+  
+  /* Border and Shadow */
+  --border-light: #d0d9e8;    /* Light blue-gray border */
+  --shadow-sm: 0 1px 3px rgba(10, 28, 61, 0.1);
+  --shadow-md: 0 4px 6px rgba(10, 28, 61, 0.1), 0 2px 4px rgba(10, 28, 61, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(10, 28, 61, 0.1), 0 4px 6px -2px rgba(10, 28, 61, 0.05);
+  
+  /* Other */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  --transition: all 0.3s ease;
+}
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      background-color: var(--bg-white);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Utilidades */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .flex-wrap {
+      flex-wrap: wrap;
+    }
+
+    .grid {
+      display: grid;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .gap-4 {
+      gap: 1rem;
+    }
+
+    .gap-6 {
+      gap: 1.5rem;
+    }
+
+    .gap-8 {
+      gap: 2rem;
+    }
+
+    .gap-12 {
+      gap: 3rem;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-6 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mb-8 {
+      margin-bottom: 2rem;
+    }
+
+    .mb-12 {
+      margin-bottom: 3rem;
+    }
+
+    .mt-4 {
+      margin-top: 1rem;
+    }
+
+    .mt-8 {
+      margin-top: 2rem;
+    }
+
+    .mt-12 {
+      margin-top: 3rem;
+    }
+
+    .p-4 {
+      padding: 1rem;
+    }
+
+    .p-6 {
+      padding: 1.5rem;
+    }
+
+    .p-8 {
+      padding: 2rem;
+    }
+
+    .py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .py-8 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .py-16 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .py-24 {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+
+    .relative {
+      position: relative;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .inset-0 {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .z-10 {
+      z-index: 10;
+    }
+
+    .z-20 {
+      z-index: 20;
+    }
+
+    .z-30 {
+      z-index: 30;
+    }
+
+    .overflow-hidden {
+      overflow: hidden;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-lg {
+      font-size: 1.125rem;
+    }
+
+    .text-xl {
+      font-size: 1.25rem;
+    }
+
+    .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .font-light {
+      font-weight: 300;
+    }
+
+    .font-normal {
+      font-weight: 400;
+    }
+
+    .font-medium {
+      font-weight: 500;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+
+    .font-bold {
+      font-weight: 700;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+
+    .text-white {
+      color: var(--bg-white);
+    }
+
+    .text-primary {
+      color: var(--primary);
+    }
+
+    .text-dark {
+      color: var(--text-dark);
+    }
+
+    .text-medium {
+      color: var(--text-medium);
+    }
+
+    .text-light {
+      color: var(--text-light);
+    }
+
+    /* Componentes */
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    header .container {
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .logo-icon {
+      color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .logo:hover .logo-icon {
+      transform: scale(1.1);
+    }
+
+    nav {
+      display: none;
+    }
+
+    nav a {
+      position: relative;
+      margin-left: 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-medium);
+      padding: 0.5rem 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-button {
+      display: block;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .mobile-menu-button:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+      color: var(--bg-white);
+      overflow: hidden;
+      margin-top: 5rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+      background-size: cover;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 8rem 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      opacity: 0.9;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--bg-white);
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--bg-white);
+      background-color: transparent;
+      color: var(--bg-white);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-green {
+      background-color: var(--primary);
+      color: var(--bg-white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-green:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-icon {
+      margin-left: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn:hover .btn-icon {
+      transform: translateX(3px);
+    }
+
+    /* Secciones */
+    section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full);
+    }
+
+    .section-title.text-center h2::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-medium);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Cards */
+    .card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .service-card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .service-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      background-color: var(--primary-bg);
+      color: var(--primary);
+      border-radius: var(--radius-lg);
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-icon {
+      background-color: var(--primary);
+      color: var(--bg-white);
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .service-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .service-card p {
+      color: var(--text-medium);
+      flex-grow: 1;
+    }
+
+    .project-card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-image {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .project-card p {
+      color: var(--text-medium);
+      margin-bottom: 1.5rem;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .project-badge {
+      display: inline-block;
+      background-color: var(--primary-bg);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .project-duration {
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+
+    .testimonial-card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .testimonial-stars {
+      color: #fbbf24;
+      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+    }
+
+    .testimonial-quote {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      color: var(--text-medium);
+      flex-grow: 1;
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      font-size: 3rem;
+      color: var(--primary-light);
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-right: 1rem;
+      border: 2px solid var(--primary-light);
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-info h4 {
+      margin-bottom: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .testimonial-info p {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .contact-card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      height: 100%;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-bg);
+      color: var(--primary);
+      border-radius: var(--radius-lg);
+      margin-right: 1rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .contact-info:hover .contact-icon {
+      background-color: var(--primary);
+      color: var(--bg-white);
+      transform: rotate(5deg);
+    }
+
+    .contact-text h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.125rem;
+    }
+
+    .contact-text p {
+      color: var(--text-medium);
+      margin-bottom: 0;
+    }
+
+    .schedule-item {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .schedule-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .schedule-day {
+      font-weight: 600;
+    }
+
+    .schedule-time {
+      color: var(--text-medium);
+    }
+
+    .map-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      margin-top: 2rem;
+    }
+
+    .map-placeholder {
+      position: absolute;
+      inset: 0;
+      background-color: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-label {
+      background-color: var(--bg-white);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* About Section */
+    .about-image {
+      position: relative;
+      height: 100%;
+      min-height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border: 4px solid var(--primary);
+      border-radius: var(--radius-lg);
+      z-index: 1;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .about-card {
+      background-color: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+    }
+
+    /* Sistema Section */
+    .sistema-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .sistema-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-bg);
+      color: var(--primary);
+      border-radius: var(--radius-lg);
+      margin-right: 1rem;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .sistema-item:hover .sistema-icon {
+      background-color: var(--primary);
+      color: var(--bg-white);
+      transform: rotate(5deg);
+    }
+
+    .sistema-text h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.125rem;
+    }
+
+    .sistema-text p {
+      color: var(--text-medium);
+      margin-bottom: 0;
+    }
+
+    .sistema-image {
+      position: relative;
+      height: 100%;
+      min-height: 400px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .sistema-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      padding: 5rem 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--bg-white);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo-icon {
+      color: var(--primary);
+    }
+
+    .footer-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      max-width: 400px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--bg-white);
+      border-radius: var(--radius-full);
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-title {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--bg-white);
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: var(--radius-full);
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .footer-links a svg {
+      margin-right: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .footer-contact {
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .footer-contact svg {
+      margin-right: 0.75rem;
+      margin-top: 0.25rem;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+
+    /* Decorative Elements */
+    .shape {
+      position: absolute;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .shape-1 {
+      top: 10%;
+      left: 5%;
+      width: 300px;
+      height: 300px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      filter: blur(50px);
+    }
+
+    .shape-2 {
+      bottom: 10%;
+      right: 5%;
+      width: 400px;
+      height: 400px;
+      background-color: var(--primary-dark);
+      border-radius: 50%;
+      filter: blur(70px);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      nav {
+        display: flex;
+      }
+
+      .mobile-menu-button {
+        display: none;
+      }
+
+      .grid-md-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .grid-md-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .flex-md-row {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-lg-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid-lg-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flex-col-mobile {
+        flex-direction: column;
+      }
+
+      .hero-content {
+        padding: 6rem 0;
+      }
+
+      .section-title {
+        margin-bottom: 2rem;
+      }
+
+      .py-16 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      .py-24 {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 5rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-white);
+      z-index: 40;
+      padding: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu-links li {
+      margin-bottom: 1rem;
+    }
+
+    .mobile-menu-links a {
+      display: block;
+      padding: 0.75rem 0;
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-menu-links a:hover {
+      color: var(--primary);
+    }
+   
+    .logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.75rem 1.5rem;
+  background-color: #0A2D5E;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: bold;
+  border-radius: 14px;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon,
+.logo-text {
+  z-index: 2;
+}
+
+.logo-text {
+  font-size: 1rem;
+}
+
+.logo-border {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    45deg,
+    #00c6ff,
+    #0072ff,
+    #00f2fe,
+    #3a7bd5,
+    #00c6ff
+  );
+  background-size: 300% 300%;
+  animation: glowingBorder 6s ease-in-out infinite;
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+/* Capa interna para simular “relleno” limpio */
+.logo::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background-color: #0A2D5E;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* Reflejo que cruza el logo */
+.logo-shine {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Animación reflejo cruzando */
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animación de bordes vivos */
+@keyframes glowingBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animación de escala */
+.animate-scale2 {
+  animation: scale 0.3s ease-in-out;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Decorative Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="container">
+      <a href="#" class="logo animate-scale2">
+        <div class="logo-border"></div>
+        <div class="logo-shine"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+          <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+          <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+          <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+          <path d="M10 6h4"></path>
+          <path d="M10 10h4"></path>
+          <path d="M10 14h4"></path>
+          <path d="M10 18h4"></path>
+        </svg>
+        <span class="logo-text">INCOCAT S.R.L</span>
+      </a>
+      
+      
+      
+      
+      
+      <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="http://localhost/incocat_abancay/seguimiento.php" target="_blank">Seguimiento</a>
+        <a href="http://localhost/incocat_abancay/index.php" target="_blank">Sistema</a>
+      </nav>
+      <button class="mobile-menu-button" id="mobile-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-menu-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="http://localhost/incocat_abancay/index.php" target="_blank">Sistema</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <a href="http://localhost/incocat_abancay/seguimiento.php" target="_blank">Seguimiento</a>
+      <a href="http://localhost/incocat_abancay/index.php" target="_blank">Sistema</a>
+    </ul>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+      <div class="container hero-content">
+        <h1 class="animate-float">Expertos en Saneamiento de Terrenos</h1>
+        <p>
+          Soluciones integrales para la formalización y titulación de su propiedad con los más altos estándares de calidad y profesionalismo.
+        </p>
+        <div class="hero-buttons">
+          <a href="#servicios" class="btn btn-primary">
+            Nuestros Servicios
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+         
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="py-24 bg-white">
+      <div class="container">
+        <div class="grid grid-md-cols-2 gap-12">
+          <div>
+            <div class="section-title">
+              <h2>Sobre INCOCAT S.R.L</h2>
+            </div>
+            <p class="text-lg mb-6 text-medium">
+              Somos una empresa especializada en brindar soluciones integrales para el saneamiento físico legal de predios, 
+              con amplia experiencia en el sector y un equipo de profesionales altamente calificados.
+            </p>
+            <div class="grid gap-6">
+              <div class="about-card">
+                <h3>Misión</h3>
+                <p class="text-medium">
+                  Brindar servicios de alta calidad en saneamiento físico legal de predios, garantizando seguridad jurídica 
+                  y satisfacción a nuestros clientes mediante procesos eficientes y personal especializado.
+                </p>
+              </div>
+              <div class="about-card">
+                <h3>Visión</h3>
+                <p class="text-medium">
+                  Ser la empresa líder en saneamiento de terrenos a nivel nacional, reconocida por su excelencia, 
+                  innovación y compromiso con el desarrollo ordenado de la propiedad en el Perú.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="about-image">
+              <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80" alt="Equipo INCOCAT">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 bg-gray-50">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Nuestros Servicios</h2>
+          <p class="section-subtitle">
+            Ofrecemos soluciones completas para todos sus trámites de saneamiento y titulación de propiedades.
+          </p>
+        </div>
+        <div class="grid grid-md-cols-2 grid-lg-cols-3 gap-8">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 16.5 9 8.5l7.5 2.5-2 5.5z"></path>
+                <path d="M18.5 8.5 9 3l1 13 8.5-7.5z"></path>
+              </svg>
+            </div>
+            <h3>Saneamiento de Terrenos</h3>
+            <p>
+              Regularización de la situación física y legal de su propiedad para obtener la titulación correspondiente.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                <line x1="9" y1="9" x2="10" y2="9"></line>
+                <line x1="9" y1="13" x2="15" y2="13"></line>
+                <line x1="9" y1="17" x2="15" y2="17"></line>
+              </svg>
+            </div>
+            <h3>Requisito de Subdivisión</h3>
+            <p>
+              Gestión de trámites para la subdivisión de predios cumpliendo con la normativa vigente.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                <path d="M10 6h4"></path>
+                <path d="M10 10h4"></path>
+                <path d="M10 14h4"></path>
+                <path d="M10 18h4"></path>
+              </svg>
+            </div>
+            <h3>Prescripción Adquisitiva</h3>
+            <p>
+              Proceso legal para obtener la propiedad de un bien inmueble por posesión continua, pacífica y pública.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <h3>Forprap</h3>
+            <p>
+              Formalización de la propiedad predial y rural según las normativas establecidas.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 16.5 9 8.5l7.5 2.5-2 5.5z"></path>
+                <path d="M18.5 8.5 9 3l1 13 8.5-7.5z"></path>
+              </svg>
+            </div>
+            <h3>Independización Rústicos</h3>
+            <p>
+              Trámites para la independización de predios rústicos conforme a la legislación actual.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                <path d="M10 6h4"></path>
+                <path d="M10 10h4"></path>
+                <path d="M10 14h4"></path>
+                <path d="M10 18h4"></path>
+              </svg>
+            </div>
+            <h3>Trámites Municipales</h3>
+            <p>
+              Gestión integral de trámites ante municipalidades para la regularización de su propiedad.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mt-12">
+          <div class="section-title text-center">
+            <h2>Certificados y Trámites Especializados</h2>
+          </div>
+          <div class="grid grid-md-cols-2 grid-lg-cols-3 gap-6">
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Certificado de Visación</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Certificado Negativo de Catastro</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Certificado de Numeración</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Certificado de Parámetros Urbanísticos</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Búsqueda Negativa de Catastro (RRPP)</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-4">
+              <div class="flex items-center gap-4">
+                <div class="service-icon" style="width: 50px; height: 50px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4>Titulación en Registros Públicos</h4>
+                  <p class="text-medium text-sm mb-0">Gestión y trámite completo</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sistema Section -->
+    <section id="sistema" class="py-24 bg-white">
+      <div class="container">
+        <div class="grid grid-md-cols-2 gap-12">
+          <div>
+            <div class="section-title">
+              <h2>Nuestro Sistema</h2>
+            </div>
+            <p class="text-lg mb-8 text-medium">
+              En INCOCAT S.R.L contamos con un sistema de gestión integral que nos permite brindar un servicio eficiente y de calidad.
+            </p>
+            <div class="space-y-6">
+              <div class="sistema-item">
+                <div class="sistema-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="sistema-text">
+                  <h3>Evaluación Inicial</h3>
+                  <p>Análisis detallado de la situación actual de su propiedad.</p>
+                </div>
+              </div>
+              <div class="sistema-item">
+                <div class="sistema-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="sistema-text">
+                  <h3>Planificación Estratégica</h3>
+                  <p>Desarrollo de un plan de acción personalizado según sus necesidades.</p>
+                </div>
+              </div>
+              <div class="sistema-item">
+                <div class="sistema-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="sistema-text">
+                  <h3>Ejecución Profesional</h3>
+                  <p>Implementación de procesos por especialistas en cada área.</p>
+                </div>
+              </div>
+              <div class="sistema-item">
+                <div class="sistema-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="sistema-text">
+                  <h3>Seguimiento Continuo</h3>
+                  <p>Monitoreo constante del avance de sus trámites.</p>
+                </div>
+              </div>
+              <div class="sistema-item">
+                <div class="sistema-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <div class="sistema-text">
+                  <h3>Resultados Garantizados</h3>
+                  <p>Compromiso con la obtención de resultados satisfactorios.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="sistema-image">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Sistema INCOCAT">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos Destacados Section -->
+    <section id="proyectos" class="py-24 bg-primary-bg">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Proyectos Destacados</h2>
+          <p class="section-subtitle">
+            Conozca algunos de nuestros casos de éxito en saneamiento de terrenos y formalización de propiedades.
+          </p>
+        </div>
+        <div class="grid grid-md-cols-3 gap-8">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1073&q=80" alt="Proyecto Urbanización Los Pinos">
+            </div>
+            <div class="project-content">
+              <h3>Urbanización Los Pinos</h3>
+              <p>
+                Saneamiento físico legal de 120 lotes en el distrito de San Juan de Lurigancho, incluyendo subdivisión y titulación completa.
+              </p>
+              <div class="project-meta">
+                <span class="project-badge">Completado</span>
+                <span class="project-duration">Duración: 8 meses</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Proyecto Asociación de Vivienda El Mirador">
+            </div>
+            <div class="project-content">
+              <h3>Asociación de Vivienda El Mirador</h3>
+              <p>
+                Prescripción adquisitiva de dominio para 85 familias en Ate Vitarte, incluyendo gestión municipal y registral.
+              </p>
+              <div class="project-meta">
+                <span class="project-badge">Completado</span>
+                <span class="project-duration">Duración: 12 meses</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="Proyecto Terrenos Agrícolas Valle Verde">
+            </div>
+            <div class="project-content">
+              <h3>Terrenos Agrícolas Valle Verde</h3>
+              <p>
+                Independización de 15 parcelas rústicas en Pachacamac, incluyendo levantamiento topográfico y trámites ante MINAGRI.
+              </p>
+              <div class="project-meta">
+                <span class="project-badge">Completado</span>
+                <span class="project-duration">Duración: 6 meses</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 text-center">
+          <a href="http://localhost/incocat_abancay/seguimiento.php" target="_blank" class="btn btn-green">
+            Consulte por su expediente
+            <svg xmlns="seguimiento.php" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section id="testimonios" class="py-24 bg-white">
+      <div class="container">
+        <div class="section-title text-center">
+          <h2>Lo que dicen nuestros clientes</h2>
+          <p class="section-subtitle">
+            La satisfacción de nuestros clientes es nuestro mayor logro. Conozca las experiencias de quienes han confiado en nosotros.
+          </p>
+        </div>
+        <div class="grid grid-md-cols-3 gap-8">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">
+              "Gracias a INCOCAT S.R.L pudimos regularizar la situación legal de nuestro terreno después de años de intentarlo por nuestra cuenta. Su equipo profesional nos guió en cada paso del proceso."
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente">
+              </div>
+              <div class="testimonial-info">
+                <h4>Carlos Mendoza</h4>
+                <p>Asociación de Vivienda El Mirador</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">
+              "Profesionalismo y eficiencia definen a INCOCAT. Lograron la independización de nuestras parcelas en tiempo récord, superando todas nuestras expectativas. Altamente recomendados."
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente">
+              </div>
+              <div class="testimonial-info">
+                <h4>María Sánchez</h4>
+                <p>Propietaria, Valle Verde</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <div class="testimonial-quote">
+              "Después de intentar con otras empresas, INCOCAT fue la única que logró resolver nuestro complejo caso de saneamiento. Su conocimiento técnico y legal es incomparable."
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">
+                <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Cliente">
+              </div>
+              <div class="testimonial-info">
+                <h4>Jorge Ramírez</h4>
+                <p>Urbanización Los Pinos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="grid grid-md-cols-3 gap-8">
+        <div>
+          <div class="footer-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-logo-icon">
+              <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+              <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+              <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+              <path d="M10 6h4"></path>
+              <path d="M10 10h4"></path>
+              <path d="M10 14h4"></path>
+              <path d="M10 18h4"></path>
+            </svg>
+            <span>INCOCAT S.R.L</span>
+          </div>
+          <p class="footer-description">
+            Expertos en saneamiento físico legal de predios, brindando soluciones integrales para la formalización y titulación de su propiedad.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer-title">Enlaces Rápidos</h3>
+          <ul class="footer-links">
+            <li>
+              <a href="#inicio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Inicio
+              </a>
+            </li>
+            <li>
+              <a href="#nosotros">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Nosotros
+              </a>
+            </li>
+            <li>
+              <a href="#servicios">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Servicios
+              </a>
+            </li>
+            <li>
+              <a href="#sistema">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Sistema
+              </a>
+            </li>
+            
+            <li>
+              <a href="#proyectos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Proyectos
+              </a>
+            </li>
+            <li>
+              <a href="#testimonios">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+                Testimonios
+              </a>
+            </li>
+           
+          </ul>
+        </div>
+        <div>
+          <h3 class="footer-title">Contáctenos</h3>
+          <div class="footer-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Av. Principal 123, Lima, Perú</span>
+          </div>
+          <div class="footer-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>(01) 123-4567 / 987 654 321</span>
+          </div>
+          <div class="footer-contact">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>contacto@incocat.com.pe</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 INCOCAT S.R.L. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Script para manejar el menú móvil
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+      const header = document.getElementById('header');
+      
+      // Función para alternar el menú móvil
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle('active');
+      }
+      
+      // Evento para el botón del menú móvil
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+      }
+      
+      // Cerrar el menú móvil al hacer clic en un enlace
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', toggleMobileMenu);
+      });
+      
+      // Cambiar el estilo del header al hacer scroll
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
