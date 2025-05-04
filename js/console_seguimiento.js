@@ -10,7 +10,7 @@ function Buscar_expediente() {
   }
 
   $.ajax({
-      url: "../incocat_abancay/controller/expedientes/controlador_buscar_expediente.php",
+      url: "../controller/expedientes/controlador_buscar_expediente.php",
       type: 'POST',
       data: {
           tipo_documento: tipo,
@@ -126,7 +126,7 @@ function cargarHistorialPorExpediente() {
   console.log("🟡 Enviando ID de expediente desde sessionStorage:", id_expediente);
 
   $.ajax({
-    url: "../incocat_abancay/controller/expedientes/controlador_listar_historial_expediente.php",
+    url: "../controller/expedientes/controlador_listar_historial_expediente.php",
     type: "POST",
     data: { id_expediente: id_expediente },
     dataType: "json",
@@ -242,7 +242,7 @@ function cargarHistorialPorExpediente() {
     }
 
     // Construir la URL al archivo PHP que genera el PDF con mPDF
-    var url = "../../incocat_abancay/view/MPDF/REPORTE/resumen_seguimiento.php?nro_expediente=" + 
+    var url = "../view/MPDF/REPORTE/resumen_seguimiento.php?nro_expediente=" + 
               encodeURIComponent(nroExpediente) + 
               "&nro_documento=" + 
               encodeURIComponent(nroDocumento) + 
