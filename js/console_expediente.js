@@ -1546,6 +1546,9 @@ function listar_expedientes_filtro_archivados() {
     document.getElementById('txt_telefono_mostrar').value=data.telefono;
     document.getElementById('txt_direccion_mostrar').value=data.direccion;
     document.getElementById('txt_email_mostrar').value=data.email;
+      document.getElementById('txt_region_mostrar').value=data.REGION;
+  document.getElementById('txt_provincia_mostrar').value=data.PROVINCIA;
+  document.getElementById('txt_distrito_mostrar').value=data.DISTRITO;
     document.getElementById('txt_obser_mostrar').value=data.observacion;
   })
 
@@ -1945,3 +1948,223 @@ $('#tabla_expedientes').on('click','.print',function(){
   }
 
 })
+
+
+$("#tabla_expedientes").on("click", ".mirar", function () {
+  var data = tbl_expedientes.row($(this).parents("tr")).data();
+  if (tbl_expedientes.row(this).child.isShown()) {
+    data = tbl_expedientes.row(this).data();
+  }
+
+  localStorage.setItem("expedienteMostrar", JSON.stringify(data));
+  cargar_contenido('contenido_principal', '../view/expedientes/view_mostrar_expediente.php');
+});
+
+function cargar_contenido(contenedor, contenido) {
+  if (!contenido.includes("view_mostrar_expediente.php")) {
+    localStorage.removeItem("expedienteMostrar");
+  }
+
+  $("#" + contenedor).load(contenido, function (response, status, xhr) {
+    if (status == "error") {
+      console.error("❌ Error al cargar el contenido:", xhr.status, xhr.statusText);
+    } else {
+      console.log("✅ Contenido cargado:", contenido);
+      if (contenido.includes("view_mostrar_expediente.php")) {
+        cargarDatosDesdeLocalStorage();
+        cargarRequisitosDelExpediente(); // ✅ sin parámetro
+      }
+    }
+  });
+}
+
+function cargarRequisitosDelExpediente() {
+  const datos = JSON.parse(localStorage.getItem("expedienteMostrar"));
+  if (!datos || !datos.id_expediente) {
+    console.warn("⚠️ No se encontró el ID del expediente.");
+    return;
+  }
+
+  const id_expediente = datos.id_expediente;
+
+  $.ajax({
+    url: "../controller/expedientes/controlador_listar_historial_expediente.php",
+    type: "POST",
+    data: { id_expediente: id_expediente },
+    dataType: "json",
+    success: function (resp) {
+      console.log("🟢 Requisitos recibidos:", resp);
+
+      const tbody = document.getElementById("tbody_tabla_requisito");
+      tbody.innerHTML = ""; // Limpiar antes de cargar
+
+      if (resp && resp.data && resp.data.length > 0) {
+        resp.data.forEach(req => {
+       const fila = `
+        <tr>
+          <td>${req.id_requisito}</td>
+          <td>${req.REQUISITO}</td>
+        <td>
+  ${
+    req.archivo && req.archivo !== "" && req.archivo !== "NO"
+      ? `<a href="/incocat_abancay/${req.archivo.replace("../../", "")}" target="_blank" class="btn btn-success btn-sm">
+            <i class="bi bi-eye-fill"></i> Ver archivo
+         </a>`
+      : `<button class="btn btn-danger btn-sm" disabled>
+          <i class="bi bi-x-circle-fill"></i> Sin archivo
+        </button>
+        `
+        }
+      </td>
+
+          <td>
+            ${
+              req.estado && req.estado.toUpperCase() === "SI"
+                ? `<span class="badge bg-success">COMPLETO</span>`
+                : `<span class="badge bg-danger">FALTA</span>`
+            }
+          </td>
+          <td>
+            ${
+              req.fecha_formateada && req.fecha_formateada !== "00-00-0000 - 00:00:00"
+                ? req.fecha_formateada
+                : `<span class="text-muted">SIN DATOS</span>`
+            }
+          </td>
+        </tr>
+      `;
+
+          tbody.insertAdjacentHTML("beforeend", fila);
+        });
+      } else {
+        const fila = `<tr><td colspan="7">No hay requisitos registrados.</td></tr>`;
+        tbody.insertAdjacentHTML("beforeend", fila);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("❌ Error al cargar requisitos:", error);
+      Swal.fire("Error", "No se pudieron cargar los requisitos.", "error");
+    }
+  });
+}
+
+
+// Función para buscar por documento
+function buscarPorDocumento() {
+  const tipo = document.getElementById("select_tipo_documento").value;
+  const dni = document.getElementById("txt_dni").value.trim();
+  const otroDoc = document.getElementById("txt_dni2").value.trim();
+
+  let numero_documento = "";
+
+  if (tipo === "DNI" && dni !== "") {
+    numero_documento = dni;
+  } else if (tipo !== "DNI" && otroDoc !== "") {
+    numero_documento = otroDoc;
+  } else {
+    Swal.fire("Advertencia", "Debe ingresar un número de documento válido.", "warning");
+    return;
+  }
+
+  $.ajax({
+    url: "../controller/expedientes/controlador_buscar_persona_por_documento.php",
+    type: "POST",
+    data: { numero_documento: numero_documento },
+    dataType: "json",
+success: async function (resp) {
+  if (resp.data && resp.data.length > 0) {
+    const d = resp.data[0];
+
+    // Rellenar campos
+    $("#txt_nomb").val(d.nombres);
+    $("#txt_ape").val(d.apellidos);
+    $("#txt_celular").val(d.celular);
+    $("#txt_telefono").val(d.telefono);
+    $("#txt_email").val(d.email);
+    $("#txt_dire").val(d.direccion);
+    $("#txt_descrip").val(d.observacion);
+
+    try {
+      await cargarRegionesYSeleccionar(d.id_region);
+      await cargarProvinciasYSeleccionar(d.id_region, d.id_provincia);
+      await cargarDistritosYSeleccionar(d.id_provincia, d.id_distrito);
+    } catch (e) {
+      console.error("Error al cargar ubicación:", e);
+    }
+
+  } else {
+    Swal.fire("No encontrado", "No se encontró ninguna persona con ese documento.", "info");
+  }
+},
+    error: function (xhr, status, error) {
+      console.error("❌ Error en AJAX:", error);
+      Swal.fire("Error", "No se pudo hacer la búsqueda.", "error");
+    }
+  });
+}
+
+function cargarRegionesYSeleccionar(id_region) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../controller/regiones/controlador_cargar_select_regiones.php",
+      type: "POST",
+      dataType: "json",
+    })
+    .done(function (data) {
+      let opciones = "<option value=''>Seleccionar Región</option>";
+      data.forEach(region => {
+        const selected = region[0] === id_region ? " selected" : "";
+        opciones += `<option value="${region[0]}"${selected}>${region[1]}</option>`;
+      });
+
+      $("#select_region").html(opciones).val(id_region).trigger("change");
+      resolve();
+    })
+    .fail(reject);
+  });
+}
+
+function cargarProvinciasYSeleccionar(id_region, id_provincia) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../controller/provincias/controlador_cargar_select_provincias.php",
+      type: "POST",
+      data: { id_region },
+      dataType: "json",
+    })
+    .done(function (data) {
+      let opciones = "<option value=''>Seleccionar Provincia</option>";
+      data.forEach(provincia => {
+        const selected = provincia[0] === id_provincia ? " selected" : "";
+        opciones += `<option value="${provincia[0]}"${selected}>${provincia[1]}</option>`;
+      });
+
+      $("#txt_provincia").html(opciones).val(id_provincia).trigger("change");
+      resolve();
+    })
+    .fail(reject);
+  });
+}
+
+function cargarDistritosYSeleccionar(id_provincia, id_distrito) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../controller/distritos/controlador_cargar_select_distritos.php",
+      type: "POST",
+      data: { id_provincia },
+      dataType: "json",
+    })
+    .done(function (response) {
+      let opciones = "<option value=''>Seleccionar Distrito</option>";
+      const data = response.data || [];
+      data.forEach(distrito => {
+        const selected = distrito.id_distritos === id_distrito ? " selected" : "";
+        opciones += `<option value="${distrito.id_distritos}"${selected}>${distrito.nombre}</option>`;
+      });
+
+      $("#select_distrito").html(opciones).val(id_distrito).trigger("change");
+      resolve();
+    })
+    .fail(reject);
+  });
+}

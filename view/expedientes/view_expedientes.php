@@ -277,6 +277,18 @@
                             <label for="">Email:</label>
                             <input type="email" readonly class="form-control" placeholder="Ingrese el correo electronico" id="txt_email_mostrar">
                         </div>
+                        <div class="col-4 form-group">
+                          <label for="">Departamento:</label>
+                          <input type="text" readonly class="form-control" placeholder="Ingrese la región" id="txt_region_mostrar">
+                        </div>
+                        <div class="col-4 form-group">
+                          <label for="">Provincia:</label>
+                          <input type="text" readonly class="form-control" placeholder="Ingrese la provincia" id="txt_provincia_mostrar">
+                        </div>
+                        <div class="col-4 form-group">
+                          <label for="">Distrito:</label>
+                          <input type="text" readonly class="form-control" placeholder="Ingrese el distrito" id="txt_distrito_mostrar">
+                        </div>
                         <div class="col-12 form-group">
                             <label for="">Observaciones:</label>
                             <textarea class="form-control" readonly id="txt_obser_mostrar" rows="3" style="resize:none" placeholder="Ingrese alguna observación si tuviera"></textarea>

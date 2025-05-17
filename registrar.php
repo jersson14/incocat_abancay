@@ -14,7 +14,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="plantilla/dist/css/adminlte.min.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="icon" href="img/incocat.png" type="image/jpg">
+  <link rel="icon" href="img/incocat.jpeg" type="image/jpg">
 
 </head>
 <body class="hold-transition layout-top-nav">
@@ -23,7 +23,7 @@
     <div class="container" >
       
     <div class="image-container">
-        <img src="img/incocat.png" alt="" width="100%" height="100%">
+        <img src="img/incocat.jpeg" alt="" width="100%" height="100%">
     </div>     
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

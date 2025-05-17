@@ -9,7 +9,7 @@
     $apellido = strtoupper(htmlspecialchars($_POST['apellido'], ENT_QUOTES, 'UTF-8'));
     $celular = strtoupper(htmlspecialchars($_POST['celular'], ENT_QUOTES, 'UTF-8'));
     $telefono = strtoupper(htmlspecialchars($_POST['telefono'], ENT_QUOTES, 'UTF-8'));
-    $email = strtoupper(htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8'));
+    $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
 
     $direc = strtoupper(htmlspecialchars($_POST['direc'], ENT_QUOTES, 'UTF-8'));
     $descrip = strtoupper(htmlspecialchars($_POST['descrip'], ENT_QUOTES, 'UTF-8'));

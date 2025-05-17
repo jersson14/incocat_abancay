@@ -183,7 +183,7 @@ function cargarHistorialPorExpediente() {
   });
 }
 
-  function aplicarEstadoExpediente(estado) {
+function aplicarEstadoExpediente(estado) {
     const estadoDiv = document.getElementById("estadoExpediente");
     const estadoTexto = document.getElementById("estadoTexto");
   

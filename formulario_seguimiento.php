@@ -941,7 +941,7 @@
     <div class="main-container">
         <div class="content-container">
             <div class="logos animate-fade-in">
-                <img src="img/incocat.png" alt="Logo Síguelo Incocat" class="logo-siguelo">
+                <img src="img/incocat.jpeg" alt="Logo Síguelo Incocat" class="logo-siguelo">
             </div>
 
             <div class="welcome-banner animate-slide-up">

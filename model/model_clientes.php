@@ -17,9 +17,9 @@
             conexionBD::cerrar_conexion();
         }
       
-        public function Modificar_Clientes($id,$tipo,$nro,$nombre,$apellido,$celular,$telefono,$direccion,$email,$ober){
+        public function Modificar_Clientes($id,$tipo,$nro,$nombre,$apellido,$celular,$telefono,$direccion,$email,$iddistri,$ober){
             $c = conexionBD::conexionPDO();
-            $sql = "CALL SP_MODIFICAR_CLIENTES(?,?,?,?,?,?,?,?,?,?)";
+            $sql = "CALL SP_MODIFICAR_CLIENTES(?,?,?,?,?,?,?,?,?,?,?)";
             $arreglo = array();
             $query  = $c->prepare($sql);
             $query ->bindParam(1,$id);
@@ -31,7 +31,8 @@
             $query ->bindParam(7,$telefono);
             $query ->bindParam(8,$direccion);
             $query ->bindParam(9,$email);
-            $query ->bindParam(10,$ober);
+            $query ->bindParam(10,$iddistri);
+            $query ->bindParam(11,$ober);
 
             $query->execute();
             if($row = $query->fetchColumn()){

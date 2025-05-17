@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index.php" class="brand-link">
-        <img src="../img/incocat.png" alt="<?php echo $_SESSION['S_RAZON']; ?>" width="100%" height="auto">
+        <img src="../img/incocat.jpeg" alt="<?php echo $_SESSION['S_RAZON']; ?>" width="100%" height="auto">
       </a>
 
       <!-- Sidebar -->
@@ -633,7 +633,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th style="text-align:center; border-top: none;">Logo</th>
                       <th style="text-align:center; border-top: none;">Nombre</th>
                       <th style="text-align:center; border-top: none;">Email</th>
-                      <th style="text-align:center; border-top: none;">Código</th>
                       <th style="text-align:center; border-top: none;">Teléfono</th>
                       <th style="text-align:center; border-top: none;">Dirección</th>
                       <th style="text-align:center; border-top: none;">Acciones</th>

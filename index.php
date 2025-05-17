@@ -457,7 +457,7 @@ if (isset($_SESSION['S_ID'])) {
       <div class="card">
         <div class="login-card-body">
           <div class="logo-container">
-            <img src="img/incocat.png" alt="INCOCAT Logo" class="img-fluid">
+            <img src="img/incocat.jpeg" alt="INCOCAT Logo" class="img-fluid" style="width:100%">
           </div>
           
           <p class="login-box-msg">

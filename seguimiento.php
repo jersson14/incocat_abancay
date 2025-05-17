@@ -300,7 +300,7 @@
     
     <div class="form-container">
         <div class="logo">
-            <img src="img/incocat.png" alt="INCOCAT Logo" class="img-fluid">
+            <img src="img/incocat.jpeg" alt="INCOCAT Logo" class="img-fluid">
         </div>
 
         <p class="form-description">

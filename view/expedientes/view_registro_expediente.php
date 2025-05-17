@@ -55,6 +55,9 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="txt_dni" maxlength="8" onkeypress="return soloNumeros(event)">
                                 <div class="input-group-append">
+                                    <button onclick="buscarPorDocumento()" class="btn btn-success" id="btnBuscar">
+                                        <i class="fa fa-search"></i><b> Buscar</b>
+                                        </button>
                                     <button onclick="" class="btn btn-primary" id="prueba"><i class="fa fa-search"></i><b> Reniec</b></button>
                                 </div>
                             </div>
@@ -63,7 +66,11 @@
                             <label for="" style="font-size:small;">N° Documento<b style="color:red">(*)</b>:</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="txt_dni2">
-
+                                <div class="input-group-append">
+                                <button onclick="buscarPorDocumento()" class="btn btn-success" id="btnBuscar">
+                                <i class="fa fa-search"></i><b> Buscar</b>
+                                </button>                                
+                                </div>
                             </div>
                         </div>
                         <div class="col-6 form-group">
@@ -373,6 +380,7 @@
                         // Asignamos los valores a los campos correspondientes
                         document.getElementById("txt_nomb").value = data.nombres;
                         document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno;
+                        
                     }
                 }
             });

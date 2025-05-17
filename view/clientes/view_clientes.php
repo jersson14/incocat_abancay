@@ -109,6 +109,19 @@
               <label for="">Email(Opcional):</label>
               <input type="email" class="form-control" placeholder="Ingrese el correo electronico" id="txt_email">
             </div>
+             <div class="col-4 form-group">
+                  <label for="" style="font-size:small;">Región<b style="color:red">(*)</b>:</label>
+                  <select class="form-control" id="select_region_editar" style="width:100%"></select>
+              </div>
+              <div class="col-4 form-group">
+                  <label for="" style="font-size:small;">Provincia<b style="color:red">(*)</b>:</label>
+                  <select id="txt_provincia_editar" class="form-control" style="width:100%"></select>
+              </div>
+              <div class="col-4 form-group">
+                  <label for="" style="font-size:small;">Distrito<b style="color:red">(*)</b>:</label>
+                  <select class="form-control" id="select_distrito_editar" style="width:100%"></select>
+              </div>
+
             <div class="col-12 form-group">
               <label for="">Observaciones(Opcional):</label>
               <textarea class="form-control" id="txt_obser" rows="3" style="resize:none" placeholder="Ingrese alguna observación si tuviera"></textarea>
@@ -176,6 +189,18 @@
               <label for="">Email:</label>
               <input type="email" readonly class="form-control" placeholder="Ingrese el correo electronico" id="txt_email_mostrar">
             </div>
+             <div class="col-4 form-group">
+              <label for="">Departamento:</label>
+              <input type="text" readonly class="form-control" placeholder="Ingrese la región" id="txt_region_mostrar">
+            </div>
+             <div class="col-4 form-group">
+              <label for="">Provincia:</label>
+              <input type="text" readonly class="form-control" placeholder="Ingrese la provincia" id="txt_provincia_mostrar">
+            </div>
+             <div class="col-4 form-group">
+              <label for="">Distrito:</label>
+              <input type="text" readonly class="form-control" placeholder="Ingrese el distrito" id="txt_distrito_mostrar">
+            </div>
             <div class="col-12 form-group">
               <label for="">Observaciones:</label>
               <textarea class="form-control" readonly id="txt_obser_mostrar" rows="3" style="resize:none" placeholder="Ingrese alguna observación si tuviera"></textarea>
@@ -188,6 +213,46 @@
       </div>
     </div>
   </div>
+
+   <div class="modal fade" id="modal_ver_expedientes" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div style="display: flex; flex-direction: column;color:black">
+            <h5 class="modal-title" id="lb_titulo_historial_requi"></h5>
+            <h5 class="modal-title" id="lb_titulo_historial2_requi" style="margin-top: 10px;"></h5> <!-- Espaciado entre títulos -->
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12" style="text-align:center">
+              <div class="table-responsive" style="text-align:center">
+                <div class="card-body">
+                  <!-- Título general -->
+                  <table id="tabla_ver_requi" class="display compact" style="width:100%; text-align:center;">
+                    <thead style="background-color:#0252A0;color:#FFFFFF;">
+                      <tr>
+                        <th colspan="7" style="text-align:center; font-size: 18px; font-weight: bold;">LISTA DE EXPEDIENTES PRESENTADOS</th>
+                      </tr>
+                      <tr style="text-align:center;">
+                        <th style="text-align:center">Nro.</th>
+                        <th style="text-align:center">Nro Expediente.</th>
+                        <th style="text-align:center">Servicio</th>
+                        <th style="text-align:center">Precio</th>
+                        <th style="text-align:center">Folios</th>
+                        <th style="text-align:center">Estado</th>
+                        <th style="text-align:center">Fecha de Registro</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   <script>
     $(document).ready(function() {
         listar_clientes();
@@ -196,4 +261,23 @@
     $('#modal_registro').on('shown.bs.modal', function() {
       $('#txt_servicio').trigger('focus')
     })
+    // Si el usuario cambia manualmente la región en el modal
+$('#select_region_editar').on('change', function () {
+  const id_region = $(this).val();
+  $('#txt_provincia_editar').html("<option value=''>Cargando...</option>");
+  $('#select_distrito_editar').html("<option value=''>Seleccionar Distrito</option>");
+  if (id_region) {
+    cargarProvinciasYSeleccionarEditar(id_region, '');
+  }
+});
+
+$('#txt_provincia_editar').on('change', function () {
+  const id_provincia = $(this).val();
+  $('#select_distrito_editar').html("<option value=''>Cargando...</option>");
+  if (id_provincia) {
+    cargarDistritosYSeleccionarEditar(id_provincia, '');
+  }
+});
+
+
   </script>

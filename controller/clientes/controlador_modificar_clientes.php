@@ -10,9 +10,10 @@
     $telefono = strtoupper(htmlspecialchars($_POST['telefono'],ENT_QUOTES,'UTF-8'));
     $direccion = strtoupper(htmlspecialchars($_POST['direccion'],ENT_QUOTES,'UTF-8'));
     $email = strtoupper(htmlspecialchars($_POST['email'],ENT_QUOTES,'UTF-8'));
+    $iddistri = strtoupper(htmlspecialchars($_POST['iddistri'],ENT_QUOTES,'UTF-8'));
     $ober = strtoupper(htmlspecialchars($_POST['ober'],ENT_QUOTES,'UTF-8'));
 
-    $consulta = $MCL->Modificar_Clientes($id,$tipo,$nro,$nombre,$apellido,$celular,$telefono,$direccion,$email,$ober);
+    $consulta = $MCL->Modificar_Clientes($id,$tipo,$nro,$nombre,$apellido,$celular,$telefono,$direccion,$email,$iddistri,$ober);
     echo $consulta;
 
 
