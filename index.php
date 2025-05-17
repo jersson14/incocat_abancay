@@ -254,10 +254,7 @@ if (isset($_SESSION['S_ID'])) {
       font-weight: 500;
     }
     
-    .form-control[type="password"] {
-      letter-spacing: 3px;
-      font-weight: bold;
-    }
+
 
     .icheck-primary label {
       font-family: 'Poppins', sans-serif;
