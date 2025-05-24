@@ -333,16 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        let precio = document.getElementById("txt_archivo")
-        let cajaChecada = document.getElementById("checkboxSuccess2")
-
-        cajaChecada.addEventListener("click", () => {
-            if (precio.disabled) {
-                precio.disabled = false
-            } else {
-                precio.disabled = true
-            }
-        })
+       
 
         $('input[type="file"]').on('change', function() {
             var ext = $(this).val().split('.').pop();
