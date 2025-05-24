@@ -690,6 +690,7 @@ function listar_expedientes_filtro() {
 
 
   //REGISTRAR EXPEDIENTE
+//REGISTRAR EXPEDIENTE
   function Registrar_Expediente() {
     let tipo_doc = document.getElementById('select_tipo_documento').value;
     let dni = document.getElementById('txt_dni').value.trim();
@@ -800,136 +801,135 @@ function listar_expedientes_filtro() {
 
 
 function Registrar_Detalle_requisitos2(idexpediente, dni, idusu) {
-  let count = $("#tabla_requisito tbody#tbody_tabla_requisito tr").length;
-  if (count === 0) {
-      return Swal.fire({
-          title: "Advertencia",
-          text: "El detalle de los requisitos debe tener al menos un registro.",
-          icon: "warning",
-          allowOutsideClick: false,
-          allowEscapeKey: false
-      });
-  }
+    let count = $("#tabla_requisito tbody#tbody_tabla_requisito tr").length;
+    if (count === 0) {
+        return Swal.fire({
+            title: "Advertencia",
+            text: "El detalle de los requisitos debe tener al menos un registro.",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
 
-  let requisitosSeleccionados = 0;
-  let formData = new FormData();
-  formData.append("idexpediente", idexpediente);
-  formData.append("dni", dni);
-  formData.append("idusu", idusu);
+    let formData = new FormData();
+    formData.append("idexpediente", idexpediente);
+    formData.append("dni", dni);
+    formData.append("idusu", idusu);
 
-  let archivosCompletos = true;
+    let archivosCompletos = true;
+    let algunSeleccionado = false;
 
-  $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
-      const checkbox = $(this).find('input[type="checkbox"]').first();
-      const isChecked = checkbox.is(":checked");
+    $("#tabla_requisito tbody#tbody_tabla_requisito tr").each(function () {
+        const checkbox = $(this).find('input[type="checkbox"]').first();
+        const isChecked = checkbox.is(":checked");
+        if (isChecked) algunSeleccionado = true;
 
-      const idRequisito = $(this).find('td').eq(0).text().trim();
-      const fileInput = $(this).find('.file-input')[0];
-      const fecha = $(this).find('.fecha-input').val();
-      const estado = $(this).find('.estado-text span').text().trim();
+        const idRequisito = $(this).find('td').eq(0).text().trim();
+        const fileInput = $(this).find('.file-input')[0];
+        const fecha = $(this).find('.fecha-input').val();
+        const estado = $(this).find('.estado-text span').text().trim();
 
-      if (isChecked) {
-          requisitosSeleccionados++;
-          formData.append("requisitos[]", idRequisito);
-          formData.append("fechas[]", fecha ? fecha : "");
-          formData.append("estados[]", estado);
+        formData.append("requisitos[]", idRequisito);
+        formData.append("fechas[]", fecha ? fecha : "");
+        formData.append("estados[]", estado);
+        formData.append("seleccionados[]", isChecked ? 1 : 0);
 
-          if (fileInput && fileInput.files.length > 0) {
-              formData.append("archivos[]", fileInput.files[0]);
-          } else {
-              archivosCompletos = false;
-              formData.append("archivos[]", new Blob([]), 'vacio.txt');
-          }
-      }
-  });
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append("archivos[]", fileInput.files[0]);
+        } else {
+            archivosCompletos = false;
+            formData.append("archivos[]", new Blob([]), 'vacio.txt');
+        }
+    });
 
-  if (requisitosSeleccionados === 0) {
-      return Swal.fire({
-          title: "Advertencia",
-          text: "Debe seleccionar al menos un requisito marcándolo con el check.",
-          icon: "warning",
-          allowOutsideClick: false,
-          allowEscapeKey: false
-      });
-  }
+    if (!algunSeleccionado) {
+        return Swal.fire({
+            title: "Advertencia",
+            text: "Debe seleccionar al menos un requisito marcándolo con el check.",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
 
-  if (!archivosCompletos) {
-      Swal.fire({
-          title: "Advertencia",
-          text: "Algunos requisitos seleccionados no tienen archivo, se subirá como vacío.",
-          icon: "info",
-          allowOutsideClick: false,
-          allowEscapeKey: false
-      });
-  }
+    if (!archivosCompletos) {
+        Swal.fire({
+            title: "Advertencia",
+            text: "Algunos requisitos no tienen archivo. Se subirán archivos vacíos.",
+            icon: "info",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
 
-  Swal.fire({
-      title: 'Registrando...',
-      text: 'Por favor espere mientras se guarda la información.',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-      didOpen: () => {
-          Swal.showLoading();
-      }
-  });
+    Swal.fire({
+        title: 'Registrando...',
+        text: 'Por favor espere mientras se guarda la información.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
 
-  $.ajax({
-      url: "../controller/expedientes/controlador_registrar_detalle_requisitos.php",
-      type: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false
-  }).done(function (resp) {
-      Swal.close(); // Cierra el loading
+    $.ajax({
+        url: "../controller/expedientes/controlador_registrar_detalle_requisitos.php",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false
+    }).done(function (resp) {
+        Swal.close(); // Cierra el loading
 
-      let response = JSON.parse(resp);
+        let response = JSON.parse(resp);
 
-      if (response.success) {
-          Swal.fire({
-              title: '¡Registro exitoso!',
-              text: "¿Desea imprimir la boleta?",
-              icon: 'success',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: '¡Sí, imprimir!',
-              cancelButtonText: 'No, gracias',
-              allowOutsideClick: false,
-              allowEscapeKey: false
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  var url = "../view/MPDF/REPORTE/ticket_seguimiento.php?id=" + encodeURIComponent(idexpediente) + "#zoom=100%";
-                  var newWindow = window.open(url, "TICKET DE SEGUIMIENTO", "scrollbars=NO");
+        if (response.success) {
+            Swal.fire({
+                title: '¡Registro exitoso!',
+                text: "¿Desea imprimir la boleta?",
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, imprimir!',
+                cancelButtonText: 'No, gracias',
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = "../view/MPDF/REPORTE/ticket_seguimiento.php?id=" + encodeURIComponent(idexpediente) + "#zoom=100%";
+                    var newWindow = window.open(url, "TICKET DE SEGUIMIENTO", "scrollbars=NO");
 
-                  if (newWindow) {
-                      newWindow.moveTo(0, 0);
-                      newWindow.resizeTo(screen.width, screen.height);
-                  }
-              }
+                    if (newWindow) {
+                        newWindow.moveTo(0, 0);
+                        newWindow.resizeTo(screen.width, screen.height);
+                    }
+                }
 
-              // Limpia la tabla de requisitos siempre
-              $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
-          });
+                // Limpia la tabla de requisitos siempre
+                $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
+            });
 
-      } else {
-          Swal.fire({
-              title: "Error",
-              text: response.message,
-              icon: "error",
-              allowOutsideClick: false,
-              allowEscapeKey: false
-          });
-      }
-  }).fail(function () {
-      Swal.close();
-      Swal.fire({
-          title: "Error",
-          text: "Hubo un problema con la conexión, intente nuevamente.",
-          icon: "error",
-          allowOutsideClick: false,
-          allowEscapeKey: false
-      });
-  });
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: response.message,
+                icon: "error",
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+        }
+    }).fail(function () {
+        Swal.close();
+        Swal.fire({
+            title: "Error",
+            text: "Hubo un problema con la conexión, intente nuevamente.",
+            icon: "error",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    });
 }
 
 
@@ -1900,19 +1900,13 @@ $("#tabla_expedientes").on("click", ".editar", function () {
     data = tbl_expedientes.row(this).data();
   }
 
-  console.log("DATOS GUARDADOS:", data); // 👈 Verifica estos datos
-
-  // Guardamos los datos del expediente en localStorage
   localStorage.setItem("expedienteEditar", JSON.stringify(data));
-  
-  // Cargamos la vista de edición
-  cargar_contenido('contenido_principal', '../view/expedientes/view_editar_expediente.php');
+  cargar_contenido2('contenido_principal', '../view/expedientes/view_editar_expediente.php');
 });
-function cargar_contenido(contenedor, contenido) {
-  // Limpiar el localStorage SOLO si no es la vista de editar
+
+function cargar_contenido2(contenedor, contenido) {
   if (!contenido.includes("view_editar_expediente.php")) {
     localStorage.removeItem("expedienteEditar");
-    console.log("🧹 LocalStorage limpiado");
   }
 
   $("#" + contenedor).load(contenido, function (response, status, xhr) {
@@ -1920,14 +1914,181 @@ function cargar_contenido(contenedor, contenido) {
       console.error("❌ Error al cargar el contenido:", xhr.status, xhr.statusText);
     } else {
       console.log("✅ Contenido cargado:", contenido);
-      
-      // Este bloque es para cargar los datos del expediente en caso de que estemos editando
       if (contenido.includes("view_editar_expediente.php")) {
-        cargarDatosDesdeLocalStorage();
+        cargarDatosDesdeLocalStorage2();
+                cargarRequisitosDelExpediente2(); // ✅ sin parámetro
       }
     }
   });
 }
+function cargarRequisitosDelExpediente2() {
+  const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
+
+  if (!datos || !datos.id_expediente) {
+    console.warn("⚠️ No se encontró el ID del expediente.");
+    return;
+  }
+
+  const id_expediente = datos.id_expediente;
+  const $tbody = $("#tbody_tabla_requisito");
+
+  if (!$tbody.length) {
+    console.error("Elemento tbody_tabla_requisito no encontrado en el DOM.");
+    return;
+  }
+
+  $tbody.html('<tr><td colspan="7">Cargando requisitos...</td></tr>');
+
+  $.ajax({
+    url: "../controller/expedientes/controlador_listar_historial_expediente.php",
+    type: "POST",
+    data: { id_expediente },
+    dataType: "json",
+    timeout: 10000
+  }).done(function (resp) {
+    try {
+      let html = '';
+      if (resp && resp.data && Array.isArray(resp.data) && resp.data.length > 0) {
+        resp.data.forEach((req, index) => {
+const tieneArchivo = req.archivo && req.archivo !== "" && !req.archivo.includes("vacio.txt");
+          const checked = tieneArchivo ? 'checked' : '';
+          const disabled = tieneArchivo ? '' : 'disabled';
+          
+          // Sección de Ver archivo con input id_requisito y cargar archivo
+        const archivoHTML = tieneArchivo
+  ? `<div class="ver-archivo-section">
+      <!-- Input para id_requisito -->
+      <input type="hidden" name="id_requisito[]" value="${req.id_requisito}" />
+      <div class="mb-2">
+        <a href="/incocat_abancay/${req.archivo.replace("../../", "")}" target="_blank" class="btn btn-success btn-sm">
+          <i class="bi bi-eye-fill"></i> Ver archivo
+        </a>
+      </div>
+      <div class="cargar-archivo-section">
+        <div class="input-group">
+          <label class="input-group-text bg-primary text-white" for="file${index}">
+            <i class="fas fa-file-upload"></i> Cargar nuevo
+          </label>
+          <input type="file" name="archivos[]" id="file${index}" accept="application/pdf" class="form-control file-input" data-index="${index}">
+        </div>
+      </div>
+    </div>`
+  : `<div class="ver-archivo-section">
+      <!-- Input para id_requisito -->
+      <input type="hidden" name="id_requisito[]" value="${req.id_requisito}" />
+      <div class="cargar-archivo-section">
+        <div class="input-group">
+          <label class="input-group-text bg-primary text-white" for="file${index}">
+            <i class="fas fa-file-upload"></i> Cargar archivo
+          </label>
+          <input type="file" name="archivos[]" id="file${index}" accept="application/pdf" class="form-control file-input" data-index="${index}" ${disabled}>
+        </div>
+        <small class="text-muted mt-1 d-block">Ningún archivo seleccionado</small>
+      </div>
+    </div>`;
+          const estadoHTML = tieneArchivo
+            ? `<span class="badge bg-success">SI</span>`
+            : `<span class="badge bg-danger">NO</span>`;
+
+          const fechaHTML = (req.fecha_formateada && req.fecha_formateada !== "00-00-0000 - 00:00:00")
+            ? req.fecha_formateada
+            : '';
+
+          html += `
+            <tr>
+              <td class="align-middle">${req.id_requisito}</td>
+              <td class="align-middle">${req.REQUISITO}</td>
+              <td class="text-center align-middle">
+                <input type="checkbox" class="form-check-input chk-agregar fs-4" data-index="${index}" ${checked} style="width: 1.5em; height: 1.5em;">
+              </td>
+              <td class="align-middle archivo-cell" data-index="${index}">${archivoHTML}</td>
+              <td class="estado-text align-middle" data-index="${index}">${estadoHTML}</td>
+              <td class="align-middle">
+                <input type="text" class="form-control fecha-input" data-index="${index}" value="${fechaHTML}" ${disabled}>
+              </td>
+              <td class="text-center align-middle">
+                <button class="btn btn-outline-danger btn-sm btn-remove" title="Limpiar fila" data-index="${index}" ${disabled}>
+                  <i class="fas fa-eraser"></i>
+                </button>
+              </td>
+            </tr>`;
+        });
+      } else {
+        html = '<tr><td colspan="7" class="text-center">No hay requisitos registrados.</td></tr>';
+      }
+
+      $tbody.html(html);
+
+      // Evento de checkbox
+      $('.chk-agregar').on('change', function () {
+        const index = $(this).data('index');
+        const isChecked = $(this).is(':checked');
+
+        const fileInput = $(`.file-input[data-index="${index}"]`);
+        const estadoCell = $(`.estado-text[data-index="${index}"]`);
+        const btnRemove = $(`.btn-remove[data-index="${index}"]`);
+        const fechaInput = $(`.fecha-input[data-index="${index}"]`);
+
+        if (isChecked) {
+          fileInput.prop('disabled', false);
+          estadoCell.html('<span class="badge bg-success">SI</span>');
+          btnRemove.prop('disabled', false);
+          fechaInput.prop('disabled', false).val(obtenerFechaHoraActual());
+        } else {
+          fileInput.prop('disabled', true).val('');
+          estadoCell.html('<span class="badge bg-danger">NO</span>');
+          fechaInput.prop('disabled', true).val('');
+          btnRemove.prop('disabled', true);
+        }
+      });
+
+      // Evento para limpiar fila
+      $('.btn-remove').on('click', function () {
+        const index = $(this).data('index');
+        $(`.chk-agregar[data-index="${index}"]`).prop('checked', false);
+        $(`.file-input[data-index="${index}"]`).prop('disabled', true).val('');
+        $(`.estado-text[data-index="${index}"]`).html('<span class="badge bg-danger">NO</span>');
+        $(`.fecha-input[data-index="${index}"]`).prop('disabled', true).val('');
+        $(this).prop('disabled', true);
+      });
+
+      // Evento para mostrar información del archivo seleccionado
+      $('.file-input').on('change', function() {
+        const $this = $(this);
+        const $section = $this.closest('.cargar-archivo-section');
+        const $info = $section.find('small');
+        
+        if (this.files.length > 0) {
+          const fileName = this.files[0].name;
+          const fileSize = (this.files[0].size / 1024 / 1024).toFixed(2);
+          $info.text(`Archivo: ${fileName} (${fileSize} MB)`).removeClass('text-muted').addClass('text-success');
+        } else {
+          $info.text('Ningún archivo seleccionado').removeClass('text-success').addClass('text-muted');
+        }
+      });
+
+    } catch (error) {
+      console.error("❌ Error procesando la respuesta del servidor:", error);
+      Swal.fire("Error", "Ocurrió un problema al procesar los requisitos.", "error");
+    }
+  }).fail(function (jqXHR, textStatus, errorThrown) {
+    console.error("❌ Error AJAX al cargar requisitos:", textStatus, errorThrown);
+    Swal.fire("Error", "No se pudieron cargar los requisitos del expediente.", "error");
+    $tbody.html('<tr><td colspan="7" class="text-center text-danger">Error al cargar requisitos.</td></tr>');
+  });
+}
+
+// Función auxiliar para obtener la fecha actual
+function obtenerFechaHoraActual() {
+  const ahora = new Date();
+  const yyyy = ahora.getFullYear();
+  const mm = String(ahora.getMonth() + 1).padStart(2, '0');
+  const dd = String(ahora.getDate()).padStart(2, '0');
+  const hh = String(ahora.getHours()).padStart(2, '0');
+  const min = String(ahora.getMinutes()).padStart(2, '0');
+  return `${dd}-${mm}-${yyyy} ${hh}:${min}`;
+}
+
 
 //IMREMIAR TICKET
 $('#tabla_expedientes').on('click','.print',function(){
@@ -2050,7 +2211,10 @@ function cargarRequisitosDelExpediente() {
 
 
 // Función para buscar por documento
-function buscarPorDocumento() {
+// Función para buscar por documento
+let cacheRegiones = null;
+
+async function buscarPorDocumento() {
   const tipo = document.getElementById("select_tipo_documento").value;
   const dni = document.getElementById("txt_dni").value.trim();
   const otroDoc = document.getElementById("txt_dni2").value.trim();
@@ -2066,41 +2230,38 @@ function buscarPorDocumento() {
     return;
   }
 
-  $.ajax({
-    url: "../controller/expedientes/controlador_buscar_persona_por_documento.php",
-    type: "POST",
-    data: { numero_documento: numero_documento },
-    dataType: "json",
-success: async function (resp) {
-  if (resp.data && resp.data.length > 0) {
-    const d = resp.data[0];
+  try {
+    const resp = await $.ajax({
+      url: "../controller/expedientes/controlador_buscar_persona_por_documento.php",
+      type: "POST",
+      data: { numero_documento },
+      dataType: "json"
+    });
 
-    // Rellenar campos
-    $("#txt_nomb").val(d.nombres);
-    $("#txt_ape").val(d.apellidos);
-    $("#txt_celular").val(d.celular);
-    $("#txt_telefono").val(d.telefono);
-    $("#txt_email").val(d.email);
-    $("#txt_dire").val(d.direccion);
-    $("#txt_descrip").val(d.observacion);
+    if (resp.data && resp.data.length > 0) {
+      const d = resp.data[0];
 
-    try {
+      // Rellenar campos
+      $("#txt_nomb").val(d.nombres);
+      $("#txt_ape").val(d.apellidos);
+      $("#txt_celular").val(d.celular);
+      $("#txt_telefono").val(d.telefono);
+      $("#txt_email").val(d.email);
+      $("#txt_dire").val(d.direccion);
+      $("#txt_descrip").val(d.observacion);
+
+      // Carga secuencial de ubicaciones
       await cargarRegionesYSeleccionar(d.id_region);
       await cargarProvinciasYSeleccionar(d.id_region, d.id_provincia);
       await cargarDistritosYSeleccionar(d.id_provincia, d.id_distrito);
-    } catch (e) {
-      console.error("Error al cargar ubicación:", e);
-    }
 
-  } else {
-    Swal.fire("No encontrado", "No se encontró ninguna persona con ese documento.", "info");
-  }
-},
-    error: function (xhr, status, error) {
-      console.error("❌ Error en AJAX:", error);
-      Swal.fire("Error", "No se pudo hacer la búsqueda.", "error");
+    } else {
+      Swal.fire("No encontrado", "No se encontró ninguna persona con ese documento.", "info");
     }
-  });
+  } catch (error) {
+    console.error("❌ Error en AJAX:", error);
+    Swal.fire("Error", "No se pudo hacer la búsqueda.", "error");
+  }
 }
 
 function cargarRegionesYSeleccionar(id_region) {
@@ -2108,7 +2269,7 @@ function cargarRegionesYSeleccionar(id_region) {
     $.ajax({
       url: "../controller/regiones/controlador_cargar_select_regiones.php",
       type: "POST",
-      dataType: "json",
+      dataType: "json"
     })
     .done(function (data) {
       let opciones = "<option value=''>Seleccionar Región</option>";
@@ -2117,10 +2278,13 @@ function cargarRegionesYSeleccionar(id_region) {
         opciones += `<option value="${region[0]}"${selected}>${region[1]}</option>`;
       });
 
-      $("#select_region").html(opciones).val(id_region).trigger("change");
+      $("#select_region").html(opciones).val(id_region);
       resolve();
     })
-    .fail(reject);
+    .fail(function (err) {
+      console.error("Error al cargar regiones:", err);
+      reject(err);
+    });
   });
 }
 
@@ -2130,7 +2294,7 @@ function cargarProvinciasYSeleccionar(id_region, id_provincia) {
       url: "../controller/provincias/controlador_cargar_select_provincias.php",
       type: "POST",
       data: { id_region },
-      dataType: "json",
+      dataType: "json"
     })
     .done(function (data) {
       let opciones = "<option value=''>Seleccionar Provincia</option>";
@@ -2139,32 +2303,62 @@ function cargarProvinciasYSeleccionar(id_region, id_provincia) {
         opciones += `<option value="${provincia[0]}"${selected}>${provincia[1]}</option>`;
       });
 
-      $("#txt_provincia").html(opciones).val(id_provincia).trigger("change");
+      $("#txt_provincia").html(opciones).val(id_provincia);
       resolve();
     })
-    .fail(reject);
+    .fail(function (err) {
+      console.error("Error al cargar provincias:", err);
+      reject(err);
+    });
   });
 }
+function cargarProvinciasYSeleccionar2(id_region, id_provincia) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: "../controller/provincias/controlador_cargar_select_provincias.php",
+      type: "POST",
+      data: { id_region },
+      dataType: "json"
+    })
+    .done(function (data) {
+      let opciones = "<option value=''>Seleccionar Provincia</option>";
+      data.forEach(provincia => {
+        const selected = provincia.id_provincia == id_provincia ? " selected" : "";
+        opciones += `<option value="${provincia.id_provincia}"${selected}>${provincia.PROVINCIA}</option>`;
+      });
+      $("#select_provincia").html(opciones).val(id_provincia);
 
+      resolve();
+    })
+    .fail(function (err) {
+      console.error("Error al cargar provincias:", err);
+      reject(err);
+    });
+  });
+}
 function cargarDistritosYSeleccionar(id_provincia, id_distrito) {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: "../controller/distritos/controlador_cargar_select_distritos.php",
       type: "POST",
       data: { id_provincia },
-      dataType: "json",
+      dataType: "json"
     })
     .done(function (response) {
-      let opciones = "<option value=''>Seleccionar Distrito</option>";
       const data = response.data || [];
+      let opciones = "<option value=''>Seleccionar Distrito</option>";
       data.forEach(distrito => {
         const selected = distrito.id_distritos === id_distrito ? " selected" : "";
         opciones += `<option value="${distrito.id_distritos}"${selected}>${distrito.nombre}</option>`;
       });
 
-      $("#select_distrito").html(opciones).val(id_distrito).trigger("change");
+      $("#select_distrito").html(opciones).val(id_distrito);
       resolve();
     })
-    .fail(reject);
+    .fail(function (err) {
+      console.error("Error al cargar distritos:", err);
+      reject(err);
+    });
   });
 }
+

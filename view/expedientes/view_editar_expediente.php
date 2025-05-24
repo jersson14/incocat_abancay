@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-6 form-group">
                             <label for="" style="font-size:small;">Tipo de documento<b style="color:red">(*)</b>:</label>
-                            <select class="form-control" id="select_tipo_documento" style="width:100%">
+                            <select disabled class="form-control" id="select_tipo_documento" style="width:100%">
                                 <option value="" disabled>Seleccione</option>
                                 <option value="DNI" selected>DNI</option>
                                 <option value="CARNET DE EXTRANJERIA">CARNET DE EXTRANJERIA</option>
@@ -55,22 +55,22 @@
                         <div id="dni_section" class="col-6 form-group">
                             <label for="" style="font-size:small;">N° Documento<b style="color:red">(*)</b>:</label>
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Ingrese el Nro de Documento" id="txt_dni" onkeypress="return soloNumeros(event)">
+                            <input disabled type="text" class="form-control" placeholder="Ingrese el Nro de Documento" id="txt_dni" onkeypress="return soloNumeros(event)">
                             <div class="input-group-append">
-                                    <button onclick="" class="btn btn-primary" id="prueba"><i class="fa fa-search"></i><b> Reniec</b></button>
+                                    <button disabled onclick="" class="btn btn-primary" id="prueba"><i class="fa fa-search"></i><b> Reniec</b></button>
                                 </div>
                             </div>
                         </div>
                         <div id="otros_documentos_section" class="col-6 form-group" style="display: none;">
                             <label for="" style="font-size:small;">N° Documento<b style="color:red">(*)</b>:</label>
                             <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Ingrese los nombres" id="txt_nro_doc" onkeypress="return sololetras(event)">
+                            <input disabled type="text" class="form-control" placeholder="Ingrese los nombres" id="txt_nro_doc" onkeypress="return sololetras(event)">
 
                             </div>
                         </div>
                         <div class="col-6 form-group">
                             <label for="" style="font-size:small;">Nombres<b style="color:red">(*)</b>:</label>
-                            <input type="text" class="form-control" id="txt_nomb" onkeypress="return sololetras(event)">
+                            <input type="text" class="form-control" id="txt_nomb_edi" onkeypress="return sololetras(event)">
                         </div>
                         <div class="col-6 form-group">
                             <label for="" style="font-size:small;">Apellidos<b style="color:red">(*)</b>:</label>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Provincia<b style="color:red">(*)</b>:</label>
-                            <select id="txt_provincia" class="form-control" style="width:100%"></select>
+                            <select id="select_provincia" class="form-control" style="width:100%"></select>
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Distrito<b style="color:red">(*)</b>:</label>
@@ -174,7 +174,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">Servicio<b style="color:red">(*)</b>:</label>
-                            <select class="js-example-basic-single" id="select_servicio" style="width:100%"></select>
+                            <select disabled class="js-example-basic-single" id="select_servicio" style="width:100%"></select>
                         </div>
                         <div class="col-4 form-group">
                             <label for="" style="font-size:small;">N° Expediente<b style="color:red">(*)</b>:</label>
@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="col-12" style="text-align:center">
-                                <button class="btn btn-success btn-lg" onclick="Registrar_Expediente()" id="btn_registro"><i class="fas fa-save"></i><b> REGISTRAR EXPEDIENTE</b></button>
+                                <button class="btn btn-success btn-lg" onclick="Registrar_Expediente()" id="btn_registro"><i class="fas fa-save"></i><b> MODIFICAR EXPEDIENTE</b></button>
                             </div>
                         </div>
                     </div>
@@ -231,109 +231,35 @@
         </div>
     </div>
 
-
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  cargarDatosDesdeLocalStorage();
+  cargarDatosDesdeLocalStorage2();
 });
 
-
-let regionesCargadas = false;
-let provinciasCargadas = false;
-
-function cargarRegionesSeleccion(idRegion, idProvincia, idDistrito) {
-  if (regionesCargadas) return;  // Evita la recarga innecesaria
-  regionesCargadas = true;  // Marcamos como cargada
-
-  $.ajax({
-    url: "../controller/regiones/controlador_cargar_select_regiones.php",
-    method: 'GET',
-    dataType: 'json',
-    success: function (regiones) {
-      const $region = $('#select_region');
-      $region.empty().append('<option value="">Seleccione región</option>');
-
-      regiones.forEach(region => {
-        const selected = (region.id == idRegion) ? 'selected' : '';
-        $region.append(`<option value="${region.id}" ${selected}>${region.nombre}</option>`);
-      });
-
-      // Llamamos solo si no ha sido cargado previamente
-      if (idRegion && !provinciasCargadas) {
-        cargarProvinciasSeleccion(idRegion, idProvincia, idDistrito);
-      }
-    }
-  });
-}
-
-function cargarProvinciasSeleccion(idRegion, idProvincia, idDistrito) {
-  if (provinciasCargadas) return;  // Evita la recarga innecesaria
-  provinciasCargadas = true;  // Marcamos como cargada
-
-  $.ajax({
-    url: "../controller/provincias/controlador_cargar_select_provincias.php",
-    method: 'POST',
-    data: { id_region: idRegion },
-    dataType: 'json',
-    success: function (provincias) {
-      const $provincia = $('#txt_provincia');
-      $provincia.empty().append('<option value="">Seleccione provincia</option>');
-
-      provincias.forEach(prov => {
-        const selected = (prov.id_provincia == idProvincia) ? 'selected' : '';
-        $provincia.append(`<option value="${prov.id_provincia}" ${selected}>${prov.PROVINCIA}</option>`);
-      });
-
-      // Llamamos solo si no ha sido cargado previamente
-      if (idProvincia) {
-        cargarDistritosSeleccion(idProvincia, idDistrito);
-      }
-    }
-  });
-}
-
-function cargarDistritosSeleccion(idProvincia, idDistrito) {
-  $.ajax({
-    url: "../controller/distritos/controlador_cargar_select_distritos.php",
-    method: 'POST',
-    data: { id_provincia: idProvincia },
-    dataType: 'json',
-    success: function (distritos) {
-      const $distrito = $('#select_distrito');
-      $distrito.empty().append('<option value="">Seleccione distrito</option>');
-
-      distritos.data.forEach(dist => {
-        const selected = (dist.id_distritos == idDistrito) ? 'selected' : '';
-        $distrito.append(`<option value="${dist.id_distritos}" ${selected}>${dist.nombre}</option>`);
-      });
-    }
-  });
-}
-
-
-
-
-function cargarDatosDesdeLocalStorage() {
+function cargarDatosDesdeLocalStorage2() {
   const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
   if (!datos) {
     console.log("⚠ No se encontraron datos en localStorage");
     return;
   }
 
-  // Asignación de campos...
+  // Asignación de campos normales
   document.getElementById("txt_dni").value = datos.nro_documento;
-  document.getElementById("txt_nomb").value = datos.nombres;
+  document.getElementById("txt_nomb_edi").value = datos.nombres;
   document.getElementById("txt_ape").value = datos.apellidos;
   document.getElementById("txt_celular").value = datos.celular;
   document.getElementById("txt_telefono").value = datos.telefono;
   document.getElementById("txt_email").value = datos.email;
   document.getElementById("txt_dire").value = datos.direccion;
   document.getElementById("txt_descrip").value = datos.observacion;
+
   document.getElementById("txt_ruc").value = datos.ruc;
   document.getElementById("txt_razon").value = datos.razon_social;
   document.getElementById("txt_nro_expediente").value = datos.nro_expediente;
   document.getElementById("txt_folio").value = datos.folios;
+  document.getElementById("precio_total").value = datos.costo;
 
+  // Asignación de radio buttons y visibilidad
   if (datos.representacion == "A NOMBRE PROPIO") {
     $("#rad_presentacion1").prop('checked', true);
     document.getElementById('div_juridico').style.display = "none";
@@ -347,8 +273,25 @@ function cargarDatosDesdeLocalStorage() {
     document.getElementById('div_juridico').style.display = "none";
   }
 
-  // 👇 Pasamos los tres valores correctamente
-  cargarRegionesSeleccion(datos.id_region, datos.id_provincia, datos.id_distrito);
+  // Aquí hacemos la carga en cadena de región -> provincia -> distrito
+  // usando las funciones que ya tienes y pasando los IDs correctos desde datos:
+   const id_region = datos.id_region;
+  const id_provincia = datos.id_provincia;
+  const id_distrito = datos.id_distrito;
+
+ cargarRegionesYSeleccionar(id_region).then(() => {
+  return cargarProvinciasYSeleccionar2(id_region, id_provincia);
+}).then(() => {
+  return cargarDistritosYSeleccionar(id_provincia, id_distrito);
+}).then(() => {
+  return Cargar_Select_Servicios();
+}).then(() => {
+  const id_servicio = datos.id_servicio;
+  if (id_servicio) {
+    $('#select_servicio').val(id_servicio).trigger('change.select2');
+  }
+});
+
 }
 </script>
 
@@ -356,10 +299,10 @@ function cargarDatosDesdeLocalStorage() {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
+  const datos = JSON.parse(localStorage.getItem("expedienteMostrar"));
   if (datos) {
         document.getElementById("txt_dni").value = datos.nro_documento;
-        document.getElementById("txt_nomb").value = datos.nombres;
+        document.getElementById("txt_nomb_edi").value = datos.nombres;
         document.getElementById("txt_ape").value = datos.apellidos;
 
     } else {
@@ -367,8 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-
-    <script>
+ <script>
         $(document).ready(function() {
             $("#rad_presentacion1").on('click', function() {
                 document.getElementById('div_juridico').style.display = "none";
@@ -512,6 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Asignamos los valores a los campos correspondientes
                         document.getElementById("txt_nomb").value = data.nombres;
                         document.getElementById("txt_ape").value = data.apellidoPaterno + ' ' + data.apellidoMaterno;
+                        
                     }
                 }
             });
