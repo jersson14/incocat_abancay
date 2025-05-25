@@ -1959,7 +1959,7 @@ const tieneArchivo = req.archivo && req.archivo !== "" && !req.archivo.includes(
         const archivoHTML = tieneArchivo
   ? `<div class="ver-archivo-section">
       <!-- Input para id_requisito -->
-      <input type="text" name="id_requisito[]" value="${req.id_requisito_expe}" />
+      <input type="text" hidden name="id_requisito[]" value="${req.id_requisito_expe}" />
       <div class="mb-2">
         <a href="/incocat_abancay/${req.archivo.replace("../../", "")}" target="_blank" class="btn btn-success btn-sm">
           <i class="bi bi-eye-fill"></i> Ver archivo
@@ -1976,7 +1976,7 @@ const tieneArchivo = req.archivo && req.archivo !== "" && !req.archivo.includes(
     </div>`
   : `<div class="ver-archivo-section">
       <!-- Input para id_requisito -->
-      <input type="text" name="id_requisito[]" value="${req.id_requisito_expe}" />
+      <input type="text" hidden name="id_requisito[]" value="${req.id_requisito_expe}" />
       <div class="cargar-archivo-section">
         <div class="input-group">
           <label class="input-group-text bg-primary text-white" for="file${index}">
