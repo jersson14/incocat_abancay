@@ -84,7 +84,84 @@
             return $resultado;
         }
         
-        
+        public function Modificar_Expediente(
+    $id,$idexpe, $nombre, $apellido, $celular, $telefono, $email, $direc, $descrip,
+    $vpresentacion, $ruc, $raz, $servi, $nroexpe, $folio, $total, $distri, $idusu
+){
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_MODIFICAR_EXPEDIENTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $query  = $c->prepare($sql);
+            $query ->bindParam(1,$id);
+            $query ->bindParam(2,$idexpe);
+            $query ->bindParam(3,$nombre);
+            $query ->bindParam(4,$apellido);
+            $query ->bindParam(5,$celular);
+            $query ->bindParam(6,$telefono);
+            $query ->bindParam(7,$email);
+            $query ->bindParam(8,$direc);
+            $query ->bindParam(9,$descrip);
+            $query ->bindParam(10,$vpresentacion);
+            $query ->bindParam(11,$ruc);
+            $query ->bindParam(12,$raz);
+            $query ->bindParam(13,$servi);
+            $query ->bindParam(14,$nroexpe);
+            $query ->bindParam(15,$folio);
+            $query ->bindParam(16,$idusu);
+            $query ->bindParam(17,$total);
+            $query ->bindParam(18,$distri);
+             $resul = $query->execute();
+            if($resul){
+                return 1;
+            }else{
+                return 0;
+            }
+            conexionBD::cerrar_conexion();
+        }
+public function Modificar_Detalle_Requisito($id_requisito_expe, $archivo_nombre, $fecha_convertida, $idusu, $estado) {
+    try {
+        $c = conexionBD::conexionPDO();
+        $sql = "CALL SP_MODIFICAR_DETALLE_REQUISITO(?,?,?,?,?)";
+
+        $query = $c->prepare($sql);
+
+        $query->bindParam(1, $id_requisito_expe, PDO::PARAM_INT);
+
+        if (empty($archivo_nombre)) {
+            $query->bindValue(2, null, PDO::PARAM_NULL);
+        } else {
+            $query->bindValue(2, $archivo_nombre, PDO::PARAM_STR);
+        }
+
+        if (empty($fecha_convertida)) {
+            $query->bindValue(3, null, PDO::PARAM_NULL);
+        } else {
+            $query->bindValue(3, $fecha_convertida, PDO::PARAM_STR);
+        }
+
+        $query->bindParam(4, $idusu, PDO::PARAM_INT);
+        $query->bindParam(5, $estado, PDO::PARAM_STR);
+
+        $resultado = $query->execute();
+
+        conexionBD::cerrar_conexion();
+
+        return $resultado;
+
+    } catch (PDOException $e) {
+        error_log("Error en Modificar_Detalle_Requisito: " . $e->getMessage());
+        if (isset($c)) {
+            conexionBD::cerrar_conexion();
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
         public function Eliminar_Servicio($id){
             $c = conexionBD::conexionPDO();
             $sql = "CALL SP_ELIMINAR_SERVICIO(?)";

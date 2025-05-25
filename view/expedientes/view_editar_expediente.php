@@ -1,6 +1,6 @@
 
 
-<script src="../js/console_expediente_editar.js?rev=<?php echo time(); ?>"></script>
+<script src="../js/console_expediente.js?rev=<?php echo time(); ?>"></script>
 <link rel="stylesheet" href="../plantilla/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -44,6 +44,8 @@
                         </div>
                         <div class="col-6 form-group">
                             <label for="" style="font-size:small;">Tipo de documento<b style="color:red">(*)</b>:</label>
+                            <input  type="text" id="txt_id_cliente" hidden>
+                            <input  type="text" id="txt_id_expediente" hidden>
                             <select disabled class="form-control" id="select_tipo_documento" style="width:100%">
                                 <option value="" disabled>Seleccione</option>
                                 <option value="DNI" selected>DNI</option>
@@ -64,7 +66,7 @@
                         <div id="otros_documentos_section" class="col-6 form-group" style="display: none;">
                             <label for="" style="font-size:small;">N° Documento<b style="color:red">(*)</b>:</label>
                             <div class="input-group">
-                            <input disabled type="text" class="form-control" placeholder="Ingrese los nombres" id="txt_nro_doc" onkeypress="return sololetras(event)">
+                            <input disabled type="text" class="form-control" placeholder="Ingrese los nombres" id="txt_dni2" onkeypress="return sololetras(event)">
 
                             </div>
                         </div>
@@ -222,7 +224,7 @@
                                 </div>
                             </div>
                             <div class="col-12" style="text-align:center">
-                                <button class="btn btn-success btn-lg" onclick="Registrar_Expediente()" id="btn_registro"><i class="fas fa-save"></i><b> MODIFICAR EXPEDIENTE</b></button>
+                                <button class="btn btn-success btn-lg" onclick="Modificar_Expediente()" id="btn_registro"><i class="fas fa-save"></i><b> MODIFICAR EXPEDIENTE</b></button>
                             </div>
                         </div>
                     </div>
@@ -244,6 +246,10 @@ function cargarDatosDesdeLocalStorage2() {
   }
 
   // Asignación de campos normales
+      document.getElementById("txt_id_cliente").value = datos.id_cliente;
+      document.getElementById("txt_id_expediente").value = datos.id_expediente;
+
+    document.getElementById("select_tipo_documento").value = datos.tipo_documento;
   document.getElementById("txt_dni").value = datos.nro_documento;
   document.getElementById("txt_nomb_edi").value = datos.nombres;
   document.getElementById("txt_ape").value = datos.apellidos;

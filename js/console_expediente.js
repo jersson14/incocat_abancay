@@ -1921,6 +1921,7 @@ function cargar_contenido2(contenedor, contenido) {
     }
   });
 }
+
 function cargarRequisitosDelExpediente2() {
   const datos = JSON.parse(localStorage.getItem("expedienteEditar"));
 
@@ -1958,7 +1959,7 @@ const tieneArchivo = req.archivo && req.archivo !== "" && !req.archivo.includes(
         const archivoHTML = tieneArchivo
   ? `<div class="ver-archivo-section">
       <!-- Input para id_requisito -->
-      <input type="hidden" name="id_requisito[]" value="${req.id_requisito}" />
+      <input type="text" name="id_requisito[]" value="${req.id_requisito_expe}" />
       <div class="mb-2">
         <a href="/incocat_abancay/${req.archivo.replace("../../", "")}" target="_blank" class="btn btn-success btn-sm">
           <i class="bi bi-eye-fill"></i> Ver archivo
@@ -1975,7 +1976,7 @@ const tieneArchivo = req.archivo && req.archivo !== "" && !req.archivo.includes(
     </div>`
   : `<div class="ver-archivo-section">
       <!-- Input para id_requisito -->
-      <input type="hidden" name="id_requisito[]" value="${req.id_requisito}" />
+      <input type="text" name="id_requisito[]" value="${req.id_requisito_expe}" />
       <div class="cargar-archivo-section">
         <div class="input-group">
           <label class="input-group-text bg-primary text-white" for="file${index}">
@@ -2362,3 +2363,225 @@ function cargarDistritosYSeleccionar(id_provincia, id_distrito) {
   });
 }
 
+
+
+  //REGISTRAR EXPEDIENTE
+//REGISTRAR EXPEDIENTE
+function Modificar_Expediente() {
+    let id = document.getElementById('txt_id_cliente').value;
+    let idexpe = document.getElementById('txt_id_expediente').value;
+    let tipo_doc = document.getElementById('select_tipo_documento').value;
+    let dni = document.getElementById('txt_dni').value.trim();
+    let dni2 = document.getElementById('txt_dni2').value.trim();
+    let nombre = document.getElementById('txt_nomb_edi').value.trim();
+    let apellido = document.getElementById('txt_ape').value.trim();
+    let celular = document.getElementById('txt_celular').value.trim();
+    let telefono = document.getElementById('txt_telefono').value.trim();
+    let email = document.getElementById('txt_email').value.trim();
+    let direc = document.getElementById('txt_dire').value.trim();
+    let descrip = document.getElementById('txt_descrip').value.trim();
+    let ruc = document.getElementById('txt_ruc').value.trim();
+    let raz = document.getElementById('txt_razon').value.trim();
+    let servi = document.getElementById('select_servicio').value;
+    let nroexpe = document.getElementById('txt_nro_expediente').value.trim();
+    let total = document.getElementById('precio_total').value;
+    let folio = document.getElementById('txt_folio').value;
+    let distri = document.getElementById('select_distrito').value;
+    let idusu = document.getElementById('txtprincipalid').value;
+
+    // Validar campos obligatorios
+    if (!id || !idexpe || !nombre || !apellido || !celular || !nroexpe || !folio || !servi || !distri) {
+        return Swal.fire("Mensaje de Advertencia", "Los campos obligatorios no han sido completados", "warning");
+    }
+
+    // Validar documento según tipo
+    let documentoFinal = '';
+    if (tipo_doc === 'DNI') {
+        if (!dni) {
+            return Swal.fire("Mensaje de Advertencia", "El campo DNI es obligatorio", "warning");
+        }
+        documentoFinal = dni;
+    } else {
+        if (!dni2) {
+            return Swal.fire("Mensaje de Advertencia", "El campo de documento es obligatorio", "warning");
+        }
+        documentoFinal = dni2;
+    }
+
+    // Obtener tipo de presentación
+    let vpresentacion = '';
+    let presentacion = document.getElementsByName("r1");
+    for (let i = 0; i < presentacion.length; i++) {
+        if (presentacion[i].checked) {
+            vpresentacion = presentacion[i].value;
+            break;
+        }
+    }
+
+    // ** Aquí eliminamos la validación que exige archivos cargados **
+
+    // Si todo está bien, registrar el expediente
+    $.ajax({
+        url: "../controller/expedientes/controlador_modificar_expediente.php",
+        type: 'POST',
+        data: {
+            id: id,
+            idexpe: idexpe,
+            nombre: nombre,
+            apellido: apellido,
+            celular: celular,
+            telefono: telefono,
+            email: email,
+            direc: direc,
+            descrip: descrip,
+            vpresentacion: vpresentacion,
+            ruc: ruc,
+            raz: raz,
+            servi: servi,
+            nroexpe: nroexpe,
+            folio: folio,
+            idusu: idusu,
+            total: total,
+            distri: distri
+        }
+    }).done(function (resp) {
+        console.log("RESPUESTA DEL SERVIDOR:", resp);
+
+        if (resp) {
+            Modificar_Detalle_requisitos2(resp, documentoFinal, idusu);
+            $("#contenido_principal").load("../view/expedientes/view_expedientes.php");
+
+            Swal.fire("Mensaje de Confirmación", `Expediente modificado satisfactoriamente del cliente con el nombre: <b>${nombre} ${apellido}</b>`, "success");
+            LimpiarRegistro();
+        } else {
+            return Swal.fire("Mensaje de Error", "No se completó la modificación", "error");
+        }
+    });
+}
+
+
+
+function Modificar_Detalle_requisitos2(idexpediente, dni, idusu) {
+    let filas = $("#tabla_requisito tbody#tbody_tabla_requisito tr");
+    if (filas.length === 0) {
+        return Swal.fire({
+            title: "Advertencia",
+            text: "El detalle de los requisitos debe tener al menos un registro.",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
+
+    let formData = new FormData();
+    formData.append("idexpediente", idexpediente);
+    formData.append("dni", dni);
+    formData.append("idusu", idusu);
+
+    let algunSeleccionado = false;
+
+    filas.each(function (index) {
+        const checkbox = $(this).find('input[type="checkbox"]').first();
+        const isChecked = checkbox.is(":checked");
+        if (isChecked) algunSeleccionado = true;
+
+        // Obtener ID del requisito desde el input hidden/text
+        const idRequisitoInput = $(this).find('input[name="id_requisito[]"]');
+        const idRequisito = idRequisitoInput.val();
+        const fileInput = $(this).find('.file-input')[0];
+
+        // Verificar que tenemos el ID del requisito
+        if (!idRequisito) {
+            console.error("No se encontró ID de requisito en la fila", index);
+            return;
+        }
+
+        // Agregar datos del requisito
+        formData.append(`requisitos[${index}]`, idRequisito);
+        formData.append(`seleccionados[${index}]`, isChecked ? 1 : 0);
+
+        // Agregar archivo si existe
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append(`archivos[${index}]`, fileInput.files[0]);
+        }
+    });
+
+    if (!algunSeleccionado) {
+        return Swal.fire({
+            title: "Advertencia",
+            text: "Debe seleccionar al menos un requisito marcándolo con el check.",
+            icon: "warning",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
+
+    Swal.fire({
+        title: 'Registrando...',
+        text: 'Por favor espere mientras se guarda la información.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => Swal.showLoading()
+    });
+
+    $.ajax({
+        url: "../controller/expedientes/controlador_modificar_detalle_requisitos.php",
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json' // Especificar que esperamos JSON
+    }).done(function (resp) {
+        Swal.close();
+
+        // resp ya debería ser un objeto, no string
+        if (typeof resp === 'string') {
+            console.error("Respuesta recibida como string:", resp);
+            try {
+                resp = JSON.parse(resp);
+            } catch (e) {
+                console.error("Error parseando JSON:", e);
+                return Swal.fire({
+                    title: "Error",
+                    text: "Respuesta inválida del servidor: " + resp.substring(0, 200),
+                    icon: "error",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                });
+            }
+        }
+
+        if (resp.success) {
+           Swal.fire({
+            title: '¡Registro exitoso!',
+            text: "El detalle de requisitos se guardó correctamente.",
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then(() => {
+            $("#tabla_requisito tbody#tbody_tabla_requisito").empty();
+        });
+
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: resp.message || "Error desconocido",
+                icon: "error",
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            });
+        }
+    }).fail(function (xhr, status, error) {
+        Swal.close();
+        console.error("Error AJAX:", error);
+        console.error("Respuesta:", xhr.responseText);
+        Swal.fire({
+            title: "Error",
+            text: "Hubo un problema con la conexión, intente nuevamente.",
+            icon: "error",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    });
+}
