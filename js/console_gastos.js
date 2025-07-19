@@ -548,15 +548,14 @@ function listar_diferencia(){
     }   
     },    
     {"data":"Diferencia",
-        render: function(data,type,row){
-            if(data<0){
-            return '<span class="badge bg-danger">'+data+'</span>';
-            }else{
-                return '<span class="badge bg-success">'+data+'</span>';
-
+        "render": function(data, type, row) {
+            if(data.toString().indexOf('-') !== -1) {
+                return '<span class="badge bg-danger">' + data + '</span>';
+            } else {
+                return '<span class="badge bg-success">' + data + '</span>';
             }
-    }   
-    },    
+        }
+    },  
     ],
 
     "language":idioma_espanol,
@@ -647,15 +646,14 @@ function listar_diferencia_filtro(){
     }   
     },    
     {"data":"Diferencia",
-        render: function(data,type,row){
-            if(data<0){
-            return '<span class="badge bg-danger">'+data+'</span>';
-            }else{
-                return '<span class="badge bg-success">'+data+'</span>';
-
+        "render": function(data, type, row) {
+            if(data.toString().indexOf('-') !== -1) {
+                return '<span class="badge bg-danger">' + data + '</span>';
+            } else {
+                return '<span class="badge bg-success">' + data + '</span>';
             }
-    }   
-    },    
+        }
+    },   
     ],
 
     "language":idioma_espanol,

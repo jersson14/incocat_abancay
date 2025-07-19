@@ -128,7 +128,7 @@
               <label for="">Rol<b style="color:red">(*)</b>:</label>
               <select class="form-control" id="select_rol_editar" style="width:100%">
                   <option value="">Seleccione</option>
-                  <option value="MEDICO">MEDICO</option>
+                  <option value="SECRETARIA">SECRETARIA</option>
                   <option value="ADMINISTRADOR">ADMINISTRADOR</option>
               </select>
           </div>
@@ -218,7 +218,7 @@
               <label for="">Rol<b style="color:red">(*)</b>:</label>
               <select class="form-control" id="select_rol_editar2" style="width:100%">
                   <option value="">Seleccione</option>
-                  <option value="MEDICO">MEDICO</option>
+                  <option value="SECRETARIA">SECRETARIA</option>
                   <option value="ADMINISTRADOR">ADMINISTRADOR</option>
               </select>
           </div>
