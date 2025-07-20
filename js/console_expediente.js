@@ -789,7 +789,7 @@ function obtenerFechaHoraActual() {
 
         if (resp) {
             Registrar_Detalle_requisitos2(resp, documentoFinal, idusu);
-  cargar_contenido('contenido_principal', '../view/expedientes/view_mostrar_expediente.php');
+            cargar_contenido('contenido_principal', '../view/expedientes/view_expedientes.php');
 
 
             Swal.fire("Mensaje de Confirmación", `Nuevo Expediente registrado satisfactoriamente del cliente con el nombre: <b>${nombre} ${apellido}</b>`, "success");
