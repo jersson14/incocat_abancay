@@ -27,7 +27,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"><i class="nav-icon fas fas fa-folder"></i>&nbsp;&nbsp;<b>Expedientes Archivados</b></h3>
-                        <button class="btn btn-success float-right" onclick="cargar_contenido('contenido_principal','expedientes/view_registro_expediente.php')"><i class="fas fa-plus"></i> Nuevo Registro</button>
                     </div>
                     <div class="table-responsive" style="text-align:left">
                         <div class="card-body">
