@@ -15,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INCOCAT S.R.L.</title>
-<!-- En tu <head> -->
+  <!-- En tu <head> -->
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php
     }
     ?>
-    <?php if ($_SESSION['S_ROL'] == "MEDICO") { ?>
+    <?php if ($_SESSION['S_ROL'] == "SECRETARIA") { ?>
       <!-- Navbar -->
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -133,19 +133,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if ($_SESSION['S_ROL'] == "ADMINISTRADOR") { ?>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-globe"></i>
-       
-                <p style="color:white">
-                Ubigeo
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
+                  <i class="nav-icon fas fa-globe"></i>
+
+                  <p style="color:white">
+                    Ubigeo
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" onclick="cargar_contenido('contenido_principal','regiones/view_regiones.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Regiones
+                        Regiones
                       </p>
                     </a>
                   </li>
@@ -153,36 +153,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" onclick="cargar_contenido('contenido_principal','provincias/view_provincias.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Provincias
+                        Provincias
                       </p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="#" onclick="cargar_contenido('contenido_principal','distritos/view_distritos.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
-                  <p style="color:white">
+                      <p style="color:white">
                         Distritos
                       </p>
                     </a>
                   </li>
                 </ul>
               </li>
-             
+
               <li class="nav-item">
-              <a href="#" onclick="cargar_contenido('contenido_principal','servicios/view_servicios.php')" class="nav-link">
-              <i class="nav-icon fas fas fa-hands-helping"></i>
+                <a href="#" onclick="cargar_contenido('contenido_principal','servicios/view_servicios.php')" class="nav-link">
+                  <i class="nav-icon fas fas fa-hands-helping"></i>
 
                   <p style="color:white">
                     Servicios
                   </p>
                 </a>
               </li>
-              
-
-
               <li class="nav-item">
-              <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="nav-link">
-              <i class="nav-icon fas fa-calendar-check"></i>
+                <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="nav-link">
+                  <i class="nav-icon fas fa-calendar-check"></i>
 
                   <p style="color:white">
                     Agendar reuniones
@@ -199,18 +196,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-folder" ></i> 
-                <p style="color:white">
-                Gestión de Expedientes
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
+                  <i class="nav-icon fas fa-folder"></i>
+                  <p style="color:white">
+                    Gestión de Expedientes
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_registro_expediente.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Registro de Expediente
+                        Registro de Expediente
                       </p>
                     </a>
                   </li>
@@ -218,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Lista de Expedientes
+                        Lista de Expedientes
                       </p>
                     </a>
                   </li>
@@ -226,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expediente_archivados.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Expedientes Archivados
+                        Expedientes Archivados
                       </p>
                     </a>
                   </li>
@@ -234,7 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_editar_expediente.php')" class="nav-link">
                       <i class="nav-icon far fa-circle"></i>
                       <p style="color:white">
-                      Expedientes Archivados
+                        Expedientes Archivados
                       </p>
                     </a>
                   </li>
@@ -250,12 +247,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-coins" ></i> 
+                  <i class="nav-icon fas fa-coins"></i>
 
-                <p style="color:white">
-                Ingresos y Gastos
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
+                  <p style="color:white">
+                    Ingresos y Gastos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
@@ -282,10 +279,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </p>
                     </a>
                   </li>
-                
+
                 </ul>
               </li>
-            
+
               <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
                 <b>REPORTES DE EXPEDIENTES</b>
               </li>
@@ -300,16 +297,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
               <li class="nav-item">
                 <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_expediente_fecha_distritos.php')" class="nav-link">
-                <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
+                  <i class="nav-icon fas fa-file-pdf"></i> <!-- Archivada -->
 
                   <p style="color:white">
-                  Por fecha y distrito
+                    Por fecha y distrito
                   </p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_fechas_estado.php')" class="nav-link">
-                <i class="nav-icon fas fa-file-pdf" ></i> <!-- Archivada -->
+                  <i class="nav-icon fas fa-file-pdf"></i> <!-- Archivada -->
 
                   <p style="color:white">
                     Por fecha y estado
@@ -328,7 +325,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../manual_admin.pdf" target="blank" onclick="" class="nav-link">
+                <a href="#" target="blank" onclick="" class="nav-link">
                   <i class="nav-icon fas fa-file-pdf"></i>
                   <p style="color:white">
                     Manual de Usuario
@@ -338,29 +335,152 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php
             }
             ?>
-            <?php if ($_SESSION['S_ROL'] == "MEDICO") { ?>
-              
+            <?php if ($_SESSION['S_ROL'] == "SECRETARIA") { ?>
+
+
+
               <li class="nav-item">
-                <a href="#" onclick="cargar_contenido('contenido_principal','practicas_paciente/view_practicas_paciente2.php')" class="nav-link">
-                <i class="nav-icon fas fa-stethoscope"></i>
-                <p style="color:white">
-                    Prácticas - Paciente
+                <a href="#" onclick="cargar_contenido('contenido_principal','servicios/view_servicios.php')" class="nav-link">
+                  <i class="nav-icon fas fas fa-hands-helping"></i>
+
+                  <p style="color:white">
+                    Servicios
                   </p>
                 </a>
               </li>
-            
-              <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
-                <b>MANUAL</b>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="nav-link">
+                  <i class="nav-icon fas fa-calendar-check"></i>
+
+                  <p style="color:white">
+                    Agendar reuniones
+                  </p>
+                </a>
               </li>
               <li class="nav-item">
-                <a href="../manual_doctor.pdf" target="blank" onclick="" class="nav-link">
-                <i class="nav-icon fas fa-file-pdf"></i>
-                <p style="color:white">
+                <a href="#" onclick="cargar_contenido('contenido_principal','clientes/view_clientes.php')" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p style="color:white">
+                    Clientes
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-folder"></i>
+                  <p style="color:white">
+                    Gestión de Expedientes
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_registro_expediente.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Registro de Expediente
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Lista de Expedientes
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expediente_archivados.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Expedientes Archivados
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','pagos/view_pagos.php')" class="nav-link">
+                  <i class="nav-icon fas fa-hand-holding-usd"></i>
+                  <p style="color:white">
+                    Registro de Pagos
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-coins"></i>
+
+                  <p style="color:white">
+                    Ingresos y Gastos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Ingresos
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="nav-link">
+                      <i class="nav-icon far fa-circle"></i>
+                      <p style="color:white">
+                        Gastos
+                      </p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+              <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
+                <b>REPORTES DE EXPEDIENTES</b>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_expedientes_fecha_provincia.php')" class="nav-link">
+                  <i class="nav-icon fas fa-file-pdf"></i>
+
+                  <p style="color:white">
+                    Por fecha y provincia
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_expediente_fecha_distritos.php')" class="nav-link">
+                  <i class="nav-icon fas fa-file-pdf"></i> <!-- Archivada -->
+
+                  <p style="color:white">
+                    Por fecha y distrito
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" onclick="cargar_contenido('contenido_principal','reportes/view_fechas_estado.php')" class="nav-link">
+                  <i class="nav-icon fas fa-file-pdf"></i> <!-- Archivada -->
+
+                  <p style="color:white">
+                    Por fecha y estado
+                  </p>
+                </a>
+              </li>
+              <li class="header text-center" style="color:#FFFFFF; background-color:#023D77; border-radius: 10px;">
+                <b>CONFIGURACIÓN Y MANUAL</b>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" target="blank" onclick="" class="nav-link">
+                  <i class="nav-icon fas fa-file-pdf"></i>
+                  <p style="color:white">
                     Manual de Usuario
                   </p>
                 </a>
               </li>
-            
             <?php
             }
             ?>
@@ -383,31 +503,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Content Wrapper. Contains page content -->
 
       <!-- Content Header (Page header) -->
-    
+
       <?php if ($_SESSION['S_ROL'] == "ADMINISTRADOR") { ?>
         <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0"><i class="fas fa-home"></i>
-                <b>BIENVENIDOS AL SISTEMA</b>
-              </h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">MENÚ</a></li>
-                <li class="breadcrumb-item active">MENÚ PRINCIPAL</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><i class="fas fa-home"></i>
+                  <b>BIENVENIDOS AL SISTEMA</b>
+                </h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">MENÚ</a></li>
+                  <li class="breadcrumb-item active">MENÚ PRINCIPAL</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
 
 
         <div class="col-md-12">
           <div class="card card-primary">
-            <div class="card-header py-2"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
+            <div class="card-header py-2" style="background: linear-gradient(135deg, #023D77, #0266C8)">
               <h5 class="m-0" style="font-family:cooper; text-align:center; line-height: 1; padding: 0;">
                 <i class="fas fa-list-ol" style="margin-right: 8px;"></i>DATOS IMPORTANTES
               </h5>
@@ -430,7 +550,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -445,7 +565,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -461,7 +581,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -476,9 +596,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
                       </div>
-                      
+
                       <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
@@ -491,7 +611,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -506,7 +626,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -522,7 +642,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-users"></i>
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','clientes/view_clientes.php')" class="small-box-footer"><b>Ver Clientes</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -537,14 +657,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
                       </div>
-                      
+
                       <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <div class="col-lg-3 col-6">
-                    <!-- small box -->        <hr>
+                    <!-- small box -->
+                    <hr>
 
                     <div class="small-box bg-success">
                       <div class="inner">
@@ -554,14 +675,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="nav-icon fas fa-coins"></i>
+                        <i class="nav-icon fas fa-coins"></i>
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->
                   <div class="col-lg-3 col-6">
-                    <!-- small box -->        <hr>
+                    <!-- small box -->
+                    <hr>
                     <div class="small-box bg-danger">
                       <div class="inner">
                         <b>Total de Gastos Hoy</b>
@@ -569,14 +691,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="fas fas fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fas fas fa-coins"></i> <!-- Factura con signo de dólar -->
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->
                   <div class="col-lg-3 col-6">
-                    <!-- small box -->        <hr>
+                    <!-- small box -->
+                    <hr>
                     <div class="small-box bg-success">
                       <div class="inner">
 
@@ -585,24 +708,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                       </div>
                       <div class="icon">
-                      <i class="nav-icon fas fa-coins"></i>
+                        <i class="nav-icon fas fa-coins"></i>
                       </div>
                       <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                   <!-- ./col -->
                   <div class="col-lg-3 col-6">
-                    <!-- small box -->        <hr>
+                    <!-- small box -->
+                    <hr>
                     <div class="small-box bg-danger">
                       <div class="inner">
-                      <b>Total de Gastos Mes Actual</b>
-                      <h3 id="total_gastos_mes_actual"><sup style="font-size: 20px"></sup></h3>
+                        <b>Total de Gastos Mes Actual</b>
+                        <h3 id="total_gastos_mes_actual"><sup style="font-size: 20px"></sup></h3>
 
                       </div>
                       <div class="icon">
-                      <i class="fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                        <i class="fas fa-coins"></i> <!-- Factura con signo de dólar -->
                       </div>
-                      
+
                       <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
@@ -614,9 +738,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <div class="col-md-12">
           <div class="card card-primary" style="border-radius: 15px; overflow: hidden;">
-            <div class="card-header py-2"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
+            <div class="card-header py-2" style="background: linear-gradient(135deg, #023D77, #0266C8)">
               <h5 class="m-0" style="font-family:cooper; text-align:center; line-height: 1; padding: 0; color: white;">
-              <i class="fas fa-building" style="margin-right: 8px;"></i> DATOS DE LA EMPRESA
+                <i class="fas fa-building" style="margin-right: 8px;"></i> DATOS DE LA EMPRESA
               </h5>
               <div class="card-tools" style="position: absolute; right: 10px; top: 5px;">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -696,7 +820,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="modal fade" id="modal_editar_foto" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header"   style="background: linear-gradient(135deg, #023D77, #0266C8)">
+              <div class="modal-header" style="background: linear-gradient(135deg, #023D77, #0266C8)">
                 <h5 class="modal-title" id="exampleModalLabel" style="color:white; text-align:center"><b>EDITAR FOTO DE LA INSTITUCIÓN: </b><label for="" id="lb_empresa"></label></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -726,37 +850,240 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <?php
       }
       ?>
-      <?php if ($_SESSION['S_ROL'] == "MEDICO") { ?>
+      <?php if ($_SESSION['S_ROL'] == "SECRETARIA") { ?>
 
         <!-- Main content -->
 
-        <div class="content">
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 text-center">
-        <div class="p-5 rounded shadow-lg" 
-             style="background: linear-gradient(135deg, #023D77, #0266C8); 
-                    color: white; 
-                    border-radius: 20px; 
-                    margin-bottom: 20px;">
-          <h1 class="display-3 font-weight-bold" style="font-family: Cooper;">
-            ¡BIENVENIDO AL SISTEMA!
-          </h1>
-          <p class="lead" style="font-size: 1.3rem;">
-            Gestiona y revisa las prácticas realizadas a cada paciente de manera eficiente y organizada.
-          </p>
-          <hr class="my-4 border-light">
-          <a href="#seccion_practicas" onclick="cargar_contenido('contenido_principal','practicas_paciente/view_practicas_paciente2.php')" class="btn btn-light btn-lg font-weight-bold" 
-
-             style="border-radius: 10px;">
-            <i class="fas fa-stethoscope"></i> Ver Prácticas
-          </a>
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 class="m-0"><i class="fas fa-home"></i>
+                  <b>BIENVENIDOS AL SISTEMA</b>
+                </h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">MENÚ</a></li>
+                  <li class="breadcrumb-item active">MENÚ PRINCIPAL</li>
+                </ol>
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
         </div>
-      </div>
-    </div> <!-- /.row -->
-  </div> <!-- /.container-fluid -->
-</div> <!-- /.content -->
+        <!-- /.content-header -->
 
+
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header py-2" style="background: linear-gradient(135deg, #023D77, #0266C8)">
+              <h5 class="m-0" style="font-family:cooper; text-align:center; line-height: 1; padding: 0;">
+                <i class="fas fa-list-ol" style="margin-right: 8px;"></i>DATOS IMPORTANTES
+              </h5>
+              <div class="card-tools" style="position: absolute; right: 10px; top: 5px;">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive" style="text-align:center">
+              <!-- Resto del contenido igual -->
+              <div class="card-body" style="background-color:white">
+                <div class="row">
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-secondary">
+                      <div class="inner">
+                        <b>Reuniones Hoy</b>
+                        <h3 id="total_reuniones_hoy"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-dark">
+                      <div class="inner">
+                        <b>Total de Expedientes</b>
+                        <h3 id="total_expedientes"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                      <div class="inner">
+
+                        <b>Expedientes en Proceso</b>
+                        <h3 id="total_expedientes_proceso"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                      <div class="inner">
+                        <b>Expedientes en Trámite</b>
+                        <h3 id="total_expedientes_tramite"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <b> Expedientes Observados</b>
+                        <h3 id="total_expedientes_observados"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                      <div class="inner">
+                        <b>Expedientes Finalizados</b>
+                        <h3 id="total_expedientes_finalizados"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fa-folder-open"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','expedientes/view_expedientes.php')" class="small-box-footer"><b>Ver Expedientes</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                      <div class="inner">
+
+                        <b>Total de Clientes</b>
+                        <h3 id="total_clientes"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="nav-icon fas fa-users"></i>
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','clientes/view_clientes.php')" class="small-box-footer"><b>Ver Clientes</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                      <div class="inner">
+                        <b>Total de Reuniones</b>
+                        <h3 id="total_reuniones"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fa-calendar-check"></i> <!-- Factura con signo de dólar -->
+                      </div>
+
+                      <a href="#" onclick="cargar_contenido('contenido_principal','reuniones/view_reuniones.php')" class="small-box-footer"><b>Ver Reuniones</b>&nbsp; <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <hr>
+
+                    <div class="small-box bg-success">
+                      <div class="inner">
+
+                        <b> Total de Ingresos Hoy</b>
+                        <h3 id="total_ingresos_hoy"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="nav-icon fas fa-coins"></i>
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <hr>
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <b>Total de Gastos Hoy</b>
+                        <h3 id="total_gastos_hoy"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <hr>
+                    <div class="small-box bg-success">
+                      <div class="inner">
+
+                        <b>Total de Ingresos Mes Actual</b>
+                        <h3 id="total_ingresos_mes_actual"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="nav-icon fas fa-coins"></i>
+                      </div>
+                      <a href="#" onclick="cargar_contenido('contenido_principal','ingresos/view_ingresos.php')" class="small-box-footer"><b>Ver Ingresos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <hr>
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                        <b>Total de Gastos Mes Actual</b>
+                        <h3 id="total_gastos_mes_actual"><sup style="font-size: 20px"></sup></h3>
+
+                      </div>
+                      <div class="icon">
+                        <i class="fas fa-coins"></i> <!-- Factura con signo de dólar -->
+                      </div>
+
+                      <a href="#" onclick="cargar_contenido('contenido_principal','gastos/view_gastos.php')" class="small-box-footer"><b>Ver Gastos</b>&nbsp;<i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
@@ -888,29 +1215,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </html>
 <script>
   $(document).ready(function() {
-   listar_empresa();
-   Total_reuniones_hoy();
-   Total_reuniones();
-   Total_expedientes();
-   Total_expedientes_proceso();
-   Total_expedientes_tramite();
-   Total_expedientes_observados();
-   Total_expedientes_finalizados();
-   Total_clientes();
-   Total_ingresos_hoy();
-   Total_gastos_hoy();
-   Total_ingresos_mensual();
-   Total_gastos_mensual();
+    listar_empresa();
+    Total_reuniones_hoy();
+    Total_reuniones();
+    Total_expedientes();
+    Total_expedientes_proceso();
+    Total_expedientes_tramite();
+    Total_expedientes_observados();
+    Total_expedientes_finalizados();
+    Total_clientes();
+    Total_ingresos_hoy();
+    Total_gastos_hoy();
+    Total_ingresos_mensual();
+    Total_gastos_mensual();
   });
-
-
 </script>
 
 <style>
   /* Color de fondo principal del aside con degradado */
   .main-sidebar {
     background: linear-gradient(135deg, #023D77, #0266C8) !important;
-    color: white !important; /* Texto en blanco */
+    color: white !important;
+    /* Texto en blanco */
   }
 
   /* Eliminar cualquier color heredado del tema dark */
