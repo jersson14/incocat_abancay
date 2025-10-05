@@ -349,7 +349,7 @@ function Modificar_Servicio(){
   }).done(function(resp){
     if(resp>0){
       if(resp==1){
-      Modificar_Detalle_requisitos(id);
+        Modificar_Detalle_requisitos(id);
         Swal.fire("Mensaje de Confirmación","Datos actualizados del servicio de: <b>"+serv+"</b>","success").then((value)=>{
           tbl_servicios.ajax.reload();
         $("#modal_editar").modal('hide');

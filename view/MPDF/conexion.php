@@ -1,3 +1,9 @@
 <?php
-$mysqli = new mysqli("82.197.82.53","u486624649_jersson2025","Miranda1407.","u486624649_INCOCAT2025");
+$mysqli = new mysqli("localhost", "root", "", "incocat2", 3307);
+
+// Verificar conexión
+if ($mysqli->connect_errno) {
+    echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+    exit();
+}
 ?>

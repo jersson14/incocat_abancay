@@ -461,28 +461,28 @@ public function Modificar_Detalle_Requisito($id_requisito_expe, $archivo_nombre,
         
         }
       public function Buscar_persona_por_documento($numero_documento) {
-    $c = conexionBD::conexionPDO();
-    $sql = "CALL SP_BUSCAR_PERSONA_POR_DOCUMENTO(?)";
-    $arreglo = array();
+            $c = conexionBD::conexionPDO();
+            $sql = "CALL SP_BUSCAR_PERSONA_POR_DOCUMENTO(?)";
+            $arreglo = array();
 
-    try {
-        $query  = $c->prepare($sql);
-        $query->bindParam(1, $numero_documento);
-        $query->execute();
+            try {
+                $query  = $c->prepare($sql);
+                $query->bindParam(1, $numero_documento);
+                $query->execute();
 
-        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($resultado as $resp) {
-            $arreglo["data"][] = $resp;
+                $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($resultado as $resp) {
+                    $arreglo["data"][] = $resp;
+                }
+
+                return $arreglo;
+            } catch (Exception $e) {
+                return ["error" => true, "message" => $e->getMessage()];
+            } finally {
+                // Esto garantiza que la conexión se cierre correctamente
+                $c = null;
+            }
         }
-
-        return $arreglo;
-    } catch (Exception $e) {
-        return ["error" => true, "message" => $e->getMessage()];
-    } finally {
-        // Esto garantiza que la conexión se cierre correctamente
-        $c = null;
-    }
-}
 
     }
 
