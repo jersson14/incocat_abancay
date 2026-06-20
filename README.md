@@ -40,7 +40,50 @@ Resultados aproximados al pasar de un proceso manual/físico a este sistema digi
 
 ## Arquitectura
 
-El proyecto sigue una organización **MVC** simple sobre PHP plano:
+El proyecto sigue una organización **MVC** simple sobre PHP plano, con un cliente web que consume controladores vía peticiones HTTP/AJAX, los cuales orquestan el acceso a datos a través de los modelos y delegan la generación de vistas, PDFs y notificaciones a sus respectivas capas.
+
+```mermaid
+flowchart TB
+    subgraph Cliente["Cliente (navegador)"]
+        UI["UI AdminLTE<br/>+ DataTables / AJAX"]
+    end
+
+    subgraph Servidor["Servidor PHP (Apache)"]
+        direction TB
+        Entry["index.php<br/>(login / sesión)"]
+        Controller["Controladores<br/>controller/*<br/>(expedientes, clientes, usuario,<br/>pagos, indicadores, reuniones...)"]
+        Model["Modelos<br/>model/*<br/>(acceso a datos vía PDO)"]
+        View["Vistas<br/>view/*<br/>(plantilla AdminLTE)"]
+
+        subgraph Servicios["Servicios de soporte"]
+            direction LR
+            PDF["mPDF<br/>(view/MPDF)<br/>Reportes PDF"]
+            Mail["PHPMailer<br/>Notificaciones por correo"]
+            Cron["Tareas programadas<br/>(cron) — expedientes atrasados"]
+        end
+    end
+
+    subgraph Datos["Capa de datos"]
+        DB[("MySQL / MariaDB")]
+    end
+
+    Externo["Servicio externo<br/>(consulta DNI)"]
+
+    UI -->|HTTP / AJAX| Entry
+    Entry --> Controller
+    UI -->|AJAX| Controller
+    Controller --> Model
+    Model -->|PDO| DB
+    Controller --> View
+    View -->|HTML| UI
+    Controller --> PDF
+    Controller --> Mail
+    Cron --> Controller
+    Controller -->|consulta| Externo
+    PDF --> Model
+```
+
+### Estructura de carpetas
 
 ```text
 incocat_abancay/
@@ -95,7 +138,9 @@ En mantenimiento activo, con mejoras continuas sobre el módulo de expedientes y
 
 ---
 
+## Autor
 
+Jersson Jorge Corilla Miranda
 
 ## Licencia y derechos de autor
 
