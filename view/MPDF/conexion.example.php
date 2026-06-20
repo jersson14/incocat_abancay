@@ -1,5 +1,5 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "incocat2", 3307);
+$mysqli = new mysqli("localhost", "tu_usuario", "tu_contrasena", "tu_base_de_datos", 3306);
 
 // Verificar conexión
 if ($mysqli->connect_errno) {

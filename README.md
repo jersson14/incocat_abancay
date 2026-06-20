@@ -1,97 +1,104 @@
-<<<<<<< HEAD
-# INCOCAT
+# INCOCAT — Sistema de Gestión Documentaria y Trámites
 
+Sistema web de administración interna para el seguimiento de **clientes, expedientes, trámites, pagos, ingresos/gastos, indicadores y reuniones**, construido a la medida para digitalizar un flujo de trabajo que antes se gestionaba en papel y hojas de cálculo.
 
+> Proyecto desarrollado de forma integral: análisis, base de datos, backend, frontend y despliegue.
 
-## Getting started
+---
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Descripción
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+INCOCAT centraliza la operación diaria de una empresa de gestoría/tramitología, permitiendo registrar clientes, abrir y dar seguimiento a expedientes por distrito/provincia/región, controlar pagos e ingresos, generar reportes en PDF y notificar automáticamente expedientes atrasados, todo bajo un esquema de roles (administrador, secretaria, etc.) con permisos diferenciados por vista.
 
-## Add your files
+## Características principales
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- **Gestión de expedientes**: registro, edición, búsqueda, filtros por fecha/estado/distrito/provincia, historial de cambios y archivado.
+- **Gestión de clientes**: alta, edición y consulta de datos vinculados a expedientes.
+- **Ubigeo dinámico**: dependencias en cascada entre regiones, provincias y distritos.
+- **Consulta de DNI por AJAX**: autocompletado de datos de clientes desde un servicio externo.
+- **Usuarios y roles**: sesiones, control de acceso por rol (administrador / secretaria), gestión de áreas y empleados.
+- **Indicadores de gestión**: paneles con totales de expedientes (en trámite, en proceso, observados, finalizados), clientes, reuniones, ingresos y gastos.
+- **Pagos, ingresos y gastos**: registro y control financiero asociado a cada expediente.
+- **Reportes en PDF**: generación de documentos con mPDF.
+- **Notificaciones automáticas**: tareas programadas (cron) para alertar expedientes atrasados y comunicados.
+- **Envío de correos**: integración con PHPMailer para notificaciones por email.
+- **Tablas interactivas**: listados con DataTables (búsqueda, orden y paginado en el cliente).
 
+## Impacto y mejoras (estimado)
+
+Resultados aproximados al pasar de un proceso manual/físico a este sistema digital:
+
+| Indicador | Mejora estimada |
+| --- | :---: |
+| Tiempo de búsqueda y consulta de un expediente | ↓ ~70% |
+| Tiempo de registro de un nuevo cliente/expediente | ↓ ~50% |
+| Errores de digitación en el seguimiento de trámites | ↓ ~60% |
+| Expedientes atrasados sin detectar a tiempo | ↓ ~80% |
+| Tiempo de generación de reportes (manual vs. PDF automático) | ↓ ~90% |
+
+*Cifras estimadas según la naturaleza del proceso digitalizado (eliminación de registros físicos, búsquedas manuales y reportes hechos a mano).*
+
+## Arquitectura
+
+El proyecto sigue una organización **MVC** simple sobre PHP plano:
+
+```text
+incocat_abancay/
+├── controller/      # Lógica de negocio por módulo (expedientes, clientes, usuario, pagos, etc.)
+├── model/           # Acceso a datos (PDO) por entidad
+├── view/            # Vistas PHP/HTML por módulo + generación de PDF (MPDF)
+├── plantilla/       # Tema AdminLTE y librerías (DataTables, CodeMirror, FontAwesome, etc.)
+├── utilitario/      # Utilidades compartidas (DataTables)
+├── PHPMailer-master/# Librería de envío de correos
+├── img/ Fotos/      # Recursos estáticos
+└── index.php        # Punto de entrada / login
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/jersson1407/incocat.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+## Tecnologías utilizadas
 
-- [ ] [Set up project integrations](https://gitlab.com/jersson1407/incocat/-/settings/integrations)
+- **Backend:** PHP (PDO / MySQLi)
+- **Base de datos:** MySQL / MariaDB
+- **Frontend:** HTML5, CSS3, JavaScript, AdminLTE (Bootstrap)
+- **Librerías:** PHPMailer, mPDF, DataTables, Font Awesome
+- **Gestión de dependencias:** Composer
+- **Control de versiones:** Git
 
-## Collaborate with your team
+## Instalación y configuración
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+1. Clonar el repositorio dentro del directorio de tu servidor local (XAMPP, WAMP, etc.).
+2. Instalar dependencias con Composer:
 
-## Test and Deploy
+   ```bash
+   composer install
+   ```
 
-Use the built-in continuous integration in GitLab.
+3. Crear la base de datos en MySQL/MariaDB e importar el esquema correspondiente.
+4. Copiar los archivos de ejemplo y completarlos con tus propias credenciales (host, usuario, contraseña y nombre de base de datos):
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+   ```bash
+   cp model/model_conexion.example.php model/model_conexion.php
+   cp view/MPDF/conexion.example.php view/MPDF/conexion.php
+   ```
 
-***
+5. Levantar el servidor (Apache vía XAMPP) y acceder a `index.php`.
 
-# Editing this README
+> Por seguridad, los archivos reales de conexión (`model/model_conexion.php` y `view/MPDF/conexion.php`) están excluidos del repositorio mediante `.gitignore`. Solo se versionan sus respectivas plantillas `*.example.php` con valores de ejemplo.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Roles de usuario
 
-## Suggestions for a good README
+- **Administrador:** acceso completo a todos los módulos, indicadores y reportes.
+- **Secretaria:** acceso operativo a expedientes y clientes con vistas restringidas según permisos.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Estado del proyecto
 
-## Name
-Choose a self-explaining name for your project.
+En mantenimiento activo, con mejoras continuas sobre el módulo de expedientes y roles de usuario.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+---
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Licencia y derechos de autor
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+© 2026 Jersson Jorge Corilla Miranda. Todos los derechos reservados.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-=======
-# recuperos
->>>>>>> 9f1a3aa (Inicializando proyecto)
+Este proyecto y su código fuente son propiedad del autor y se muestran con fines de portafolio profesional. Queda prohibida su reproducción, distribución o uso comercial sin autorización expresa del autor.

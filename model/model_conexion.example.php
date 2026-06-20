@@ -4,10 +4,10 @@ class conexionBD {
 
     public function conexionPDO() {
         $host = "localhost";
-        $port = "3307";
-        $usuario = "root";
-        $contrasena = "";
-        $bdName = "incocat2";
+        $port = "3306";
+        $usuario = "tu_usuario";
+        $contrasena = "tu_contrasena";
+        $bdName = "tu_base_de_datos";
 
         try {
             // Asignar la conexión a la propiedad de clase $this->pdo
